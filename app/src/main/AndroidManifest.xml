@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ddairy.eyebrows">
+
+    <!--
+    The starting theme should be set to the splash screen theme as its used first.
+    If the splash screen is not needed then it will use the theme provided on what to show next.
+    Check the values/themes.xml to see the splash theme.
+    -->
+    <application
+        android:exported="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Eyebrows.Splash"
+        >
+        <activity
+            android:name=".EyebrowsActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

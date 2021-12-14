@@ -1,0 +1,48 @@
+buildscript {
+    // Define versions in a single place
+    ext {
+        // Sdk and tools
+        compileSdkVersion = 31
+        minSdkVersion = 29
+        targetSdkVersion = 31
+        ktlint = "0.42.1"
+
+        // App dependencies
+        appCompatVersion = '1.3.1'
+        activityComposeVersion = '1.4.0'
+        composeVersion = '1.0.5'
+        composeNavigationVersion = '2.4.0-beta02'
+        coreTestingVersion = '2.1.0'
+        coroutinesVersion = "1.5.2"
+        espressoVersion = '3.4.0'
+        fragmentVersion = '1.3.6'
+        gradleVersion = '7.0.2'
+        junitVersion = '4.13.1'
+        kotlinVersion = '1.5.31'
+        ktlintVersion = '0.42.1'
+        ktxVersion = '1.7.0'
+        lifecycleVersion = '2.3.0'
+
+        // This version is needed to depend on material3 themes in xml.
+        materialVersion = '1.5.0-alpha04'
+
+        composeMaterial3Version = '1.0.0-alpha02'
+        roomVersion = '2.3.0'
+        runnerVersion = '1.0.1'
+        truthVersion = '1.0.1'
+        testExtJunit = '1.1.3'
+        uiAutomatorVersion = '2.2.0'
+        viewPagerVersion = '1.0.0'
+        workVersion = '2.5.0'
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
