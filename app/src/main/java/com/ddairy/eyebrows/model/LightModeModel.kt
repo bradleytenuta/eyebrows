@@ -1,4 +1,4 @@
-package com.ddairy.eyebrows.ui.components
+package com.ddairy.eyebrows.model
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

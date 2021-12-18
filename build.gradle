@@ -26,6 +26,8 @@ buildscript {
         // This version is needed to depend on material3 themes in xml.
         materialVersion = '1.5.0-alpha04'
 
+        accompanistVersion = '0.20.3'
+
         composeMaterial3Version = '1.0.0-alpha02'
         roomVersion = '2.3.0'
         runnerVersion = '1.0.1'
