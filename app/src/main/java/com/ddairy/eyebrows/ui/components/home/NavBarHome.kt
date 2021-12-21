@@ -1,29 +1,25 @@
-package com.ddairy.eyebrows.ui.components
+package com.ddairy.eyebrows.ui.components.home
 
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.rounded.AddCircle
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.SmallTopAppBar
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.ddairy.eyebrows.ui.components.NavBar
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 
 @Composable
-fun EyebrowsTopBar(
+fun NavBarHome(
     onClickNewEyebrows: () -> Unit = {},
     onSwitchTheme: () -> Unit = {},
     isLightMode: Boolean
 ) {
-    SmallTopAppBar(
+    NavBar(
         title = { Text("") },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.Transparent),
         actions = {
             IconButton(onClick = onSwitchTheme) {
                 if (isLightMode) {
@@ -48,25 +44,23 @@ fun EyebrowsTopBar(
     )
 }
 
-@ExperimentalMaterial3Api
-@Preview("Eyebrows Top Bar")
+@Preview("Light Mode")
 @Composable
-private fun EyebrowsTopBarPreview() {
+private fun LightModePreview() {
     EyebrowsTheme {
-        EyebrowsTopBar(
+        NavBarHome(
             isLightMode = true
         )
     }
 }
 
-@ExperimentalMaterial3Api
-@Preview("Eyebrows Top Bar - Dark Mode")
+@Preview("Dark Mode")
 @Composable
-private fun EyebrowsTopBarDarkMode() {
+private fun DarkModePreview() {
     EyebrowsTheme(
         isLight = false
     ) {
-        EyebrowsTopBar(
+        NavBarHome(
             isLightMode = false
         )
     }

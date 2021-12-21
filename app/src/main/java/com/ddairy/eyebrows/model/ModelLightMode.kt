@@ -5,8 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-// TODO: https://developer.android.com/topic/libraries/architecture/livedata and https://developer.android.com/topic/libraries/architecture/viewmodel-savedstate
-class LightModeModel : ViewModel() {
+class ModelLightMode : ViewModel() {
 
     private var isLight: Boolean by mutableStateOf(true)
 

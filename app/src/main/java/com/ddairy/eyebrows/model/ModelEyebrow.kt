@@ -2,22 +2,16 @@ package com.ddairy.eyebrows.model;
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
-import java.util.*
+import com.ddairy.eyebrows.data.Eyebrow
 
-data class Eyebrow(
-    var id: UUID = UUID.randomUUID(), // Since the user may generate identical tasks, give them each a unique ID
-    var title: String = "",
-    var description: String = "",
-    var prize: String = "",
-    var endDate: Date? = null
-)
-
-class EyebrowModel : ViewModel() {
+class ModelEyebrow : ViewModel() {
 
     var eyebrows = mutableStateListOf<Eyebrow>()
     private set // By specifying private set, we're restricting writes to this state object to a private setter only visible inside the ViewModel.
 
     fun addEyebrow(eyebrow: Eyebrow) {
+        // If an eyebrow with the same id already exists, then replace it.
+        eyebrows.removeIf { eyebrowItem -> eyebrowItem.id == eyebrow.id }
         eyebrows.add(eyebrow)
     }
 

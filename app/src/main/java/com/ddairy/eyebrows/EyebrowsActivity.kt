@@ -8,15 +8,15 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
-import com.ddairy.eyebrows.model.EyebrowModel
+import com.ddairy.eyebrows.model.ModelEyebrow
 import com.google.accompanist.navigation.animation.composable
-import com.ddairy.eyebrows.model.LightModeModel
+import com.google.accompanist.navigation.animation.navigation
+import com.ddairy.eyebrows.model.ModelLightMode
 import com.ddairy.eyebrows.ui.home.HomeBody
 import com.ddairy.eyebrows.ui.stake.NewEyebrowsBody
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
@@ -25,38 +25,36 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 class EyebrowsActivity : ComponentActivity() {
 
-    private val lightModeModel by viewModels<LightModeModel>()
-    private val eyebrowModel by viewModels<EyebrowModel>()
+    private val lightModeModel by viewModels<ModelLightMode>()
+    private val eyebrowModel by viewModels<ModelEyebrow>()
 
     @ExperimentalAnimationApi
-    @ExperimentalMaterial3Api
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
             EyebrowsApp(
-                lightModeModel = lightModeModel,
-                eyebrowModel = eyebrowModel
+                modelLightMode = lightModeModel,
+                modelEyebrow = eyebrowModel
             )
         }
     }
 }
 
 @ExperimentalAnimationApi
-@ExperimentalMaterial3Api
 @Composable
 fun EyebrowsApp(
-    lightModeModel: LightModeModel,
-    eyebrowModel: EyebrowModel
+    modelLightMode: ModelLightMode,
+    modelEyebrow: ModelEyebrow
 ) {
     EyebrowsTheme(
-        isLight = lightModeModel.isLightMode()
+        isLight = modelLightMode.isLightMode()
     ) {
         Scaffold { innerPadding ->
             EyebrowsNavHost(
                 navController = rememberAnimatedNavController(),
-                lightModeModel = lightModeModel,
-                eyebrowModel = eyebrowModel,
+                modelLightMode = modelLightMode,
+                modelEyebrow = modelEyebrow,
                 modifier = Modifier.padding(innerPadding)
             )
         }
@@ -64,12 +62,11 @@ fun EyebrowsApp(
 }
 
 @ExperimentalAnimationApi
-@ExperimentalMaterial3Api
 @Composable
 fun EyebrowsNavHost(
     navController: NavHostController,
-    lightModeModel: LightModeModel,
-    eyebrowModel: EyebrowModel,
+    modelLightMode: ModelLightMode,
+    modelEyebrow: ModelEyebrow,
     modifier: Modifier = Modifier
 ) {
     AnimatedNavHost(
@@ -80,23 +77,24 @@ fun EyebrowsNavHost(
         composable(route = EyebrowsScreen.Overview.name) {
             HomeBody(
                 onClickNewEyebrows = { navController.navigate(EyebrowsScreen.NewEyebrows.name) },
-                onSwitchTheme = { lightModeModel.toggleLightMode() },
-                isLightMode = lightModeModel.isLightMode(),
-                eyebrows = eyebrowModel.eyebrows,
+                onSwitchTheme = { modelLightMode.toggleLightMode() },
+                isLightMode = modelLightMode.isLightMode(),
+                eyebrows = modelEyebrow.eyebrows,
+                removeEyebrow = modelEyebrow::removeEyebrow
             )
         }
         composable(
             route = EyebrowsScreen.NewEyebrows.name,
-            enterTransition = { initial, _ ->
+            enterTransition = {
                 slideInHorizontally(initialOffsetX = { 1000 })
             },
-            exitTransition = { _, target ->
+            exitTransition = {
                 slideOutHorizontally(targetOffsetX = { 1000 })
             },
         ) {
             NewEyebrowsBody(
                 onClickReturnHome = { navController.navigate(EyebrowsScreen.Overview.name) },
-                addEyebrow = eyebrowModel::addEyebrow,
+                addEyebrow = modelEyebrow::addEyebrow,
             )
         }
     }

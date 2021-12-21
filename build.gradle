@@ -23,12 +23,11 @@ buildscript {
         ktxVersion = '1.7.0'
         lifecycleVersion = '2.3.0'
 
-        // This version is needed to depend on material3 themes in xml.
         materialVersion = '1.5.0-alpha04'
 
-        accompanistVersion = '0.20.3'
+        accompanistNavAnimationVersion = '0.21.4-beta'
+        accompanistFlowLayoutVersion = '0.21.4-beta'
 
-        composeMaterial3Version = '1.0.0-alpha02'
         roomVersion = '2.3.0'
         runnerVersion = '1.0.1'
         truthVersion = '1.0.1'

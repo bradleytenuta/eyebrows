@@ -1,4 +1,4 @@
-package com.ddairy.eyebrows.data
+package com.ddairy.eyebrows.util
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
 

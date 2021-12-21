@@ -95,11 +95,11 @@ dependencies {
 
     implementation "androidx.compose.material:material:$rootProject.composeVersion"
     implementation "androidx.compose.material:material-icons-extended:$rootProject.composeVersion"
-    implementation "androidx.compose.material3:material3:$rootProject.composeMaterial3Version"
 
     implementation "androidx.activity:activity-compose:$rootProject.activityComposeVersion"
     implementation "androidx.navigation:navigation-compose:$rootProject.composeNavigationVersion"
-    implementation "com.google.accompanist:accompanist-navigation-animation:$rootProject.accompanistVersion"
+    implementation "com.google.accompanist:accompanist-navigation-animation:$rootProject.accompanistNavAnimationVersion"
+    implementation "com.google.accompanist:accompanist-flowlayout:$rootProject.accompanistFlowLayoutVersion"
 
     // Testing dependencies
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
