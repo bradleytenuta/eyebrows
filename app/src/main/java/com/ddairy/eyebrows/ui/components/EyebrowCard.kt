@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
@@ -15,6 +16,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.EmojiEvents
@@ -33,6 +35,7 @@ import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
+import java.time.LocalDateTime
 import java.util.*
 
 @Composable
@@ -92,12 +95,17 @@ fun CardContent(eyebrow: Eyebrow) {
         Text(text = eyebrow.getStartDateAsString())
 
         // Progress bar to end date.
-        LinearProgressIndicator(
-            progress = eyebrow.getTimeTillEndDate(),
-            modifier = Modifier
-                .padding(10.dp)
-                .weight(1f, true)
-        )
+        Surface(modifier = Modifier.weight(1f)) {
+            // TODO: Currently a value within LinearProgressIndicator is statically set
+            // meaning that the width is minimum 240.dp, hopefully this gets fixed.
+            LinearProgressIndicator(
+                progress = eyebrow.getTimeTillEndDate(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp)
+            )
+        }
+
 
         // UI for end date.
         Icon(
@@ -155,6 +163,7 @@ private fun LightModePreview() {
         id = UUID.randomUUID(),
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         prize = "£100",
+        startDate = LocalDateTime.now().plusHours(12)
     )
     EyebrowsTheme {
         EyebrowCard(
