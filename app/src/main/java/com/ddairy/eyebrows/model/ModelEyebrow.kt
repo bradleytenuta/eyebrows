@@ -18,4 +18,14 @@ class ModelEyebrow : ViewModel() {
     fun removeEyebrow(eyebrow: Eyebrow) {
         eyebrows.remove(eyebrow)
     }
+
+    fun updateEyebrow(eyebrow: Eyebrow) {
+        val index = eyebrows.indexOf(eyebrow)
+        if (index == -1) {
+            return
+        }
+
+        eyebrows.removeIf { eyebrowItem -> eyebrowItem.id == eyebrow.id }
+        eyebrows.add(index, eyebrow)
+    }
 }

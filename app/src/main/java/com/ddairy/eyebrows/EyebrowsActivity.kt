@@ -15,11 +15,11 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import com.ddairy.eyebrows.model.ModelEyebrow
 import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.navigation
 import com.ddairy.eyebrows.model.ModelLightMode
 import com.ddairy.eyebrows.ui.home.HomeBody
 import com.ddairy.eyebrows.ui.stake.NewEyebrowsBody
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
+import com.ddairy.eyebrows.util.EyebrowsScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
@@ -80,7 +80,8 @@ fun EyebrowsNavHost(
                 onSwitchTheme = { modelLightMode.toggleLightMode() },
                 isLightMode = modelLightMode.isLightMode(),
                 eyebrows = modelEyebrow.eyebrows,
-                removeEyebrow = modelEyebrow::removeEyebrow
+                removeEyebrow = modelEyebrow::removeEyebrow,
+                updateEyebrow = modelEyebrow::updateEyebrow
             )
         }
         composable(

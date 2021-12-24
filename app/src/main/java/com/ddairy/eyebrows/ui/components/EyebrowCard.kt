@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
@@ -14,14 +13,13 @@ import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material.icons.outlined.Done
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.ui.components.home.ProgressContainer
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
@@ -41,11 +40,14 @@ import java.util.*
 @Composable
 fun EyebrowCard(
     eyebrow: Eyebrow,
-    removeEyebrow: (Eyebrow) -> Unit
+    removeEyebrow: (Eyebrow) -> Unit,
+    updateEyebrow: (Eyebrow) -> Unit
 ) {
+    val elevation = if (eyebrow.status == Eyebrow.Status.Open) 10.dp else 1.dp
+
     Card(
         shape = MaterialTheme.shapes.large,
-        elevation = 10.dp,
+        elevation = elevation,
         modifier = Modifier.fillMaxWidth()
     ) {
         Column {
@@ -53,7 +55,8 @@ fun EyebrowCard(
             Divider()
             CardBottom(
                 eyebrow = eyebrow,
-                removeEyebrow = removeEyebrow
+                removeEyebrow = removeEyebrow,
+                updateEyebrow = updateEyebrow
             )
         }
     }
@@ -95,17 +98,10 @@ fun CardContent(eyebrow: Eyebrow) {
         Text(text = eyebrow.getStartDateAsString())
 
         // Progress bar to end date.
-        Surface(modifier = Modifier.weight(1f)) {
-            // TODO: Currently a value within LinearProgressIndicator is statically set
-            // meaning that the width is minimum 240.dp, hopefully this gets fixed.
-            LinearProgressIndicator(
-                progress = eyebrow.getTimeTillEndDate(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp)
-            )
-        }
-
+        ProgressContainer(
+            eyebrow = eyebrow,
+            Modifier.weight(1f)
+        )
 
         // UI for end date.
         Icon(
@@ -121,11 +117,26 @@ fun CardContent(eyebrow: Eyebrow) {
 fun CardBottom(
     eyebrow: Eyebrow,
     removeEyebrow: (Eyebrow) -> Unit,
+    updateEyebrow: (Eyebrow) -> Unit
 ) {
     FlowRow(
         modifier = Modifier.fillMaxWidth(),
         mainAxisAlignment = FlowMainAxisAlignment.End
     ) {
+        if (eyebrow.status == Eyebrow.Status.Open) {
+            IconButton(
+                onClick = {
+                    eyebrow.status = Eyebrow.Status.Complete
+                    updateEyebrow(eyebrow)
+                }
+            ) {
+                Icon(
+                    Icons.Outlined.Done,
+                    contentDescription = "Mark as complete"
+                )
+            }
+        }
+
         var expanded by remember { mutableStateOf(false) }
         IconButton(onClick = { expanded = true }) {
             Icon(
@@ -146,10 +157,21 @@ fun CardBottom(
                 }
                 DropdownMenuItem(
                     onClick = {
+                        // TODO: add an 'are you sure?'
                         removeEyebrow(eyebrow)
                     }
                 ) {
                     Text("Remove")
+                }
+                if (eyebrow.status == Eyebrow.Status.Complete) {
+                    DropdownMenuItem(
+                        onClick = {
+                            eyebrow.status = Eyebrow.Status.Open
+                            updateEyebrow(eyebrow)
+                        }
+                    ) {
+                        Text("Mark as not complete")
+                    }
                 }
             }
         }
@@ -168,7 +190,8 @@ private fun LightModePreview() {
     EyebrowsTheme {
         EyebrowCard(
             eyebrow = eyebrow,
-            removeEyebrow = {}
+            removeEyebrow = {},
+            updateEyebrow = {}
         )
     }
 }

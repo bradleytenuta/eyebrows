@@ -28,6 +28,7 @@ fun HomeBody(
     isLightMode: Boolean,
     eyebrows: List<Eyebrow>,
     removeEyebrow: (Eyebrow) -> Unit,
+    updateEyebrow: (Eyebrow) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -45,21 +46,54 @@ fun HomeBody(
                 .semantics { contentDescription = "Home Screen" },
             contentPadding = PaddingValues(top = 8.dp)
         ) {
-            items(items = eyebrows) { eyebrow ->
-                Row(
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    EyebrowCard(
-                        eyebrow = eyebrow,
-                        removeEyebrow = removeEyebrow
-                    )
-                }
+            items(items = organiseList(eyebrows, Eyebrow.Status.Open)) { eyebrow ->
+                EyebrowListItem(
+                    eyebrow = eyebrow,
+                    removeEyebrow = removeEyebrow,
+                    updateEyebrow = updateEyebrow
+                )
+            }
+
+            // TODO: Add some type of divider here with padding. Only if complete list contains more than one.
+
+            items(items = organiseList(eyebrows, Eyebrow.Status.Complete)) { eyebrow ->
+                EyebrowListItem(
+                    eyebrow = eyebrow,
+                    removeEyebrow = removeEyebrow,
+                    updateEyebrow = updateEyebrow
+                )
             }
         }
     }
+}
+
+@Composable
+fun EyebrowListItem(
+    eyebrow: Eyebrow,
+    removeEyebrow: (Eyebrow) -> Unit,
+    updateEyebrow: (Eyebrow) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .padding(vertical = 8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        EyebrowCard(
+            eyebrow = eyebrow,
+            removeEyebrow = removeEyebrow,
+            updateEyebrow = updateEyebrow
+        )
+    }
+}
+
+private fun organiseList(
+    eyebrows: List<Eyebrow>,
+    status: Eyebrow.Status
+): List<Eyebrow> {
+    var newList = eyebrows.filter { it.status == status }
+    newList.sortedByDescending { it.endDate } // TODO: This does not work as can see in the preview.
+    return newList
 }
 
 @Preview("Home Body")
@@ -71,17 +105,24 @@ private fun HomePreview() {
             isLightMode = true,
             eyebrows = listOf(
                 Eyebrow(
-                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                    prize = "100",
-                    endDate = LocalDateTime.now()
+                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    prize = "A high five",
+                    endDate = LocalDateTime.now(),
+                    status = Eyebrow.Status.Complete
                 ),
                 Eyebrow(
-                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                    prize = "A high five",
-                    endDate = LocalDateTime.now()
+                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    prize = "100",
+                    endDate = LocalDateTime.now().plusDays(3)
+                ),
+                Eyebrow(
+                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    prize = "100",
+                    endDate = LocalDateTime.now().plusDays(1)
                 )
             ),
-            removeEyebrow = {}
+            removeEyebrow = {},
+            updateEyebrow = {}
         )
     }
 }
@@ -97,17 +138,24 @@ private fun HomePreviewDarkMode() {
             isLightMode = false,
             eyebrows = listOf(
                 Eyebrow(
-                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                    prize = "100",
-                    endDate = LocalDateTime.now()
+                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    prize = "A high five",
+                    endDate = LocalDateTime.now(),
+                    status = Eyebrow.Status.Complete
                 ),
                 Eyebrow(
-                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                    prize = "A high five",
-                    endDate = LocalDateTime.now()
+                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    prize = "100",
+                    endDate = LocalDateTime.now().plusDays(3)
+                ),
+                Eyebrow(
+                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    prize = "100",
+                    endDate = LocalDateTime.now().plusDays(1)
                 )
             ),
-            removeEyebrow = {}
+            removeEyebrow = {},
+            updateEyebrow = {}
         )
     }
 }
