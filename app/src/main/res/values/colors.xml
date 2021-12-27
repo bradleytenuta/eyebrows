@@ -1,4 +1,6 @@
 <resources>
     <color name="PrimaryYellow">#edb100</color>
-    <color name="SecondaryYellow">#d49e00</color>
+    <color name="PrimaryVariantYellow">#d49e00</color>
+    <color name="SecondaryOrange">#ed9200</color>
+    <color name="SecondaryVariantOrange">#d58500</color>
 </resources>

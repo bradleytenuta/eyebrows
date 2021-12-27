@@ -23,6 +23,7 @@ import com.ddairy.eyebrows.util.EyebrowsScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
+// TODO: Add savable properties.
 class EyebrowsActivity : ComponentActivity() {
 
     private val lightModeModel by viewModels<ModelLightMode>()

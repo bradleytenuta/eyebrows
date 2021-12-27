@@ -12,6 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.util.EyebrowUtil
 
 @Composable
 fun ProgressContainer(
@@ -25,7 +26,7 @@ fun ProgressContainer(
             progress = if (eyebrow.status == Eyebrow.Status.Complete) {
                 1.0f
             } else {
-                if (eyebrow.isEndDateInThePast()) 1.0f else eyebrow.getPercentageOfTimeTillEndDate()
+                if (EyebrowUtil.isEndDateInThePast(eyebrow)) 1.0f else EyebrowUtil.getPercentageOfTimeTillEndDate(eyebrow)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -33,10 +34,10 @@ fun ProgressContainer(
                     horizontal = 10.dp,
                     vertical = 5.dp
                 ),
-            color = if (eyebrow.isLate()) MaterialTheme.colors.error else MaterialTheme.colors.primary
+            color = if (EyebrowUtil.isLate(eyebrow)) MaterialTheme.colors.error else MaterialTheme.colors.primary
         )
 
-        val daysLeft = eyebrow.getNumberOfDaysTillEndDate()
+        val daysLeft = EyebrowUtil.getNumberOfDaysTillEndDate(eyebrow)
         var progressText = if (eyebrow.status == Eyebrow.Status.Complete) {
             "Completed!"
         } else if (daysLeft == 0L) {
@@ -47,7 +48,7 @@ fun ProgressContainer(
             "$daysLeft days"
         }
 
-        if (eyebrow.isLate()) {
+        if (EyebrowUtil.isLate(eyebrow)) {
             progressText = "$progressText late"
         }
 

@@ -33,6 +33,7 @@ import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.home.ProgressContainer
 import com.ddairy.eyebrows.ui.components.home.RemoveEyebrowAlertDialog
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
+import com.ddairy.eyebrows.util.LocalDateTimeUtil
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import java.time.LocalDateTime
@@ -97,7 +98,7 @@ fun CardContent(eyebrow: Eyebrow) {
             contentDescription = "Start Date"
         )
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-        Text(text = eyebrow.getStartDateAsString())
+        Text(text = LocalDateTimeUtil.getDateAsString(eyebrow.startDate))
 
         // Progress bar to end date.
         ProgressContainer(
@@ -111,7 +112,7 @@ fun CardContent(eyebrow: Eyebrow) {
             contentDescription = "End Date"
         )
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-        Text(text = eyebrow.getEndDateAsString())
+        Text(text = LocalDateTimeUtil.getDateAsString(eyebrow.endDate))
     }
 }
 

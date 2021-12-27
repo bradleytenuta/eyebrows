@@ -9,9 +9,23 @@ val PrimaryYellow = Color(
     alpha = 0xFF
 )
 
-val SecondaryYellow = Color(
+val PrimaryVariantYellow = Color(
     red = 212,
     green = 158,
+    blue = 0,
+    alpha = 0xFF
+)
+
+val SecondaryOrange = Color(
+    red = 237,
+    green = 146,
+    blue = 0,
+    alpha = 0xFF
+)
+
+val SecondaryVariantOrange = Color(
+    red = 213,
+    green = 133,
     blue = 0,
     alpha = 0xFF
 )

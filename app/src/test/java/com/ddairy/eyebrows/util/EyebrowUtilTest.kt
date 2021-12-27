@@ -10,9 +10,9 @@ class EyebrowUtilTest {
     @Test
     fun doesOrganiseListInCorrectOrder() {
         val listBefore = listOf(
-            Eyebrow(endDate = LocalDateTime.now().plusDays(2)),
-            Eyebrow(endDate = LocalDateTime.now().plusDays(3)),
-            Eyebrow(endDate = LocalDateTime.now())
+            Eyebrow(description = "", endDate = LocalDateTime.now().plusDays(2)),
+            Eyebrow(description = "", endDate = LocalDateTime.now().plusDays(3)),
+            Eyebrow(description = "", endDate = LocalDateTime.now())
         )
 
         val listAfter = EyebrowUtil.organiseList(listBefore)
@@ -25,11 +25,11 @@ class EyebrowUtilTest {
     @Test
     fun doesOrganiseListInCorrectOrderWithDifferentStates() {
         val listBefore = listOf(
-            Eyebrow(endDate = LocalDateTime.now().plusDays(2), status = Eyebrow.Status.Complete),
-            Eyebrow(endDate = LocalDateTime.now(), status = Eyebrow.Status.Complete),
-            Eyebrow(endDate = LocalDateTime.now().plusDays(2)),
-            Eyebrow(endDate = LocalDateTime.now().plusDays(3)),
-            Eyebrow(endDate = LocalDateTime.now())
+            Eyebrow(description = "", endDate = LocalDateTime.now().plusDays(2), status = Eyebrow.Status.Complete),
+            Eyebrow(description = "", endDate = LocalDateTime.now(), status = Eyebrow.Status.Complete),
+            Eyebrow(description = "", endDate = LocalDateTime.now().plusDays(2)),
+            Eyebrow(description = "", endDate = LocalDateTime.now().plusDays(3)),
+            Eyebrow(description = "", endDate = LocalDateTime.now())
         )
 
         val listAfter = EyebrowUtil.organiseList(listBefore)

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
@@ -20,18 +21,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.ui.components.bet.DatePicker
 import com.ddairy.eyebrows.ui.components.bet.NavBarBet
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
+import java.time.LocalDateTime
 
 @Composable
 fun NewEyebrowsBody(
     onClickReturnHome: () -> Unit = {},
-    eyebrow: Eyebrow = Eyebrow(),
+    eyebrow: Eyebrow = Eyebrow(description = ""),
     addEyebrow: (Eyebrow) -> Unit,
 ) {
     Scaffold(
@@ -46,23 +50,63 @@ fun NewEyebrowsBody(
         ) {
             val (descriptionText, descriptionSetText) = remember { mutableStateOf(eyebrow.description) }
             val (prizeText, prizeSetText) = remember { mutableStateOf(eyebrow.prize) }
+            val (startDateValue, startDateSet) = remember { mutableStateOf(eyebrow.startDate) }
+            val (endDateValue, endDateSet) = remember { mutableStateOf(eyebrow.endDate) }
 
             Column(modifier = Modifier.weight(1f)) {
-                Row(horizontalArrangement = Arrangement.SpaceBetween) {
-                    InputText(
-                        text = descriptionText,
-                        onTextChange = descriptionSetText,
-                        label = "that..."
+
+                InputText(
+                    text = descriptionText,
+                    onTextChange = descriptionSetText,
+                    label = "that..."
+                )
+
+                Row(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    // Date Picker for start date.
+                    DatePicker(
+                        context = LocalContext.current,
+                        date = startDateValue,
+                        updateDate = { year: Int, month: Int, day: Int ->
+                            startDateSet(
+                                LocalDateTime.of(year, month, day, 0, 0)
+                            )
+                        }
+                    )
+
+                    // Date Picker for end date.
+                    DatePicker(
+                        context = LocalContext.current,
+                        date = endDateValue,
+                        updateDate = { year: Int, month: Int, day: Int ->
+                            endDateSet(
+                                LocalDateTime.of(year, month, day, 0, 0)
+                            )
+                        }
                     )
                 }
-                Row(horizontalArrangement = Arrangement.SpaceBetween) {
-                    InputText(
-                        text = prizeText,
-                        onTextChange = prizeSetText,
-                        label = "Prize (Optional)"
-                    )
-                }
-                // TODO: Add date support.
+
+                Text(
+                    text = "Optional Properties",
+                    style = MaterialTheme.typography.subtitle1,
+                    modifier = Modifier
+                        .padding(
+                            horizontal = 16.dp,
+                            vertical = 8.dp
+                        )
+                        .fillMaxWidth()
+                )
+
+                // TODO: This should be fancier, should except text or money input.
+                InputText(
+                    text = prizeText,
+                    onTextChange = prizeSetText,
+                    label = "Prize"
+                )
             }
 
             Button(
@@ -71,7 +115,11 @@ fun NewEyebrowsBody(
 
                     eyebrow.description = descriptionText
                     eyebrow.prize = prizeText
+                    eyebrow.startDate = startDateValue
+                    eyebrow.endDate = endDateValue
+
                     addEyebrow(eyebrow)
+
                     onClickReturnHome()
                 },
                 modifier = Modifier
