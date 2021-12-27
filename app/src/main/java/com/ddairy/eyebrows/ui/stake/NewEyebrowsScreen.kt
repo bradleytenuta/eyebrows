@@ -59,7 +59,7 @@ fun NewEyebrowsBody(
                     InputText(
                         text = prizeText,
                         onTextChange = prizeSetText,
-                        label = "Prize"
+                        label = "Prize (Optional)"
                     )
                 }
                 // TODO: Add date support.

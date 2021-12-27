@@ -71,21 +71,22 @@ fun CardContent(eyebrow: Eyebrow) {
         .padding(8.dp)
 
     // UI for Eyebrow description.
-    Row(modifier = modifier) {
-        Text(
-            text = eyebrow.description,
-            style = MaterialTheme.typography.h5
-        )
-    }
+    Text(
+        modifier = modifier,
+        text = eyebrow.description,
+        style = MaterialTheme.typography.h5
+    )
 
     // Ui for the Eyebrow prize.
-    Row(modifier = modifier) {
-        Icon(
-            imageVector = Icons.Filled.EmojiEvents,
-            contentDescription = "Prize"
-        )
-        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-        Text(text = eyebrow.prize)
+    if (eyebrow.prize.isNotEmpty()) {
+        Row(modifier = modifier) {
+            Icon(
+                imageVector = Icons.Filled.EmojiEvents,
+                contentDescription = "Prize"
+            )
+            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
+            Text(text = eyebrow.prize)
+        }
     }
 
     // UI for Eyebrow start and end date.
@@ -193,6 +194,23 @@ private fun LightModePreview() {
         id = UUID.randomUUID(),
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         prize = "£100",
+        startDate = LocalDateTime.now().plusHours(12)
+    )
+    EyebrowsTheme {
+        EyebrowCard(
+            eyebrow = eyebrow,
+            removeEyebrow = {},
+            updateEyebrow = {}
+        )
+    }
+}
+
+@Preview("Light Mode - No prize")
+@Composable
+private fun LightModeNoPrizePreview() {
+    val eyebrow = Eyebrow(
+        id = UUID.randomUUID(),
+        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         startDate = LocalDateTime.now().plusHours(12)
     )
     EyebrowsTheme {
