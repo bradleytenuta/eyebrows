@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.home.ProgressContainer
+import com.ddairy.eyebrows.ui.components.home.RemoveEyebrowAlertDialog
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
@@ -137,6 +138,14 @@ fun CardBottom(
             }
         }
 
+        var showRemoveAlertDialog by remember { mutableStateOf(false) }
+        RemoveEyebrowAlertDialog(
+            show = showRemoveAlertDialog,
+            toggleShow = { showRemoveAlertDialog = it },
+            eyebrow = eyebrow,
+            removeEyebrow = removeEyebrow
+        )
+
         var expanded by remember { mutableStateOf(false) }
         IconButton(onClick = { expanded = true }) {
             Icon(
@@ -157,8 +166,7 @@ fun CardBottom(
                 }
                 DropdownMenuItem(
                     onClick = {
-                        // TODO: add an 'are you sure?'
-                        removeEyebrow(eyebrow)
+                        showRemoveAlertDialog = true
                     }
                 ) {
                     Text("Remove")
