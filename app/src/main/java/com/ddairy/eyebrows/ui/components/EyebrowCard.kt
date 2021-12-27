@@ -43,7 +43,7 @@ fun EyebrowCard(
     removeEyebrow: (Eyebrow) -> Unit,
     updateEyebrow: (Eyebrow) -> Unit
 ) {
-    val elevation = if (eyebrow.status == Eyebrow.Status.Open) 10.dp else 1.dp
+    val elevation = if (eyebrow.status == Eyebrow.Status.Open) 10.dp else 6.dp
 
     Card(
         shape = MaterialTheme.shapes.large,

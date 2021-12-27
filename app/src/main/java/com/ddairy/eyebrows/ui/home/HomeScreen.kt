@@ -1,12 +1,14 @@
 package com.ddairy.eyebrows.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.Divider
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,7 +20,7 @@ import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.EyebrowCard
 import com.ddairy.eyebrows.ui.components.home.NavBarHome
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import java.time.LocalDate
+import com.ddairy.eyebrows.util.EyebrowUtil
 import java.time.LocalDateTime
 
 @Composable
@@ -44,24 +46,28 @@ fun HomeBody(
                 .padding(innerPadding)
                 .fillMaxWidth()
                 .semantics { contentDescription = "Home Screen" },
-            contentPadding = PaddingValues(top = 8.dp)
+            contentPadding = PaddingValues(vertical = 4.dp)
         ) {
-            items(items = organiseList(eyebrows, Eyebrow.Status.Open)) { eyebrow ->
+            val organisedList = EyebrowUtil.organiseList(eyebrows)
+            itemsIndexed(items = organisedList) { index, eyebrow ->
                 EyebrowListItem(
                     eyebrow = eyebrow,
                     removeEyebrow = removeEyebrow,
                     updateEyebrow = updateEyebrow
                 )
-            }
 
-            // TODO: Add some type of divider here with padding. Only if complete list contains more than one.
-
-            items(items = organiseList(eyebrows, Eyebrow.Status.Complete)) { eyebrow ->
-                EyebrowListItem(
-                    eyebrow = eyebrow,
-                    removeEyebrow = removeEyebrow,
-                    updateEyebrow = updateEyebrow
-                )
+                // Creates a divider between the open and completed eyebrows.
+                val newIndex = index + 1
+                if (
+                    newIndex < organisedList.size &&
+                    eyebrow.status == Eyebrow.Status.Open &&
+                    organisedList[newIndex].status == Eyebrow.Status.Complete
+                ) {
+                    Divider(
+                        modifier = Modifier.padding(vertical = 20.dp),
+                        thickness = 2.dp
+                    )
+                }
             }
         }
     }
@@ -85,15 +91,6 @@ fun EyebrowListItem(
             updateEyebrow = updateEyebrow
         )
     }
-}
-
-private fun organiseList(
-    eyebrows: List<Eyebrow>,
-    status: Eyebrow.Status
-): List<Eyebrow> {
-    var newList = eyebrows.filter { it.status == status }
-    newList.sortedByDescending { it.endDate } // TODO: This does not work as can see in the preview.
-    return newList
 }
 
 @Preview("Home Body")
@@ -140,18 +137,15 @@ private fun HomePreviewDarkMode() {
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                     prize = "A high five",
-                    endDate = LocalDateTime.now(),
+                    startDate = LocalDateTime.now().minusDays(1),
+                    endDate = LocalDateTime.now().plusDays(1),
                     status = Eyebrow.Status.Complete
                 ),
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                     prize = "100",
-                    endDate = LocalDateTime.now().plusDays(3)
-                ),
-                Eyebrow(
-                    description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    prize = "100",
-                    endDate = LocalDateTime.now().plusDays(1)
+                    startDate = LocalDateTime.now().minusYears(30),
+                    endDate = LocalDateTime.now().minusDays(1),
                 )
             ),
             removeEyebrow = {},

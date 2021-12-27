@@ -22,22 +22,33 @@ fun ProgressContainer(
         // TODO: Currently a value within LinearProgressIndicator is statically set
         // TODO: meaning that the width is minimum 240.dp, hopefully this gets fixed.
         LinearProgressIndicator(
-            progress = eyebrow.getPercentageOfTimeTillEndDate(),
+            progress = if (eyebrow.status == Eyebrow.Status.Complete) {
+                1.0f
+            } else {
+                if (eyebrow.isEndDateInThePast()) 1.0f else eyebrow.getPercentageOfTimeTillEndDate()
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
                     horizontal = 10.dp,
                     vertical = 5.dp
-                )
+                ),
+            color = if (eyebrow.isLate()) MaterialTheme.colors.error else MaterialTheme.colors.primary
         )
 
         val daysLeft = eyebrow.getNumberOfDaysTillEndDate()
-        val progressText = if (daysLeft == 0L) {
-            "Time's up"
+        var progressText = if (eyebrow.status == Eyebrow.Status.Complete) {
+            "Completed!"
+        } else if (daysLeft == 0L) {
+            "Time's up!"
         } else if (daysLeft == 1L) {
             "$daysLeft day"
         } else {
             "$daysLeft days"
+        }
+
+        if (eyebrow.isLate()) {
+            progressText = "$progressText late"
         }
 
         Text(

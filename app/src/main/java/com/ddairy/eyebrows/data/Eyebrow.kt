@@ -47,6 +47,14 @@ data class Eyebrow(
         return TimeUnit.DAYS.convert(diffDate, TimeUnit.SECONDS)
     }
 
+    fun isEndDateInThePast(): Boolean {
+        return getPercentageOfTimeTillEndDate() > 1.0f
+    }
+
+    fun isLate(): Boolean {
+        return isEndDateInThePast() && status == Status.Open
+    }
+
     private fun formatDate(localDateTime: LocalDateTime): String {
         return localDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
     }
