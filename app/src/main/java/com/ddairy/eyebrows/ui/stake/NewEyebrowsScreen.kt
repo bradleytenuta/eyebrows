@@ -27,6 +27,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.data.Participant
 import com.ddairy.eyebrows.ui.components.bet.DatePicker
 import com.ddairy.eyebrows.ui.components.bet.NavBarBet
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
@@ -107,6 +108,8 @@ fun NewEyebrowsBody(
                     onTextChange = prizeSetText,
                     label = "Prize"
                 )
+
+                // TODO: add infinite list of text fields for participants.
             }
 
             Button(
@@ -117,6 +120,18 @@ fun NewEyebrowsBody(
                     eyebrow.prize = prizeText
                     eyebrow.startDate = startDateValue
                     eyebrow.endDate = endDateValue
+                    eyebrow.participants = listOf(
+                        Participant("Bob"),
+                        Participant("Dan"),
+                        Participant("John"),
+                        Participant("Steve"),
+                        Participant("Brad"),
+                        Participant("Jack"),
+                        Participant("Dave"),
+                        Participant("Phil"),
+                        Participant("Bill"),
+                        Participant("Ted")
+                    )
 
                     addEyebrow(eyebrow)
 

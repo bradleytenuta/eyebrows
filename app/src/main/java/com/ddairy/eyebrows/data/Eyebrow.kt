@@ -9,7 +9,8 @@ data class Eyebrow(
     var prize: String = "",
     var startDate: LocalDateTime = LocalDateTime.now(),
     var endDate: LocalDateTime = LocalDateTime.now().plusDays(1),
-    var status: Status = Status.Open
+    var status: Status = Status.Open,
+    var participants: List<Participant> = emptyList()
 ) {
 
     enum class Status {
