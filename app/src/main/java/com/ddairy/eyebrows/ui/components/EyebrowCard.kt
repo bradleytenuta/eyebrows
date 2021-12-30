@@ -42,7 +42,6 @@ import com.ddairy.eyebrows.ui.components.home.ParticipantDialog
 import com.ddairy.eyebrows.ui.components.home.ProgressContainer
 import com.ddairy.eyebrows.ui.components.home.RemoveEyebrowAlertDialog
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import com.ddairy.eyebrows.util.GeneralUtil
 import com.ddairy.eyebrows.util.LocalDateTimeUtil
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
@@ -53,7 +52,8 @@ import java.util.*
 fun EyebrowCard(
     eyebrow: Eyebrow,
     removeEyebrow: (Eyebrow) -> Unit,
-    updateEyebrow: (Eyebrow) -> Unit
+    updateEyebrow: (Eyebrow) -> Unit,
+    onClickNewEyebrows: (Eyebrow) -> Unit = {},
 ) {
     val elevation = if (eyebrow.status == Eyebrow.Status.Open) 10.dp else 6.dp
 
@@ -68,7 +68,8 @@ fun EyebrowCard(
             CardBottom(
                 eyebrow = eyebrow,
                 removeEyebrow = removeEyebrow,
-                updateEyebrow = updateEyebrow
+                updateEyebrow = updateEyebrow,
+                onClickNewEyebrows = onClickNewEyebrows
             )
         }
     }
@@ -130,7 +131,8 @@ fun CardContent(eyebrow: Eyebrow) {
 fun CardBottom(
     eyebrow: Eyebrow,
     removeEyebrow: (Eyebrow) -> Unit,
-    updateEyebrow: (Eyebrow) -> Unit
+    updateEyebrow: (Eyebrow) -> Unit,
+    onClickNewEyebrows: (Eyebrow) -> Unit,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -169,7 +171,7 @@ fun CardBottom(
                         Icon(
                             imageVector = Icons.Filled.Person,
                             contentDescription = participant.name,
-                            tint = GeneralUtil.getRandomColor()
+                            tint = participant.getIconColor()
                         )
                     }
                 }
@@ -181,7 +183,7 @@ fun CardBottom(
                     ) {
                         Text(
                             text = "...",
-                            color = GeneralUtil.getRandomColor()
+                            color = MaterialTheme.colors.secondaryVariant
                         )
                     }
                 }
@@ -224,8 +226,7 @@ fun CardBottom(
                 ) {
                     DropdownMenuItem(
                         onClick = {
-                            // TODO: Find a way to pass an eyebrow object through the navigation.
-                            //onClickNewEyebrows(eyebrow)
+                            onClickNewEyebrows(eyebrow)
                         }
                     ) {
                         Text("Edit")

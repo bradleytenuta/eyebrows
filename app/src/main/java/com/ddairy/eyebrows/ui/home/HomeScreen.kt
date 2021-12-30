@@ -25,7 +25,7 @@ import java.time.LocalDateTime
 
 @Composable
 fun HomeBody(
-    onClickNewEyebrows: () -> Unit = {},
+    onClickNewEyebrows: (Eyebrow) -> Unit,
     onSwitchTheme: () -> Unit = {},
     isLightMode: Boolean,
     eyebrows: List<Eyebrow>,
@@ -35,7 +35,7 @@ fun HomeBody(
     Scaffold(
         topBar = {
             NavBarHome(
-                onClickNewEyebrows = onClickNewEyebrows,
+                onClickNewEyebrows = { onClickNewEyebrows(Eyebrow(description = "")) },
                 onSwitchTheme = onSwitchTheme,
                 isLightMode = isLightMode
             )
@@ -53,7 +53,8 @@ fun HomeBody(
                 EyebrowListItem(
                     eyebrow = eyebrow,
                     removeEyebrow = removeEyebrow,
-                    updateEyebrow = updateEyebrow
+                    updateEyebrow = updateEyebrow,
+                    onClickNewEyebrows = onClickNewEyebrows
                 )
 
                 // Creates a divider between the open and completed eyebrows.
@@ -77,7 +78,8 @@ fun HomeBody(
 fun EyebrowListItem(
     eyebrow: Eyebrow,
     removeEyebrow: (Eyebrow) -> Unit,
-    updateEyebrow: (Eyebrow) -> Unit
+    updateEyebrow: (Eyebrow) -> Unit,
+    onClickNewEyebrows: (Eyebrow) -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -88,7 +90,8 @@ fun EyebrowListItem(
         EyebrowCard(
             eyebrow = eyebrow,
             removeEyebrow = removeEyebrow,
-            updateEyebrow = updateEyebrow
+            updateEyebrow = updateEyebrow,
+            onClickNewEyebrows = onClickNewEyebrows
         )
     }
 }

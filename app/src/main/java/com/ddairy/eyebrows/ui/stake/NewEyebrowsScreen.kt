@@ -36,8 +36,8 @@ import java.time.LocalDateTime
 @Composable
 fun NewEyebrowsBody(
     onClickReturnHome: () -> Unit = {},
-    eyebrow: Eyebrow = Eyebrow(description = ""),
-    addEyebrow: (Eyebrow) -> Unit,
+    eyebrow: Eyebrow,
+    addEyebrow: (eyebrow: Eyebrow) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -178,6 +178,7 @@ private fun HomePreview() {
     EyebrowsTheme {
         NewEyebrowsBody(
             onClickReturnHome = {},
+            eyebrow = Eyebrow(description = ""),
             addEyebrow = {}
         )
     }
@@ -189,6 +190,7 @@ private fun HomePreviewDarkMode() {
     EyebrowsTheme(isLight = false) {
         NewEyebrowsBody(
             onClickReturnHome = {},
+            eyebrow = Eyebrow(description = ""),
             addEyebrow = {}
         )
     }
