@@ -1,7 +1,6 @@
 package com.ddairy.eyebrows.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,8 +25,6 @@ import java.time.LocalDateTime
 @Composable
 fun HomeBody(
     onClickNewEyebrows: (Eyebrow) -> Unit,
-    onSwitchTheme: () -> Unit = {},
-    isLightMode: Boolean,
     eyebrows: List<Eyebrow>,
     removeEyebrow: (Eyebrow) -> Unit,
     updateEyebrow: (Eyebrow) -> Unit
@@ -35,9 +32,7 @@ fun HomeBody(
     Scaffold(
         topBar = {
             NavBarHome(
-                onClickNewEyebrows = { onClickNewEyebrows(Eyebrow(description = "")) },
-                onSwitchTheme = onSwitchTheme,
-                isLightMode = isLightMode
+                onClickNewEyebrows = { onClickNewEyebrows(Eyebrow(description = "")) }
             )
         }
     ) { innerPadding ->
@@ -102,7 +97,6 @@ private fun HomePreview() {
     EyebrowsTheme {
         HomeBody(
             onClickNewEyebrows = {},
-            isLightMode = true,
             eyebrows = listOf(
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -130,12 +124,9 @@ private fun HomePreview() {
 @Preview("Home Body - Dark Mode")
 @Composable
 private fun HomePreviewDarkMode() {
-    EyebrowsTheme(
-        isLight = false
-    ) {
+    EyebrowsTheme {
         HomeBody(
             onClickNewEyebrows = {},
-            isLightMode = false,
             eyebrows = listOf(
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",

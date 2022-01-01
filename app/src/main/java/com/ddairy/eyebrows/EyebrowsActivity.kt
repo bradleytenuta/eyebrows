@@ -16,7 +16,6 @@ import androidx.navigation.NavHostController
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.model.ModelEyebrow
 import com.google.accompanist.navigation.animation.composable
-import com.ddairy.eyebrows.model.ModelLightMode
 import com.ddairy.eyebrows.ui.home.HomeBody
 import com.ddairy.eyebrows.ui.stake.NewEyebrowsBody
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
@@ -27,7 +26,6 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 // TODO: Add savable properties.
 class EyebrowsActivity : ComponentActivity() {
 
-    private val lightModeModel by viewModels<ModelLightMode>()
     private val eyebrowModel by viewModels<ModelEyebrow>()
 
     @ExperimentalAnimationApi
@@ -36,7 +34,6 @@ class EyebrowsActivity : ComponentActivity() {
         installSplashScreen()
         setContent {
             EyebrowsApp(
-                modelLightMode = lightModeModel,
                 modelEyebrow = eyebrowModel
             )
         }
@@ -46,16 +43,12 @@ class EyebrowsActivity : ComponentActivity() {
 @ExperimentalAnimationApi
 @Composable
 fun EyebrowsApp(
-    modelLightMode: ModelLightMode,
     modelEyebrow: ModelEyebrow
 ) {
-    EyebrowsTheme(
-        isLight = modelLightMode.isLightMode()
-    ) {
+    EyebrowsTheme {
         Scaffold { innerPadding ->
             EyebrowsNavHost(
                 navController = rememberAnimatedNavController(),
-                modelLightMode = modelLightMode,
                 modelEyebrow = modelEyebrow,
                 modifier = Modifier.padding(innerPadding)
             )
@@ -67,7 +60,6 @@ fun EyebrowsApp(
 @Composable
 fun EyebrowsNavHost(
     navController: NavHostController,
-    modelLightMode: ModelLightMode,
     modelEyebrow: ModelEyebrow,
     modifier: Modifier = Modifier
 ) {
@@ -83,8 +75,6 @@ fun EyebrowsNavHost(
                     var newRoute = eyebrowRoute.replace(EyebrowsScreen.NewEyebrows.argument, eyebrow.id.toString())
                     navController.navigate(newRoute)
                 },
-                onSwitchTheme = { modelLightMode.toggleLightMode() },
-                isLightMode = modelLightMode.isLightMode(),
                 eyebrows = modelEyebrow.eyebrows,
                 removeEyebrow = modelEyebrow::removeEyebrow,
                 updateEyebrow = modelEyebrow::updateEyebrow

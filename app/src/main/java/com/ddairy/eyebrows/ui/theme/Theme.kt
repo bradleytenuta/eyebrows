@@ -6,14 +6,14 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
-private val DarkColorPalette = darkColors(
+private val darkColorPalette = darkColors(
     primary = PrimaryYellow,
     primaryVariant = PrimaryVariantYellow,
     secondary = SecondaryOrange,
     secondaryVariant = SecondaryVariantOrange
 )
 
-private val LightColorPalette = lightColors(
+private val lightColorPalette = lightColors(
     primary = PrimaryYellow,
     primaryVariant = PrimaryVariantYellow,
     secondary = SecondaryOrange,
@@ -22,17 +22,11 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun EyebrowsTheme(
-    isLight: Boolean = !isSystemInDarkTheme(),
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (isLight) {
-        LightColorPalette
-    } else {
-        DarkColorPalette
-    }
-
     MaterialTheme(
-        colors = colors,
+        colors = if (darkTheme) darkColorPalette else lightColorPalette,
         content = content
     )
 }

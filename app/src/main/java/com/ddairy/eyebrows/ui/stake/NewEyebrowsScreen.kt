@@ -263,7 +263,7 @@ private fun HomePreview() {
 @Preview("Home Body - Dark Mode")
 @Composable
 private fun HomePreviewDarkMode() {
-    EyebrowsTheme(isLight = false) {
+    EyebrowsTheme {
         NewEyebrowsBody(
             onClickReturnHome = {},
             eyebrow = Eyebrow(description = ""),
