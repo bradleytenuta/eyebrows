@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "756531614924",
+    "project_id": "eyebrows-test",
+    "storage_bucket": "eyebrows-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756531614924:android:e58ab5ce1f078ef1515e69",
+        "android_client_info": {
+          "package_name": "com.ddairy.eyebrows"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756531614924-k6p6fgfqvjmk3et0qli6vetq23q3a5um.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjrXwxPvktnGcJWDNq9hEgcZ0jQbaypCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756531614924-k6p6fgfqvjmk3et0qli6vetq23q3a5um.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -161,6 +161,7 @@ fun NewEyebrowsBody(
                                 },
                                 label = if (participant.name.isEmpty()) "Add new participant" else "",
                                 maxLines = 1,
+                                singleLine = true,
                                 modifier = Modifier
                                     .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                                     .fillMaxWidth()
@@ -212,6 +213,7 @@ fun InputText(
     text: String,
     onTextChange: (String) -> Unit,
     maxLines: Int = Int.MAX_VALUE,
+    singleLine: Boolean = false,
     label: String = "",
     modifier: Modifier = Modifier
         .padding(16.dp)
@@ -224,6 +226,7 @@ fun InputText(
         label = { Text(label) },
         colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),
         maxLines = maxLines,
+        singleLine = singleLine,
         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
         keyboardActions = KeyboardActions(onDone = {
             keyboardController?.hide()
