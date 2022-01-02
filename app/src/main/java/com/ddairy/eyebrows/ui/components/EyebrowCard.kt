@@ -20,7 +20,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Schedule
@@ -88,18 +87,6 @@ fun CardContent(eyebrow: Eyebrow) {
         text = eyebrow.description,
         style = MaterialTheme.typography.h5
     )
-
-    // Ui for the Eyebrow prize.
-    if (eyebrow.prize.isNotEmpty()) {
-        Row(modifier = modifier) {
-            Icon(
-                imageVector = Icons.Filled.EmojiEvents,
-                contentDescription = "Prize"
-            )
-            Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-            Text(text = eyebrow.prize)
-        }
-    }
 
     // UI for Eyebrow start and end date.
     Row(modifier = modifier) {
@@ -261,7 +248,6 @@ private fun LightModePreview() {
     val eyebrow = Eyebrow(
         id = UUID.randomUUID(),
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        prize = "£100",
         startDate = LocalDateTime.now().plusHours(12),
         participants = listOf(
             Participant("Bob"),

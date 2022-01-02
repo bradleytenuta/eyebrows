@@ -89,7 +89,6 @@ private fun LightModePreview() {
     val eyebrow = Eyebrow(
         id = UUID.randomUUID(),
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        prize = "£100",
         startDate = LocalDateTime.now().plusHours(12),
         participants = listOf(
             Participant("Bob"),

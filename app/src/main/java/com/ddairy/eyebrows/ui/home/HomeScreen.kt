@@ -100,18 +100,15 @@ private fun HomePreview() {
             eyebrows = listOf(
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    prize = "A high five",
                     endDate = LocalDateTime.now(),
                     status = Eyebrow.Status.Complete
                 ),
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    prize = "100",
                     endDate = LocalDateTime.now().plusDays(3)
                 ),
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    prize = "100",
                     endDate = LocalDateTime.now().plusDays(1)
                 )
             ),
@@ -130,14 +127,12 @@ private fun HomePreviewDarkMode() {
             eyebrows = listOf(
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    prize = "A high five",
                     startDate = LocalDateTime.now().minusDays(1),
                     endDate = LocalDateTime.now().plusDays(1),
                     status = Eyebrow.Status.Complete
                 ),
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    prize = "100",
                     startDate = LocalDateTime.now().minusYears(30),
                     endDate = LocalDateTime.now().minusDays(1),
                 )

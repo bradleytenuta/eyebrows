@@ -60,7 +60,6 @@ fun NewEyebrowsBody(
                 .semantics { contentDescription = "New Eyebrow Screen" }
         ) {
             val (descriptionText, descriptionSetText) = remember { mutableStateOf(eyebrow.description) }
-            val (prizeText, prizeSetText) = remember { mutableStateOf(eyebrow.prize) }
             val (startDateValue, startDateSet) = remember { mutableStateOf(eyebrow.startDate) }
             val (endDateValue, endDateSet) = remember { mutableStateOf(eyebrow.endDate) }
 
@@ -115,13 +114,6 @@ fun NewEyebrowsBody(
                             vertical = 8.dp
                         )
                         .fillMaxWidth()
-                )
-
-                // TODO: This should be fancier, should except text or money input.
-                InputText(
-                    text = prizeText,
-                    onTextChange = prizeSetText,
-                    label = "Prize"
                 )
 
                 // Participants section.
@@ -179,7 +171,6 @@ fun NewEyebrowsBody(
                             endDate = endDateValue)
                     ) {
                         eyebrow.description = descriptionText.trim()
-                        eyebrow.prize = prizeText.trim()
                         eyebrow.startDate = startDateValue
                         eyebrow.endDate = endDateValue
                         eyebrow.participants = participants
