@@ -7,11 +7,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -43,6 +44,7 @@ import com.ddairy.eyebrows.ui.components.bet.NavBarBet
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import java.time.LocalDateTime
 
+@ExperimentalComposeUiApi
 @Composable
 fun NewEyebrowsBody(
     onClickReturnHome: () -> Unit = {},
@@ -54,26 +56,32 @@ fun NewEyebrowsBody(
             NavBarBet(onClickReturnHome = onClickReturnHome)
         }
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .semantics { contentDescription = "New Eyebrow Screen" }
-        ) {
-            val (descriptionText, descriptionSetText) = remember { mutableStateOf(eyebrow.description) }
-            val (startDateValue, startDateSet) = remember { mutableStateOf(eyebrow.startDate) }
-            val (endDateValue, endDateSet) = remember { mutableStateOf(eyebrow.endDate) }
+        val (descriptionText, descriptionSetText) = remember { mutableStateOf(eyebrow.description) }
+        val (startDateValue, startDateSet) = remember { mutableStateOf(eyebrow.startDate) }
+        val (endDateValue, endDateSet) = remember { mutableStateOf(eyebrow.endDate) }
 
-            val participants = remember { eyebrow.participants.toMutableStateList() }
-            if (participants.isEmpty()) {
-                participants.add(Participant(name = ""))
-            }
+        val participants = remember { eyebrow.participants.toMutableStateList() }
+        if (participants.isEmpty()) {
+            participants.add(Participant(name = ""))
+        }
 
-            Column(modifier = Modifier.weight(1f)) {
-
+        // UI
+        Column {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(innerPadding)
+                    .semantics { contentDescription = "New Eyebrow Screen" }
+                    .verticalScroll(rememberScrollState())
+            ) {
+                val keyboardController = LocalSoftwareKeyboardController.current
                 InputText(
                     text = descriptionText,
                     onTextChange = descriptionSetText,
-                    label = "that..."
+                    label = "that...",
+                    keyboardActions = KeyboardActions(onDone = {
+                        keyboardController?.hide()
+                    })
                 )
 
                 Row(
@@ -142,33 +150,45 @@ fun NewEyebrowsBody(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .fillMaxWidth()
-                        .border(1.dp, MaterialTheme.colors.onSurface.copy(alpha = TextFieldDefaults.UnfocusedIndicatorLineOpacity), MaterialTheme.shapes.medium)
+                        .border(
+                            1.dp,
+                            MaterialTheme.colors.onSurface.copy(alpha = TextFieldDefaults.UnfocusedIndicatorLineOpacity),
+                            MaterialTheme.shapes.medium
+                        )
                 ) {
-                    LazyColumn {
-                        itemsIndexed(items = participants) { index, participant ->
-                            InputText(
-                                text = participant.name,
-                                onTextChange = {
-                                    participants[index] = participants[index].copy(name = it)
-                                },
-                                label = if (participant.name.isEmpty()) "Add new participant" else "",
-                                maxLines = 1,
-                                singleLine = true,
-                                modifier = Modifier
-                                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
-                                    .fillMaxWidth()
-                            )
-                        }
+                    participants.forEachIndexed { index, participant ->
+                        val keyboardController = LocalSoftwareKeyboardController.current
+                        InputText(
+                            text = participant.name,
+                            onTextChange = {
+                                participants[index] = participants[index].copy(name = it)
+                            },
+                            label = if (participant.name.isEmpty()) "Add new participant" else "",
+                            maxLines = 1,
+                            singleLine = true,
+                            modifier = Modifier
+                                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                                .fillMaxWidth(),
+                            keyboardActions = KeyboardActions(onDone = {
+                                if (participants.size < 10) {
+                                    participants.add(Participant(name = ""))
+                                }
+                                keyboardController?.hide()
+                                // TODO: Add focus to next text field.
+                            })
+                        )
                     }
                 }
             }
 
+            Divider()
             Button(
                 onClick = {
                     if (verifyInputs(
                             description = descriptionText,
                             startDate = startDateValue,
-                            endDate = endDateValue)
+                            endDate = endDateValue
+                        )
                     ) {
                         eyebrow.description = descriptionText.trim()
                         eyebrow.startDate = startDateValue
@@ -177,7 +197,8 @@ fun NewEyebrowsBody(
 
                         // Updates participants list to only contain valid inputs.
                         // Also trims each name so there is no leading and ending spaces.
-                        val participantsWithValidInputs = eyebrow.participants.filter { participant -> participant.name.isNotEmpty() }
+                        val participantsWithValidInputs =
+                            eyebrow.participants.filter { participant -> participant.name.isNotEmpty() }
                         participantsWithValidInputs.forEach { participant ->
                             participant.name = participant.name.trim()
                         }
@@ -208,9 +229,9 @@ fun InputText(
     label: String = "",
     modifier: Modifier = Modifier
         .padding(16.dp)
-        .fillMaxWidth()
+        .fillMaxWidth(),
+    keyboardActions: KeyboardActions = KeyboardActions()
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
     TextField(
         value = text,
         onValueChange = onTextChange,
@@ -219,9 +240,7 @@ fun InputText(
         maxLines = maxLines,
         singleLine = singleLine,
         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-        keyboardActions = KeyboardActions(onDone = {
-            keyboardController?.hide()
-        }),
+        keyboardActions = keyboardActions,
         modifier = modifier
     )
 }
@@ -242,6 +261,7 @@ private fun verifyInputs(
     return true
 }
 
+@ExperimentalComposeUiApi
 @Preview("Home Body")
 @Composable
 private fun HomePreview() {
@@ -254,10 +274,11 @@ private fun HomePreview() {
     }
 }
 
+@ExperimentalComposeUiApi
 @Preview("Home Body - Dark Mode")
 @Composable
 private fun HomePreviewDarkMode() {
-    EyebrowsTheme {
+    EyebrowsTheme(darkTheme = true) {
         NewEyebrowsBody(
             onClickReturnHome = {},
             eyebrow = Eyebrow(description = ""),
