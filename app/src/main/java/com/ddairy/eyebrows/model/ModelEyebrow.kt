@@ -5,7 +5,11 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.util.helper.FirebaseUtil
 import com.ddairy.eyebrows.util.storage.InternalStorage
+import com.ddairy.eyebrows.util.tag.AnalyticsEventName
+import com.ddairy.eyebrows.util.tag.AnalyticsParamName
+import com.google.firebase.analytics.ktx.logEvent
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -26,6 +30,7 @@ class ModelEyebrow : ViewModel() {
         if (index == -1) {
             eyebrows.add(eyebrow)
             updateInternalStorage(context)
+            logEyebrowAnalytics(AnalyticsEventName.EYEBROW_CREATED, eyebrow)
         } else {
             updateEyebrow(context, eyebrow)
         }
@@ -37,6 +42,7 @@ class ModelEyebrow : ViewModel() {
     fun removeEyebrow(context: Context, eyebrow: Eyebrow) {
         this.eyebrows.remove(eyebrow)
         updateInternalStorage(context)
+        logEyebrowAnalytics(AnalyticsEventName.EYEBROW_DELETED, eyebrow)
     }
 
     /**
@@ -51,6 +57,7 @@ class ModelEyebrow : ViewModel() {
         this.eyebrows.removeIf { eyebrowItem -> eyebrowItem.id == eyebrow.id }
         this.eyebrows.add(index, eyebrow)
         updateInternalStorage(context)
+        logEyebrowAnalytics(AnalyticsEventName.EYEBROW_UPDATED, eyebrow)
     }
 
     /**
@@ -68,6 +75,17 @@ class ModelEyebrow : ViewModel() {
     private fun updateInternalStorage(context: Context) {
         GlobalScope.launch {
             InternalStorage.writeEyebrows(context, eyebrows)
+        }
+    }
+
+    /**
+     * Logs the event of the eyebrow event in google analytics.
+     */
+    private fun logEyebrowAnalytics(analyticsEventName: AnalyticsEventName, eyebrow: Eyebrow) {
+        FirebaseUtil.firebaseAnalytics.logEvent(analyticsEventName.eventName) {
+            if (analyticsEventName == AnalyticsEventName.EYEBROW_CREATED || analyticsEventName == AnalyticsEventName.EYEBROW_UPDATED) {
+                param(AnalyticsParamName.NUMBER_OF_PARTICIPANTS.paramName, eyebrow.participants.size.toString())
+            }
         }
     }
 }

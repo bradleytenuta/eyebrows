@@ -202,6 +202,7 @@ fun EyebrowScreen(
             val context = LocalContext.current
             SaveSection(
                 onSave = {
+                    // TODO: Add verify highlight when not valid.
                     if (EyebrowUtil.verifyInputs(
                             description = descriptionText,
                             startDate = startDateValue,

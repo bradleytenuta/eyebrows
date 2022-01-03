@@ -10,6 +10,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.ddairy.eyebrows.model.ModelEyebrow
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
+import com.ddairy.eyebrows.util.helper.FirebaseUtil
 
 // TODO: test.
 class EyebrowsActivity : ComponentActivity() {
@@ -20,6 +21,9 @@ class EyebrowsActivity : ComponentActivity() {
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initialise Analytics.
+        FirebaseUtil.initialiseAnalytics()
 
         // Updates the list of eyebrows with whats in internal storage.
         modelEyebrow.initialiseWithLocalEyebrows(this)
