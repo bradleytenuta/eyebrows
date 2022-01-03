@@ -20,6 +20,9 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun EyebrowTextField(
+    modifier: Modifier = Modifier
+        .padding(16.dp)
+        .fillMaxWidth(),
     value: String,
     onValueChange: (String) -> Unit,
     label: @Composable (() -> Unit)? = null,
@@ -28,9 +31,6 @@ fun EyebrowTextField(
     singleLine: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
     keyboardActions: KeyboardActions = KeyboardActions(),
-    modifier: Modifier = Modifier
-        .padding(16.dp)
-        .fillMaxWidth(),
 ) {
     TextField(
         value = value,
