@@ -25,7 +25,7 @@ import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 // TODO: Refactor this file.
-// TODO: reduce dependencies, test.
+// TODO: test.
 class EyebrowsActivity : ComponentActivity() {
 
     private val modelEyebrow by viewModels<ModelEyebrow>()
