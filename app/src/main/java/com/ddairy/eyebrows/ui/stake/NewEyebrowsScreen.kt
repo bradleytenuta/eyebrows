@@ -1,5 +1,6 @@
 package com.ddairy.eyebrows.ui.stake
 
+import android.content.Context
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,6 +29,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -42,6 +44,7 @@ import com.ddairy.eyebrows.data.Participant
 import com.ddairy.eyebrows.ui.components.bet.DatePicker
 import com.ddairy.eyebrows.ui.components.bet.NavBarBet
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
 @ExperimentalComposeUiApi
@@ -49,7 +52,7 @@ import java.time.LocalDateTime
 fun NewEyebrowsBody(
     onClickReturnHome: () -> Unit = {},
     eyebrow: Eyebrow,
-    addEyebrow: (eyebrow: Eyebrow) -> Unit,
+    addEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -181,6 +184,8 @@ fun NewEyebrowsBody(
                 }
             }
 
+            val context = LocalContext.current
+
             Divider()
             Button(
                 onClick = {
@@ -205,7 +210,7 @@ fun NewEyebrowsBody(
                         eyebrow.participants = participantsWithValidInputs
 
                         // If inputs are valid then create object and return
-                        addEyebrow(eyebrow)
+                        addEyebrow(context, eyebrow)
                         onClickReturnHome()
                     }
                 },
@@ -269,7 +274,7 @@ private fun HomePreview() {
         NewEyebrowsBody(
             onClickReturnHome = {},
             eyebrow = Eyebrow(description = ""),
-            addEyebrow = {}
+            addEyebrow = { _: Context, _: Eyebrow -> }
         )
     }
 }
@@ -282,7 +287,7 @@ private fun HomePreviewDarkMode() {
         NewEyebrowsBody(
             onClickReturnHome = {},
             eyebrow = Eyebrow(description = ""),
-            addEyebrow = {}
+            addEyebrow = { _: Context, _: Eyebrow -> }
         )
     }
 }

@@ -1,5 +1,6 @@
 package com.ddairy.eyebrows.ui.components
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.data.Eyebrow
@@ -50,8 +52,8 @@ import java.util.*
 @Composable
 fun EyebrowCard(
     eyebrow: Eyebrow,
-    removeEyebrow: (Eyebrow) -> Unit,
-    updateEyebrow: (Eyebrow) -> Unit,
+    removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
+    updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     onClickNewEyebrows: (Eyebrow) -> Unit = {},
 ) {
     val elevation = if (eyebrow.status == Eyebrow.Status.Open) 10.dp else 6.dp
@@ -117,8 +119,8 @@ fun CardContent(eyebrow: Eyebrow) {
 @Composable
 fun CardBottom(
     eyebrow: Eyebrow,
-    removeEyebrow: (Eyebrow) -> Unit,
-    updateEyebrow: (Eyebrow) -> Unit,
+    removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
+    updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     onClickNewEyebrows: (Eyebrow) -> Unit,
 ) {
     Row(
@@ -178,12 +180,13 @@ fun CardBottom(
         }
 
         // Eyebrow action buttons
+        val context = LocalContext.current
         FlowRow(mainAxisAlignment = FlowMainAxisAlignment.End) {
             if (eyebrow.status == Eyebrow.Status.Open) {
                 IconButton(
                     onClick = {
                         eyebrow.status = Eyebrow.Status.Complete
-                        updateEyebrow(eyebrow)
+                        updateEyebrow(context, eyebrow)
                     }
                 ) {
                     Icon(
@@ -213,6 +216,7 @@ fun CardBottom(
                 ) {
                     DropdownMenuItem(
                         onClick = {
+                            expanded = false
                             onClickNewEyebrows(eyebrow)
                         }
                     ) {
@@ -220,6 +224,7 @@ fun CardBottom(
                     }
                     DropdownMenuItem(
                         onClick = {
+                            expanded = false
                             showRemoveAlertDialog = true
                         }
                     ) {
@@ -228,8 +233,9 @@ fun CardBottom(
                     if (eyebrow.status == Eyebrow.Status.Complete) {
                         DropdownMenuItem(
                             onClick = {
+                                expanded = false
                                 eyebrow.status = Eyebrow.Status.Open
-                                updateEyebrow(eyebrow)
+                                updateEyebrow(context, eyebrow)
                             }
                         ) {
                             Text("Mark as not complete")
@@ -259,8 +265,8 @@ private fun LightModePreview() {
     EyebrowsTheme {
         EyebrowCard(
             eyebrow = eyebrow,
-            removeEyebrow = {},
-            updateEyebrow = {},
+            removeEyebrow = { _: Context, _: Eyebrow -> },
+            updateEyebrow = { _: Context, _: Eyebrow -> }
         )
     }
 }
@@ -288,8 +294,8 @@ private fun LightModeNoPrizePreview() {
     EyebrowsTheme {
         EyebrowCard(
             eyebrow = eyebrow,
-            removeEyebrow = {},
-            updateEyebrow = {}
+            removeEyebrow = { _: Context, _: Eyebrow -> },
+            updateEyebrow = { _: Context, _: Eyebrow -> }
         )
     }
 }

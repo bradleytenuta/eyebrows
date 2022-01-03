@@ -1,5 +1,6 @@
 package com.ddairy.eyebrows.ui.home
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -26,8 +27,8 @@ import java.time.LocalDateTime
 fun HomeBody(
     onClickNewEyebrows: (Eyebrow) -> Unit,
     eyebrows: List<Eyebrow>,
-    removeEyebrow: (Eyebrow) -> Unit,
-    updateEyebrow: (Eyebrow) -> Unit
+    removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
+    updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -72,8 +73,8 @@ fun HomeBody(
 @Composable
 fun EyebrowListItem(
     eyebrow: Eyebrow,
-    removeEyebrow: (Eyebrow) -> Unit,
-    updateEyebrow: (Eyebrow) -> Unit,
+    removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
+    updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     onClickNewEyebrows: (Eyebrow) -> Unit,
 ) {
     Row(
@@ -112,8 +113,8 @@ private fun HomePreview() {
                     endDate = LocalDateTime.now().plusDays(1)
                 )
             ),
-            removeEyebrow = {},
-            updateEyebrow = {}
+            removeEyebrow = { _: Context, _: Eyebrow -> },
+            updateEyebrow = { _: Context, _: Eyebrow -> }
         )
     }
 }
@@ -137,8 +138,8 @@ private fun HomePreviewDarkMode() {
                     endDate = LocalDateTime.now().minusDays(1),
                 )
             ),
-            removeEyebrow = {},
-            updateEyebrow = {}
+            removeEyebrow = { _: Context, _: Eyebrow -> },
+            updateEyebrow = { _: Context, _: Eyebrow -> }
         )
     }
 }

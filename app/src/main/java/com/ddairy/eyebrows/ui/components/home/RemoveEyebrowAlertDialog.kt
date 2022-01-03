@@ -1,9 +1,11 @@
 package com.ddairy.eyebrows.ui.components.home
 
+import android.content.Context
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import com.ddairy.eyebrows.data.Eyebrow
 
 @Composable
@@ -11,9 +13,10 @@ fun RemoveEyebrowAlertDialog(
     show: Boolean,
     toggleShow: (Boolean) -> Unit,
     eyebrow: Eyebrow,
-    removeEyebrow: (Eyebrow) -> Unit
+    removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit
 ) {
-    if(show)
+    if(show) {
+        val context = LocalContext.current
         AlertDialog(
             onDismissRequest = {
                 toggleShow(false)
@@ -28,7 +31,7 @@ fun RemoveEyebrowAlertDialog(
                 TextButton(
                     onClick = {
                         toggleShow(false)
-                        removeEyebrow(eyebrow)
+                        removeEyebrow(context, eyebrow)
                     }
                 ) {
                     Text("Delete")
@@ -44,4 +47,5 @@ fun RemoveEyebrowAlertDialog(
                 }
             }
         )
+    }
 }
