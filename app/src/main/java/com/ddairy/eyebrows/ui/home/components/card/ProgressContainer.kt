@@ -20,9 +20,9 @@ import com.ddairy.eyebrows.util.helper.EyebrowUtil
 @Composable
 fun ProgressContainer(
     eyebrow: Eyebrow,
-    surfaceModifier: Modifier = Modifier
+    modifier: Modifier = Modifier
 ) {
-    Surface(modifier = surfaceModifier) {
+    Surface(modifier = modifier) {
         // TODO: Currently a value within LinearProgressIndicator is statically set
         // TODO: meaning that the width is minimum 240.dp, hopefully this gets fixed.
         LinearProgressIndicator(
@@ -41,14 +41,19 @@ fun ProgressContainer(
         )
 
         val daysLeft = EyebrowUtil.getNumberOfDaysTillEndDate(eyebrow)
-        var progressText = if (eyebrow.status == Eyebrow.Status.Complete) {
-            "Completed!"
-        } else if (daysLeft == 0L) {
-            "Time's up!"
-        } else if (daysLeft == 1L) {
-            "$daysLeft day"
-        } else {
-            "$daysLeft days"
+        var progressText = when {
+            eyebrow.status == Eyebrow.Status.Complete -> {
+                "Completed!"
+            }
+            daysLeft == 0L -> {
+                "Time's up!"
+            }
+            daysLeft == 1L -> {
+                "$daysLeft day"
+            }
+            else -> {
+                "$daysLeft days"
+            }
         }
 
         if (EyebrowUtil.isLate(eyebrow)) {

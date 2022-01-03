@@ -26,8 +26,8 @@ class EyebrowUtil {
          * will appear higher on the list.
          */
         fun organiseList(eyebrows: List<Eyebrow>): List<Eyebrow> {
-            var allOpenItems = eyebrows.filter { it.status == Eyebrow.Status.Open }
-            var allCompleteItems = eyebrows.filter { it.status == Eyebrow.Status.Complete }
+            val allOpenItems = eyebrows.filter { it.status == Eyebrow.Status.Open }
+            val allCompleteItems = eyebrows.filter { it.status == Eyebrow.Status.Complete }
 
             return allOpenItems.sortedWith(compareDate).plus(allCompleteItems.sortedWith(compareDate))
         }
@@ -40,8 +40,8 @@ class EyebrowUtil {
             val startDateLong = eyebrow.startDate.atZone(ZoneOffset.UTC).toEpochSecond()
             val endDateLong = eyebrow.endDate.atZone(ZoneOffset.UTC).toEpochSecond()
 
-            val diffDate = endDateLong - startDateLong;
-            val currentDiff = currentDateLong - startDateLong;
+            val diffDate = endDateLong - startDateLong
+            val currentDiff = currentDateLong - startDateLong
 
             return currentDiff.toFloat() / diffDate * 100
         }
@@ -52,7 +52,7 @@ class EyebrowUtil {
         fun getNumberOfDaysTillEndDate(eyebrow: Eyebrow): Long {
             val startDateLong = eyebrow.startDate.atZone(ZoneOffset.UTC).toEpochSecond()
             val endDateLong = eyebrow.endDate.atZone(ZoneOffset.UTC).toEpochSecond()
-            val diffDate = endDateLong - startDateLong;
+            val diffDate = endDateLong - startDateLong
 
             return TimeUnit.DAYS.convert(diffDate, TimeUnit.SECONDS)
         }

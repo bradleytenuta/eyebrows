@@ -1,4 +1,4 @@
-package com.ddairy.eyebrows.model;
+package com.ddairy.eyebrows.model
 
 import android.content.Context
 import androidx.compose.runtime.mutableStateListOf

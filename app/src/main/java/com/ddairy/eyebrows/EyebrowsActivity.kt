@@ -16,12 +16,12 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.model.ModelEyebrow
-import com.google.accompanist.navigation.animation.composable
-import com.ddairy.eyebrows.ui.home.HomeScreen
 import com.ddairy.eyebrows.ui.eyebrow.EyebrowScreen
+import com.ddairy.eyebrows.ui.home.HomeScreen
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.tag.ScreenName
 import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
 // TODO: Refactor this file.
@@ -76,8 +76,8 @@ fun EyebrowsNavHost(
         composable(route = ScreenName.Overview.route) {
             HomeScreen(
                 onClickNewEyebrows = { eyebrow ->
-                    var eyebrowRoute = ScreenName.NewName.route
-                    var newRoute = eyebrowRoute.replace(ScreenName.NewName.argument, eyebrow.id.toString())
+                    val eyebrowRoute = ScreenName.NewName.route
+                    val newRoute = eyebrowRoute.replace(ScreenName.NewName.argument, eyebrow.id.toString())
                     navController.navigate(newRoute)
                 },
                 eyebrows = modelEyebrow.eyebrows,

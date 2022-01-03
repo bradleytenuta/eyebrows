@@ -81,7 +81,7 @@ dependencies {
     // https://firebase.google.com/docs/android/setup#available-libraries
 
     // Jackson, used to deserialize objects to strings.
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.13.+"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.5"
 
     // Other
@@ -127,7 +127,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$rootProject.composeVersion"
 
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
 }
 
