@@ -7,6 +7,10 @@ import com.fasterxml.jackson.module.kotlin.kotlinModule
 
 class InstanceMapper {
     companion object {
+
+        /**
+         * A json mapper that works with Kotlin and can also handle date objects.
+         */
         val mapper = jsonMapper {
             addModule(kotlinModule())
             addModule(JavaTimeModule())

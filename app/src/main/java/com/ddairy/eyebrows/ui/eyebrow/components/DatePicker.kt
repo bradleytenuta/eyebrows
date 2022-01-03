@@ -1,4 +1,4 @@
-package com.ddairy.eyebrows.ui.components.bet
+package com.ddairy.eyebrows.ui.eyebrow.components
 
 import android.app.DatePickerDialog
 import android.content.Context
@@ -10,10 +10,16 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ddairy.eyebrows.util.LocalDateTimeUtil
+import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
+import com.ddairy.eyebrows.util.helper.LocalDateTimeUtil
 import java.time.LocalDateTime
 
+/**
+ * UI that allows the user to select a given date.
+ */
 @Composable
 fun DatePicker(
     context: Context,
@@ -40,5 +46,17 @@ fun DatePicker(
         }
     ) {
         Text(text = LocalDateTimeUtil.getDateAsString(date))
+    }
+}
+
+@Preview("Light Mode")
+@Composable
+private fun LightModePreview() {
+    EyebrowsTheme {
+        DatePicker(
+            context = LocalContext.current,
+            date = LocalDateTime.now(),
+            updateDate = { _: Int, _: Int, _: Int -> }
+        )
     }
 }

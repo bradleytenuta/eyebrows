@@ -1,4 +1,4 @@
-package com.ddairy.eyebrows.util
+package com.ddairy.eyebrows.util.helper
 
 import com.ddairy.eyebrows.data.Eyebrow
 import org.junit.Test

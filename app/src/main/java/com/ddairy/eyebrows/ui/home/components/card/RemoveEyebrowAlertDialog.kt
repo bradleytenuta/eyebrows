@@ -1,4 +1,4 @@
-package com.ddairy.eyebrows.ui.components.home
+package com.ddairy.eyebrows.ui.home.components.card
 
 import android.content.Context
 import androidx.compose.material.AlertDialog
@@ -8,6 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.ddairy.eyebrows.data.Eyebrow
 
+/**
+ * The UI for the eyebrow delete pop up.
+ */
 @Composable
 fun RemoveEyebrowAlertDialog(
     show: Boolean,

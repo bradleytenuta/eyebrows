@@ -20,6 +20,9 @@ private val lightColorPalette = lightColors(
     secondaryVariant = SecondaryVariantOrange
 )
 
+/**
+ * The main theme for the eyebrow application.
+ */
 @Composable
 fun EyebrowsTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

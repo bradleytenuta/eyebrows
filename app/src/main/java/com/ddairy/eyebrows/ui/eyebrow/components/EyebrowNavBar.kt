@@ -1,26 +1,29 @@
-package com.ddairy.eyebrows.ui.components.home
+package com.ddairy.eyebrows.ui.eyebrow.components
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AddCircle
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.ddairy.eyebrows.ui.components.NavBar
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 
+/**
+ * The navbar used for the eyebrow screen.
+ */
 @Composable
-fun NavBarHome(
-    onClickNewEyebrows: () -> Unit = {}
+fun EyebrowNavBar(
+    onClickReturnHome: () -> Unit = {}
 ) {
     NavBar(
-        title = { Text("") },
+        title = { Text("I bet Eyebrows...") },
         actions = {
-            IconButton(onClick = onClickNewEyebrows) {
+            IconButton(onClick = onClickReturnHome) {
                 Icon(
-                    imageVector = Icons.Rounded.AddCircle,
-                    contentDescription = "Create Eyebrows"
+                    imageVector = Icons.Outlined.Close,
+                    contentDescription = "Return Home"
                 )
             }
         }
@@ -31,6 +34,6 @@ fun NavBarHome(
 @Composable
 private fun LightModePreview() {
     EyebrowsTheme {
-        NavBarHome()
+        EyebrowNavBar()
     }
 }

@@ -1,4 +1,4 @@
-package com.ddairy.eyebrows.ui.components.home
+package com.ddairy.eyebrows.ui.home.components.card
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,8 +12,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ddairy.eyebrows.data.Eyebrow
-import com.ddairy.eyebrows.util.EyebrowUtil
+import com.ddairy.eyebrows.util.helper.EyebrowUtil
 
+/**
+ * The UI for the eyebrow card progress bar.
+ */
 @Composable
 fun ProgressContainer(
     eyebrow: Eyebrow,

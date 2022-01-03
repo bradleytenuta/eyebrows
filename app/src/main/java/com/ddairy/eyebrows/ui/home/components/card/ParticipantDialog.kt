@@ -1,4 +1,4 @@
-package com.ddairy.eyebrows.ui.components.home
+package com.ddairy.eyebrows.ui.home.components.card
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,6 +23,9 @@ import com.google.accompanist.flowlayout.FlowRow
 import java.time.LocalDateTime
 import java.util.*
 
+/**
+ * The UI for the participant pop up.
+ */
 @Composable
 fun ParticipantDialog(
     show: Boolean,

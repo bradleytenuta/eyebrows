@@ -17,14 +17,17 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.data.Eyebrow
-import com.ddairy.eyebrows.ui.components.EyebrowCard
-import com.ddairy.eyebrows.ui.components.home.NavBarHome
+import com.ddairy.eyebrows.ui.home.components.card.EyebrowCard
+import com.ddairy.eyebrows.ui.home.components.HomeNavBar
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import com.ddairy.eyebrows.util.EyebrowUtil
+import com.ddairy.eyebrows.util.helper.EyebrowUtil
 import java.time.LocalDateTime
 
+/**
+ * The UI home screen. Used to display and configure eyebrows.
+ */
 @Composable
-fun HomeBody(
+fun HomeScreen(
     onClickNewEyebrows: (Eyebrow) -> Unit,
     eyebrows: List<Eyebrow>,
     removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
@@ -32,7 +35,7 @@ fun HomeBody(
 ) {
     Scaffold(
         topBar = {
-            NavBarHome(
+            HomeNavBar(
                 onClickNewEyebrows = { onClickNewEyebrows(Eyebrow(description = "")) }
             )
         }
@@ -96,7 +99,7 @@ fun EyebrowListItem(
 @Composable
 private fun HomePreview() {
     EyebrowsTheme {
-        HomeBody(
+        HomeScreen(
             onClickNewEyebrows = {},
             eyebrows = listOf(
                 Eyebrow(
@@ -123,7 +126,7 @@ private fun HomePreview() {
 @Composable
 private fun HomePreviewDarkMode() {
     EyebrowsTheme {
-        HomeBody(
+        HomeScreen(
             onClickNewEyebrows = {},
             eyebrows = listOf(
                 Eyebrow(

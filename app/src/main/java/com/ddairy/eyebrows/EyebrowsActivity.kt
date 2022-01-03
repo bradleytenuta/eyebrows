@@ -17,14 +17,15 @@ import androidx.navigation.NavHostController
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.model.ModelEyebrow
 import com.google.accompanist.navigation.animation.composable
-import com.ddairy.eyebrows.ui.home.HomeBody
-import com.ddairy.eyebrows.ui.stake.NewEyebrowsBody
+import com.ddairy.eyebrows.ui.home.HomeScreen
+import com.ddairy.eyebrows.ui.eyebrow.EyebrowScreen
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import com.ddairy.eyebrows.util.EyebrowsScreen
-import com.ddairy.eyebrows.util.InternalStorage
+import com.ddairy.eyebrows.util.tag.ScreenName
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
+// TODO: Refactor this file.
+//TODO: Refactor, get a linter, reduce dependencies, test.
 class EyebrowsActivity : ComponentActivity() {
 
     private val modelEyebrow by viewModels<ModelEyebrow>()
@@ -35,7 +36,7 @@ class EyebrowsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // Updates the list of eyebrows with whats in internal storage.
-        modelEyebrow.initialiseWithLocalEyebrows(InternalStorage.readEyebrows(this))
+        modelEyebrow.initialiseWithLocalEyebrows(this)
 
         installSplashScreen()
         setContent {
@@ -69,14 +70,14 @@ fun EyebrowsNavHost(
 ) {
     AnimatedNavHost(
         navController = navController,
-        startDestination = EyebrowsScreen.Overview.route,
+        startDestination = ScreenName.Overview.route,
         modifier = modifier
     ) {
-        composable(route = EyebrowsScreen.Overview.route) {
-            HomeBody(
+        composable(route = ScreenName.Overview.route) {
+            HomeScreen(
                 onClickNewEyebrows = { eyebrow ->
-                    var eyebrowRoute = EyebrowsScreen.NewEyebrows.route
-                    var newRoute = eyebrowRoute.replace(EyebrowsScreen.NewEyebrows.argument, eyebrow.id.toString())
+                    var eyebrowRoute = ScreenName.NewName.route
+                    var newRoute = eyebrowRoute.replace(ScreenName.NewName.argument, eyebrow.id.toString())
                     navController.navigate(newRoute)
                 },
                 eyebrows = modelEyebrow.eyebrows,
@@ -85,7 +86,7 @@ fun EyebrowsNavHost(
             )
         }
         composable(
-            route = EyebrowsScreen.NewEyebrows.route,
+            route = ScreenName.NewName.route,
             enterTransition = {
                 slideInHorizontally(initialOffsetX = { 1000 })
             },
@@ -102,8 +103,8 @@ fun EyebrowsNavHost(
                 eyebrow = Eyebrow(description = "")
             }
 
-            NewEyebrowsBody(
-                onClickReturnHome = { navController.navigate(EyebrowsScreen.Overview.route) },
+            EyebrowScreen(
+                onClickReturnHome = { navController.navigate(ScreenName.Overview.route) },
                 eyebrow = eyebrow,
                 addEyebrow = modelEyebrow::addEyebrow,
             )

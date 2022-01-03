@@ -1,6 +1,7 @@
-package com.ddairy.eyebrows.util;
+package com.ddairy.eyebrows.util.helper;
 
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.util.helper.EyebrowUtil
 import org.junit.Assert
 import org.junit.Test;
 import java.time.LocalDateTime

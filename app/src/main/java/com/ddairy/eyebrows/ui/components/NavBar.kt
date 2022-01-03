@@ -6,6 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+/**
+ * The default navbar used for this application.
+ */
 @Composable
 fun NavBar(
     title: @Composable () -> Unit,
