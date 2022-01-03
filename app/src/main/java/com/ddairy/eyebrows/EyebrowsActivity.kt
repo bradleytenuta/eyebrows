@@ -26,7 +26,7 @@ class EyebrowsActivity : ComponentActivity() {
         FirebaseUtil.initialiseAnalytics()
 
         // Updates the list of eyebrows with whats in internal storage.
-        modelEyebrow.initialiseWithLocalEyebrows(this)
+        modelEyebrow.initialiseWithStorage(this)
 
         installSplashScreen()
         setContent {

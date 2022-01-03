@@ -69,7 +69,6 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     // Declare the dependency for the Firebase SDK for Google Analytics.
     // When using the BoM, you don't specify versions in Firebase library dependencies.
-    // TODO: How to get started: https://firebase.google.com/docs/analytics/get-started?platform=android#kotlin+ktx
     implementation 'com.google.firebase:firebase-analytics-ktx'
     // Does not come with the bom above.
     // TODO: How to get started: https://firebase.google.com/docs/admob/android/quick-start

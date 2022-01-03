@@ -63,8 +63,10 @@ class ModelEyebrow : ViewModel() {
     /**
      * This method is used to overwrite the current list of eyebrows with a new list.
      * This should only be used when the application is started.
+     * Calling this method instead of adding the eyebrows one by one will prevent extra analytics
+     * events being created and ruining the validity of the data.
      */
-    fun initialiseWithLocalEyebrows(context: Context) {
+    fun initialiseWithStorage(context: Context) {
         eyebrows = InternalStorage.readEyebrows(context).toMutableStateList()
     }
 
