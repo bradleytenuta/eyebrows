@@ -6,6 +6,8 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.util.storage.InternalStorage
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * The model that holds information about the eyebrows within the application.
@@ -56,8 +58,7 @@ class ModelEyebrow : ViewModel() {
      * This should only be used when the application is started.
      */
     fun initialiseWithLocalEyebrows(context: Context) {
-        // TODO: Make this run on another thread?
-        this.eyebrows = InternalStorage.readEyebrows(context).toMutableStateList()
+        eyebrows = InternalStorage.readEyebrows(context).toMutableStateList()
     }
 
     /**
@@ -65,7 +66,8 @@ class ModelEyebrow : ViewModel() {
      * This method should be called whenever the list in this model is updated.
      */
     private fun updateInternalStorage(context: Context) {
-        // TODO: Make this run on another thread?
-        InternalStorage.writeEyebrows(context, this.eyebrows)
+        GlobalScope.launch {
+            InternalStorage.writeEyebrows(context, eyebrows)
+        }
     }
 }

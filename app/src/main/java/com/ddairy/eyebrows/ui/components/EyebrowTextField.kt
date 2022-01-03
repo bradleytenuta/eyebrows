@@ -30,7 +30,7 @@ fun EyebrowTextField(
     maxLines: Int = Int.MAX_VALUE,
     singleLine: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-    keyboardActions: KeyboardActions = KeyboardActions(),
+    keyboardActions: KeyboardActions = KeyboardActions()
 ) {
     TextField(
         value = value,

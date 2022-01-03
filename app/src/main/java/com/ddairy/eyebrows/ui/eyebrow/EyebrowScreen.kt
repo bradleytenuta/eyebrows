@@ -37,9 +37,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.TextButton
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.ui.Alignment
 
 /**
@@ -129,6 +131,7 @@ fun EyebrowScreen(
                 // Participants section.
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .fillMaxWidth()
@@ -139,11 +142,12 @@ fun EyebrowScreen(
                         style = MaterialTheme.typography.subtitle2
                     )
                     if (participants.size < 10) {
-                        IconButton(onClick = { participants.add(Participant(name = "")) }) {
+                        TextButton(onClick = { participants.add(Participant(name = "")) }) {
                             Icon(
                                 imageVector = Icons.Filled.Add,
                                 contentDescription = "Add Participant"
                             )
+                            Text(text = "Add Participant")
                         }
                     }
                 }
@@ -160,28 +164,36 @@ fun EyebrowScreen(
                 ) {
                     participants.forEachIndexed { index, participant ->
                         val keyboardController = LocalSoftwareKeyboardController.current
-                        EyebrowTextField(
-                            value = participant.name,
-                            onValueChange = {
-                                participants[index] = participants[index].copy(name = it)
-                            },
-                            label = {
-                                val textValue = if (participant.name.isEmpty()) "Add new participant" else ""
-                                Text(textValue)
-                            },
-                            maxLines = 1,
-                            singleLine = true,
-                            keyboardActions = KeyboardActions(onDone = {
-                                if (participants.size < 10) {
-                                    participants.add(Participant(name = ""))
-                                }
-                                keyboardController?.hide()
-                                // TODO: Add focus to next text field.
-                            }),
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                                 .fillMaxWidth()
-                        )
+                        ) {
+                            EyebrowTextField(
+                                value = participant.name,
+                                onValueChange = {
+                                    participants[index] = participants[index].copy(name = it)
+                                },
+                                label = { Text("Name...") },
+                                maxLines = 1,
+                                singleLine = true,
+                                keyboardActions = KeyboardActions(onDone = {
+                                    keyboardController?.hide()
+                                }),
+                                modifier = Modifier.padding(0.dp)
+                            )
+                            IconButton(
+                                onClick = { participants.removeAt(index) },
+                                modifier = Modifier.padding(top = 8.dp),
+                                enabled = participant.name.isNotEmpty()
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Close,
+                                    contentDescription = "Delete"
+                                )
+                            }
+                        }
                     }
                 }
             }
