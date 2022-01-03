@@ -1,8 +1,8 @@
 package com.ddairy.eyebrows.ui.eyebrow.components
 
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.runtime.Composable
@@ -20,11 +20,12 @@ fun EyebrowNavBar(
     NavBar(
         title = { Text("I bet Eyebrows...") },
         actions = {
-            IconButton(onClick = onClickReturnHome) {
+            TextButton(onClick = onClickReturnHome) {
                 Icon(
                     imageVector = Icons.Outlined.Close,
-                    contentDescription = "Return Home"
+                    contentDescription = "Cancel"
                 )
+                Text(text = "Cancel")
             }
         }
     )

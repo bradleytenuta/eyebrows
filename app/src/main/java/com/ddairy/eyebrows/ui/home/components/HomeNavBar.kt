@@ -1,10 +1,10 @@
 package com.ddairy.eyebrows.ui.home.components
 
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.AddCircle
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.ddairy.eyebrows.ui.components.NavBar
@@ -20,11 +20,12 @@ fun HomeNavBar(
     NavBar(
         title = { Text("") },
         actions = {
-            IconButton(onClick = onClickNewEyebrows) {
+            TextButton(onClick = onClickNewEyebrows) {
                 Icon(
-                    imageVector = Icons.Rounded.AddCircle,
-                    contentDescription = "Create Eyebrows"
+                    imageVector = Icons.Outlined.Add,
+                    contentDescription = "New Eyebrow"
                 )
+                Text(text = "New Eyebrow")
             }
         }
     )
