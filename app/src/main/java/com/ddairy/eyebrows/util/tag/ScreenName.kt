@@ -4,6 +4,7 @@ enum class ScreenName(
     val route: String,
     val argument: String = ""
 ) {
-    Overview("overview"),
-    NewName("new-eyebrows/{id}", "{id}");
+    Welcome("welcome"),
+    Home("home"),
+    Eyebrow("eyebrow/{id}", "{id}");
 }

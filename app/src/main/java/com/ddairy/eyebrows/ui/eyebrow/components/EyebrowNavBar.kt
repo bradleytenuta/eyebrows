@@ -15,7 +15,7 @@ import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
  */
 @Composable
 fun EyebrowNavBar(
-    onClickReturnHome: () -> Unit = {}
+    onClickReturnHome: () -> Unit
 ) {
     NavBar(
         title = { Text("I bet Eyebrows...") },
@@ -35,6 +35,8 @@ fun EyebrowNavBar(
 @Composable
 private fun LightModePreview() {
     EyebrowsTheme {
-        EyebrowNavBar()
+        EyebrowNavBar(
+            onClickReturnHome = {}
+        )
     }
 }

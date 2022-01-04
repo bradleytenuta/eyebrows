@@ -29,6 +29,7 @@ import java.time.LocalDateTime
 @Composable
 fun HomeScreen(
     onClickNewEyebrows: (Eyebrow) -> Unit,
+    onClickViewWelcomePage: () -> Unit,
     eyebrows: List<Eyebrow>,
     removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit
@@ -36,7 +37,8 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             HomeNavBar(
-                onClickNewEyebrows = { onClickNewEyebrows(Eyebrow(description = "")) }
+                onClickNewEyebrows = { onClickNewEyebrows(Eyebrow(description = "")) },
+                onClickViewWelcomePage = onClickViewWelcomePage
             )
         }
     ) { innerPadding ->
@@ -95,12 +97,13 @@ fun EyebrowListItem(
     }
 }
 
-@Preview("Home Body")
+@Preview("Home Screen")
 @Composable
 private fun HomePreview() {
     EyebrowsTheme {
         HomeScreen(
             onClickNewEyebrows = {},
+            onClickViewWelcomePage = {},
             eyebrows = listOf(
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -122,12 +125,13 @@ private fun HomePreview() {
     }
 }
 
-@Preview("Home Body - Dark Mode")
+@Preview("Home Screen - Dark Mode")
 @Composable
 private fun HomePreviewDarkMode() {
     EyebrowsTheme {
         HomeScreen(
             onClickNewEyebrows = {},
+            onClickViewWelcomePage = {},
             eyebrows = listOf(
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",

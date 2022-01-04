@@ -14,8 +14,13 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    // Android apps need to be digitally signed with a certificate before installing.
     signingConfigs {
         // TODO: Look into before release.
+
+
+        // Digitally signed for debug phones.
         // We use a bundled debug keystore, to allow debug builds from CI to be upgradable.
         debug {
             storeFile rootProject.file('debug.keystore')
@@ -71,7 +76,7 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies.
     implementation 'com.google.firebase:firebase-analytics-ktx'
     // Does not come with the bom above.
-    // TODO: How to get started: https://firebase.google.com/docs/admob/android/quick-start
+    // TODO: How to get started: https://firebase.google.com/docs/admob/android/quick-start - this can only be done once app is on the play store. I have already completed step 1a in the tutorial.
     // TODO: Uncomment: implementation 'com.google.android.gms:play-services-ads:20.5.0'
 
     // Jackson, used to deserialize objects to strings.
@@ -103,6 +108,8 @@ dependencies {
     // Accompanist is a group of libraries that aim to supplement Jetpack Compose with features that are commonly required by developers but not yet available.
     implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
     implementation "com.google.accompanist:accompanist-flowlayout:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-pager:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-pager-indicators:$accompanist_version"
 
     // ----------------- androidTestImplementation -----------------
     /* adds dependency for androidTest source set

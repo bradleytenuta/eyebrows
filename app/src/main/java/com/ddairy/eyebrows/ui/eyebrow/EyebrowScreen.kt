@@ -53,7 +53,7 @@ import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDescriptionValid
 @ExperimentalComposeUiApi
 @Composable
 fun EyebrowScreen(
-    onClickReturnHome: () -> Unit = {},
+    onClickReturnHome: () -> Unit,
     eyebrow: Eyebrow,
     addEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
 ) {
@@ -140,7 +140,7 @@ fun EyebrowScreen(
                 }
 
                 Text(
-                    text = "Optional Properties",
+                    text = "Optional",
                     style = MaterialTheme.typography.subtitle1,
                     modifier = Modifier
                         .padding(
@@ -255,9 +255,9 @@ fun EyebrowScreen(
 }
 
 @ExperimentalComposeUiApi
-@Preview("Home Body")
+@Preview("Eyebrow Screen")
 @Composable
-private fun HomePreview() {
+private fun EyebrowPreview() {
     EyebrowsTheme {
         EyebrowScreen(
             onClickReturnHome = {},
@@ -268,9 +268,9 @@ private fun HomePreview() {
 }
 
 @ExperimentalComposeUiApi
-@Preview("Home Body - Dark Mode")
+@Preview("Eyebrow Screen - Dark Mode")
 @Composable
-private fun HomePreviewDarkMode() {
+private fun EyebrowPreviewDarkMode() {
     val eyebrow = Eyebrow(
         description = "description here",
         startDate = LocalDateTime.of(2020, 1, 1, 12, 0),
