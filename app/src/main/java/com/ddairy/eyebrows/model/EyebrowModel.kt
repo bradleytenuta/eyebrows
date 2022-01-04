@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 /**
  * The model that holds information about the eyebrows within the application.
  */
-class ModelEyebrow : ViewModel() {
+class EyebrowModel : ViewModel() {
 
     var eyebrows = mutableStateListOf<Eyebrow>()
     private set // By specifying private set, we're restricting writes to this state object to a private setter only visible inside the ViewModel.

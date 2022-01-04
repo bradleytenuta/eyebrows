@@ -73,13 +73,20 @@ class EyebrowUtil {
         }
 
         /**
-         * Verifies that the values are valid to be used within an eyebrow object.
+         * Verifies that the description value for an eyebrow object is valid.
          */
-        fun verifyInputs(description: String, startDate: LocalDateTime, endDate: LocalDateTime): Boolean {
+        fun isDescriptionValid(description: String): Boolean {
             // Description cannot be empty.
             if (description.trim().isEmpty()) {
                 return false
             }
+            return true
+        }
+
+        /**
+         * Verifies that the start and end date values for an eyebrow object is valid.
+         */
+        fun isDatesValid(startDate: LocalDateTime, endDate: LocalDateTime): Boolean {
             // End date cannot be before the start date
             if (endDate.isBefore(startDate)) {
                 return false

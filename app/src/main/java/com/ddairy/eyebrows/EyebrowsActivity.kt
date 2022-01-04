@@ -8,14 +8,17 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.Scaffold
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.ddairy.eyebrows.model.ModelEyebrow
+import com.ddairy.eyebrows.model.EyebrowModel
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.FirebaseUtil
 
 // TODO: test.
+/**
+ * Class that runs the application.
+ */
 class EyebrowsActivity : ComponentActivity() {
 
-    private val modelEyebrow by viewModels<ModelEyebrow>()
+    private val modelEyebrow by viewModels<EyebrowModel>()
 
     @ExperimentalComposeUiApi
     @ExperimentalAnimationApi
@@ -32,7 +35,7 @@ class EyebrowsActivity : ComponentActivity() {
         setContent {
             EyebrowsTheme {
                 Scaffold {
-                    EyebrowsNavigation(modelEyebrow = modelEyebrow)
+                    EyebrowsNavigation(eyebrowModel = modelEyebrow)
                 }
             }
         }

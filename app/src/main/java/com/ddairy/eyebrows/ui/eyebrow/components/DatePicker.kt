@@ -5,6 +5,7 @@ import android.content.Context
 import android.widget.DatePicker
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -24,6 +25,7 @@ import java.time.LocalDateTime
 fun DatePicker(
     context: Context,
     date: LocalDateTime,
+    borderColor: Color = Color.Gray,
     updateDate: (year: Int, month: Int, day: Int) -> Unit
 ){
     // Month value needs minus 1 and plus 1 as the value is used instead of int value.
@@ -40,12 +42,15 @@ fun DatePicker(
 
     TextButton(
         modifier = Modifier.padding(horizontal = 16.dp),
-        border = BorderStroke(1.dp, Color.Gray),
+        border = BorderStroke(1.dp, borderColor),
         onClick = {
             datePickerDialog.show()
         }
     ) {
-        Text(text = LocalDateTimeUtil.getDateAsString(date))
+        Text(
+            text = LocalDateTimeUtil.getDateAsString(date),
+            color = MaterialTheme.colors.secondary
+        )
     }
 }
 
@@ -57,6 +62,19 @@ private fun LightModePreview() {
             context = LocalContext.current,
             date = LocalDateTime.now(),
             updateDate = { _: Int, _: Int, _: Int -> }
+        )
+    }
+}
+
+@Preview("Light Mode Error")
+@Composable
+private fun LightModeErrorPreview() {
+    EyebrowsTheme {
+        DatePicker(
+            context = LocalContext.current,
+            date = LocalDateTime.now(),
+            updateDate = { _: Int, _: Int, _: Int -> },
+            borderColor = MaterialTheme.colors.error
         )
     }
 }

@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
 import com.ddairy.eyebrows.data.Eyebrow
-import com.ddairy.eyebrows.model.ModelEyebrow
+import com.ddairy.eyebrows.model.EyebrowModel
 import com.ddairy.eyebrows.ui.eyebrow.EyebrowScreen
 import com.ddairy.eyebrows.ui.home.HomeScreen
 import com.ddairy.eyebrows.util.tag.ScreenName
@@ -19,7 +19,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 @ExperimentalAnimationApi
 @Composable
 fun EyebrowsNavigation(
-    modelEyebrow: ModelEyebrow,
+    eyebrowModel: EyebrowModel,
     navController: NavHostController = rememberAnimatedNavController(),
 ) {
     AnimatedNavHost(
@@ -33,9 +33,9 @@ fun EyebrowsNavigation(
                     val newRoute = eyebrowRoute.replace(ScreenName.NewName.argument, eyebrow.id.toString())
                     navController.navigate(newRoute)
                 },
-                eyebrows = modelEyebrow.eyebrows,
-                removeEyebrow = modelEyebrow::removeEyebrow,
-                updateEyebrow = modelEyebrow::updateEyebrow
+                eyebrows = eyebrowModel.eyebrows,
+                removeEyebrow = eyebrowModel::removeEyebrow,
+                updateEyebrow = eyebrowModel::updateEyebrow
             )
         }
         composable(
@@ -50,7 +50,7 @@ fun EyebrowsNavigation(
             var eyebrow: Eyebrow? = null
             if (backStackEntry.arguments != null) {
                 val eyebrowUUID = backStackEntry.arguments?.getString("id")
-                eyebrow = modelEyebrow.eyebrows.find { eyebrow -> eyebrow.id.toString() == eyebrowUUID }
+                eyebrow = eyebrowModel.eyebrows.find { eyebrow -> eyebrow.id.toString() == eyebrowUUID }
             }
             if (eyebrow == null) {
                 eyebrow = Eyebrow(description = "")
@@ -59,7 +59,7 @@ fun EyebrowsNavigation(
             EyebrowScreen(
                 onClickReturnHome = { navController.navigate(ScreenName.Overview.route) },
                 eyebrow = eyebrow,
-                addEyebrow = modelEyebrow::addEyebrow,
+                addEyebrow = eyebrowModel::addEyebrow,
             )
         }
     }

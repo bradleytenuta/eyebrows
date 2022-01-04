@@ -31,7 +31,6 @@ import com.ddairy.eyebrows.ui.eyebrow.components.DatePicker
 import com.ddairy.eyebrows.ui.eyebrow.components.EyebrowNavBar
 import com.ddairy.eyebrows.ui.eyebrow.components.SaveSection
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import com.ddairy.eyebrows.util.helper.EyebrowUtil
 import java.time.LocalDateTime
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.height
@@ -43,11 +42,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDatesValid
+import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDescriptionValid
 
+// TODO: Refactor this file.
 /**
  * The UI eyebrow screen. Used to create and edit eyebrows.
  */
-// TODO: Refactor this file.
 @ExperimentalComposeUiApi
 @Composable
 fun EyebrowScreen(
@@ -61,8 +63,11 @@ fun EyebrowScreen(
         }
     ) { innerPadding ->
         val (descriptionText, descriptionSetText) = remember { mutableStateOf(eyebrow.description) }
+        val (descriptionIsErrorValue, descriptionIsErrorSet) = remember { mutableStateOf(false) }
+
         val (startDateValue, startDateSet) = remember { mutableStateOf(eyebrow.startDate) }
         val (endDateValue, endDateSet) = remember { mutableStateOf(eyebrow.endDate) }
+        val (dateIsErrorValue, dateIsErrorSet) = remember { mutableStateOf(false) }
 
         val participants = remember { eyebrow.participants.toMutableStateList() }
         if (participants.isEmpty()) {
@@ -78,6 +83,20 @@ fun EyebrowScreen(
                     .semantics { contentDescription = "New Eyebrow Screen" }
                     .verticalScroll(rememberScrollState())
             ) {
+                // Error message is only shown when there is an error.
+                if (descriptionIsErrorValue || dateIsErrorValue) {
+                    val descriptionErrorMessage = "A description must be provided."
+                    val dateErrorMessage = "The start date must occur before the end date."
+                    Text(
+                        text = if (descriptionIsErrorValue && dateIsErrorValue) "$descriptionErrorMessage $dateErrorMessage" else if (descriptionIsErrorValue) descriptionErrorMessage else dateErrorMessage,
+                        color = MaterialTheme.colors.error,
+                        style = MaterialTheme.typography.caption,
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth()
+                    )
+                }
+
                 val keyboardController = LocalSoftwareKeyboardController.current
                 EyebrowTextField(
                     value = descriptionText,
@@ -85,7 +104,8 @@ fun EyebrowScreen(
                     label = { Text("that...") },
                     keyboardActions = KeyboardActions(onDone = {
                         keyboardController?.hide()
-                    })
+                    }),
+                    isError = descriptionIsErrorValue
                 )
 
                 Row(
@@ -102,7 +122,8 @@ fun EyebrowScreen(
                             startDateSet(
                                 LocalDateTime.of(year, month, day, 0, 0)
                             )
-                        }
+                        },
+                        borderColor = if (dateIsErrorValue) MaterialTheme.colors.error else Color.Gray
                     )
 
                     // Date Picker for end date.
@@ -113,7 +134,8 @@ fun EyebrowScreen(
                             endDateSet(
                                 LocalDateTime.of(year, month, day, 0, 0)
                             )
-                        }
+                        },
+                        borderColor = if (dateIsErrorValue) MaterialTheme.colors.error else Color.Gray
                     )
                 }
 
@@ -204,13 +226,7 @@ fun EyebrowScreen(
             val context = LocalContext.current
             SaveSection(
                 onSave = {
-                    // TODO: Add verify highlight when not valid.
-                    if (EyebrowUtil.verifyInputs(
-                            description = descriptionText,
-                            startDate = startDateValue,
-                            endDate = endDateValue
-                        )
-                    ) {
+                   if (isDescriptionValid(description = descriptionText) && isDatesValid(startDate = startDateValue, endDate = endDateValue)) {
                         eyebrow.description = descriptionText.trim()
                         eyebrow.startDate = startDateValue
                         eyebrow.endDate = endDateValue
@@ -227,6 +243,9 @@ fun EyebrowScreen(
                         // If inputs are valid then create object and return.
                         addEyebrow(context, eyebrow)
                         onClickReturnHome()
+                    } else {
+                        descriptionIsErrorSet(!isDescriptionValid(description = descriptionText))
+                        dateIsErrorSet(!isDatesValid(startDate = startDateValue, endDate = endDateValue))
                     }
                 }
             )
@@ -252,10 +271,17 @@ private fun HomePreview() {
 @Preview("Home Body - Dark Mode")
 @Composable
 private fun HomePreviewDarkMode() {
+    val eyebrow = Eyebrow(
+        description = "description here",
+        startDate = LocalDateTime.of(2020, 1, 1, 12, 0),
+        endDate = LocalDateTime.of(2020, 1, 2, 12, 0),
+        participants = listOf(Participant(name = "Bob"), Participant(name = "Jim"))
+    )
+
     EyebrowsTheme(darkTheme = true) {
         EyebrowScreen(
             onClickReturnHome = {},
-            eyebrow = Eyebrow(description = ""),
+            eyebrow = eyebrow,
             addEyebrow = { _: Context, _: Eyebrow -> }
         )
     }
