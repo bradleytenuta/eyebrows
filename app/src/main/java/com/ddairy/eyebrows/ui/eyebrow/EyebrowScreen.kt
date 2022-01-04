@@ -181,7 +181,9 @@ fun EyebrowScreen(
                                 keyboardActions = KeyboardActions(onDone = {
                                     keyboardController?.hide()
                                 }),
-                                modifier = Modifier.padding(0.dp)
+                                modifier = Modifier
+                                    .padding(0.dp)
+                                    .weight(1f)
                             )
                             IconButton(
                                 onClick = { participants.removeAt(index) },
