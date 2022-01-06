@@ -34,6 +34,7 @@ import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import java.time.LocalDateTime
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.height
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.TextButton
@@ -164,7 +165,10 @@ fun EyebrowScreen(
                         style = MaterialTheme.typography.subtitle2
                     )
                     if (participants.size < 10) {
-                        TextButton(onClick = { participants.add(Participant(name = "")) }) {
+                        TextButton(
+                            onClick = { participants.add(Participant(name = "")) },
+                            colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colors.secondary)
+                        ) {
                             Icon(
                                 imageVector = Icons.Filled.Add,
                                 contentDescription = "Add Participant"

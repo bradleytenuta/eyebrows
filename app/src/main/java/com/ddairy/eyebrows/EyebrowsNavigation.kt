@@ -39,7 +39,7 @@ fun EyebrowsNavigation(
             val toHomeScreen = {
                 // Sets preferences and writes to storage.
                 preferences.showWelcomeScreen = false
-                InternalStorage.writePreferences(context, preferences) // TODO: Move to model when created.
+                InternalStorage.writePreferences(context, preferences)
 
                 // Removes this composable from the back stack, so when the page changes, the user cannot go back.
                 navController.popBackStack()

@@ -75,7 +75,7 @@ fun ParticipantSection(eyebrow: Eyebrow) {
                 ) {
                     Text(
                         text = "...",
-                        color = MaterialTheme.colors.secondaryVariant
+                        color = MaterialTheme.colors.secondary
                     )
                 }
             }

@@ -1,6 +1,6 @@
 <resources>
-    <color name="PrimaryYellow">#edb100</color>
-    <color name="PrimaryVariantYellow">#d49e00</color>
-    <color name="SecondaryOrange">#ed9200</color>
-    <color name="SecondaryVariantOrange">#d58500</color>
+    <color name="Primary">#34a044</color>
+    <color name="PrimaryVariant">#287d35</color>
+    <color name="Secondary">#bc711d</color>
+    <color name="SecondaryVariant">#925716</color>
 </resources>

@@ -1,18 +1,17 @@
 package com.ddairy.eyebrows.ui.welcome
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
@@ -45,11 +44,11 @@ val welcomePages = listOf(
 @ExperimentalPagerApi
 @Composable
 fun WelcomeScreen(
-    onGettingStartedClick:()->Unit,
-    onSkipClicked:()->Unit
+    onGettingStartedClick:() -> Unit,
+    onSkipClicked:() -> Unit
 ) {
     val pagerState = rememberPagerState()
-    Column {
+    Column(modifier = Modifier.background(Color.Transparent)) {
         TextButton(
             onClick = { onSkipClicked() },
             modifier = Modifier.padding(8.dp)
@@ -64,7 +63,13 @@ fun WelcomeScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-        ) { count -> WelcomePage(welcomePage = welcomePages[count]) }
+        ) { count ->
+            WelcomePage(
+                welcomePage = welcomePages[count],
+                onGettingStartedClick = onGettingStartedClick,
+                isLastPage = pagerState.currentPage == (welcomePages.size - 1)
+            )
+        }
 
         // The page indicator found at the bottom of the screen.
         HorizontalPagerIndicator(
@@ -74,23 +79,6 @@ fun WelcomeScreen(
                 .padding(16.dp),
             activeColor = MaterialTheme.colors.secondary
         )
-
-        // When on the last page, show the button with animation.
-        AnimatedVisibility(visible = pagerState.currentPage == (welcomePages.size - 1)) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            ) {
-                Button(
-                    shape = RoundedCornerShape(20.dp),
-                    onClick = onGettingStartedClick
-                ) {
-                    Text(text = "Get Started")
-                }
-            }
-        }
     }
 }
 

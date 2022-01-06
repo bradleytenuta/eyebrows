@@ -1,16 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.Eyebrows" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/PrimaryYellow</item>
-        <item name="colorPrimaryVariant">@color/PrimaryVariantYellow</item>
-        <item name="colorSecondary">@color/SecondaryOrange</item>
-        <item name="colorSecondaryVariant">@color/SecondaryVariantOrange</item>
+        <item name="colorPrimary">@color/Primary</item>
+        <item name="colorPrimaryVariant">@color/PrimaryVariant</item>
+        <item name="colorSecondary">@color/Secondary</item>
+        <item name="colorSecondaryVariant">@color/SecondaryVariant</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
     </style>
 
     <style name="Theme.Eyebrows.Splash" parent="Theme.SplashScreen">
         <!-- To set the background color -->
-        <item name="windowSplashScreenBackground">@color/PrimaryYellow</item>
+        <item name="windowSplashScreenBackground">@color/Primary</item>
 
         <!-- To set the splash icon -->
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
