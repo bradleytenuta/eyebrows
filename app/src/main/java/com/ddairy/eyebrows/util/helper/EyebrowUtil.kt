@@ -3,7 +3,6 @@ package com.ddairy.eyebrows.util.helper
 import com.ddairy.eyebrows.data.Eyebrow
 import java.time.LocalDateTime
 import java.time.ZoneOffset
-import java.util.concurrent.TimeUnit
 
 class EyebrowUtil {
 
@@ -33,46 +32,6 @@ class EyebrowUtil {
         }
 
         /**
-         * Gets a percentage of how long is left till the finish date of an eyebrow is reached.
-         */
-        fun getPercentageOfTimeTillEndDate(eyebrow: Eyebrow): Float {
-            val currentDateLong = LocalDateTime.now().atZone(ZoneOffset.UTC).toEpochSecond()
-            val startDateLong = eyebrow.startDate.atZone(ZoneOffset.UTC).toEpochSecond()
-            val endDateLong = eyebrow.endDate.atZone(ZoneOffset.UTC).toEpochSecond()
-
-            val diffDate = endDateLong - startDateLong
-            val currentDiff = currentDateLong - startDateLong
-
-            return currentDiff.toFloat() / diffDate * 100
-        }
-
-        /**
-         * Gets the number of days left till the finish date of an eyebrow is reached.
-         */
-        fun getNumberOfDaysTillEndDate(eyebrow: Eyebrow): Long {
-            val startDateLong = eyebrow.startDate.atZone(ZoneOffset.UTC).toEpochSecond()
-            val endDateLong = eyebrow.endDate.atZone(ZoneOffset.UTC).toEpochSecond()
-            val diffDate = endDateLong - startDateLong
-
-            return TimeUnit.DAYS.convert(diffDate, TimeUnit.SECONDS)
-        }
-
-        /**
-         * Checks if the end date for a given eyebrow is in the past or not.
-         */
-        fun isEndDateInThePast(eyebrow: Eyebrow): Boolean {
-            return getPercentageOfTimeTillEndDate(eyebrow) > 1.0f
-        }
-
-        /**
-         * If the end date is in the past and the eyebrow is still in the open status then
-         * the eyebrow is considered late.
-         */
-        fun isLate(eyebrow: Eyebrow): Boolean {
-            return isEndDateInThePast(eyebrow) && eyebrow.status == Eyebrow.Status.Open
-        }
-
-        /**
          * Verifies that the description value for an eyebrow object is valid.
          */
         fun isDescriptionValid(description: String): Boolean {
@@ -86,9 +45,9 @@ class EyebrowUtil {
         /**
          * Verifies that the start and end date values for an eyebrow object is valid.
          */
-        fun isDatesValid(startDate: LocalDateTime, endDate: LocalDateTime): Boolean {
+        fun isDateValid(endDate: LocalDateTime): Boolean {
             // End date cannot be before the start date
-            if (endDate.isBefore(startDate)) {
+            if (endDate.isBefore(LocalDateTime.now())) {
                 return false
             }
             return true

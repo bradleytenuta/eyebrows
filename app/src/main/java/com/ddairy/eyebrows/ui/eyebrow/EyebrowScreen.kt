@@ -41,10 +41,11 @@ import androidx.compose.material.TextButton
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDatesValid
+import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDateValid
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDescriptionValid
 
 // TODO: Refactor this file.
@@ -66,7 +67,6 @@ fun EyebrowScreen(
         val (descriptionText, descriptionSetText) = remember { mutableStateOf(eyebrow.description) }
         val (descriptionIsErrorValue, descriptionIsErrorSet) = remember { mutableStateOf(false) }
 
-        val (startDateValue, startDateSet) = remember { mutableStateOf(eyebrow.startDate) }
         val (endDateValue, endDateSet) = remember { mutableStateOf(eyebrow.endDate) }
         val (dateIsErrorValue, dateIsErrorSet) = remember { mutableStateOf(false) }
 
@@ -87,7 +87,7 @@ fun EyebrowScreen(
                 // Error message is only shown when there is an error.
                 if (descriptionIsErrorValue || dateIsErrorValue) {
                     val descriptionErrorMessage = "A description must be provided."
-                    val dateErrorMessage = "The start date must occur before the end date."
+                    val dateErrorMessage = "The end date can't be in the past."
                     Text(
                         text = if (descriptionIsErrorValue && dateIsErrorValue) "$descriptionErrorMessage $dateErrorMessage" else if (descriptionIsErrorValue) descriptionErrorMessage else dateErrorMessage,
                         color = MaterialTheme.colors.error,
@@ -113,18 +113,18 @@ fun EyebrowScreen(
                     modifier = Modifier
                         .padding(16.dp)
                         .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Date Picker for start date.
-                    DatePicker(
-                        context = LocalContext.current,
-                        date = startDateValue,
-                        updateDate = { year: Int, month: Int, day: Int ->
-                            startDateSet(
-                                LocalDateTime.of(year, month, day, 0, 0)
-                            )
-                        },
-                        borderColor = if (dateIsErrorValue) MaterialTheme.colors.error else Color.Gray
+                    Icon(
+                        modifier = Modifier.padding(end = 8.dp),
+                        imageVector = Icons.Filled.Flag,
+                        contentDescription = "End Date"
+                    )
+
+                    Text(
+                        text = "Select End Date:",
+                        style = MaterialTheme.typography.subtitle2
                     )
 
                     // Date Picker for end date.
@@ -230,9 +230,8 @@ fun EyebrowScreen(
             val context = LocalContext.current
             SaveSection(
                 onSave = {
-                   if (isDescriptionValid(description = descriptionText) && isDatesValid(startDate = startDateValue, endDate = endDateValue)) {
+                   if (isDescriptionValid(description = descriptionText) && isDateValid(endDate = endDateValue)) {
                         eyebrow.description = descriptionText.trim()
-                        eyebrow.startDate = startDateValue
                         eyebrow.endDate = endDateValue
 
                         // Updates participants list to only contain valid inputs.
@@ -249,7 +248,7 @@ fun EyebrowScreen(
                         onClickReturnHome()
                     } else {
                         descriptionIsErrorSet(!isDescriptionValid(description = descriptionText))
-                        dateIsErrorSet(!isDatesValid(startDate = startDateValue, endDate = endDateValue))
+                        dateIsErrorSet(!isDateValid(endDate = endDateValue))
                     }
                 }
             )
@@ -277,7 +276,6 @@ private fun EyebrowPreview() {
 private fun EyebrowPreviewDarkMode() {
     val eyebrow = Eyebrow(
         description = "description here",
-        startDate = LocalDateTime.of(2020, 1, 1, 12, 0),
         endDate = LocalDateTime.of(2020, 1, 2, 12, 0),
         participants = listOf(Participant(name = "Bob"), Participant(name = "Jim"))
     )

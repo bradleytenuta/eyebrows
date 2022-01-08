@@ -128,20 +128,18 @@ private fun HomePreview() {
 @Preview("Home Screen - Dark Mode")
 @Composable
 private fun HomePreviewDarkMode() {
-    EyebrowsTheme {
+    EyebrowsTheme(darkTheme = true) {
         HomeScreen(
             onClickNewEyebrows = {},
             onClickViewWelcomePage = {},
             eyebrows = listOf(
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    startDate = LocalDateTime.now().minusDays(1),
                     endDate = LocalDateTime.now().plusDays(1),
                     status = Eyebrow.Status.Complete
                 ),
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    startDate = LocalDateTime.now().minusYears(30),
                     endDate = LocalDateTime.now().minusDays(1),
                 )
             ),

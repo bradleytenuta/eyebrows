@@ -48,7 +48,7 @@ fun DatePicker(
         }
     ) {
         Text(
-            text = LocalDateTimeUtil.getDateAsString(date),
+            text = LocalDateTimeUtil.getDateAsString(date, "dd/MM/yyyy"),
             color = MaterialTheme.colors.secondary
         )
     }

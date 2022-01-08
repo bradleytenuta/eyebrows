@@ -1,22 +1,25 @@
 package com.ddairy.eyebrows.ui.home.components.card
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Flag
-import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.util.helper.LocalDateTimeUtil
+import kotlin.math.abs
 
 /**
  * The UI for the main content of the eyebrow card.
@@ -36,27 +39,48 @@ fun CardContent(eyebrow: Eyebrow) {
     )
 
     // UI for Eyebrow start and end date.
-    Row(modifier = modifier) {
-        // UI for start date.
-        Icon(
-            imageVector = Icons.Filled.Schedule,
-            contentDescription = "Start Date"
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colors.secondary),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    modifier = Modifier.offset(y = 2.dp),
+                    text = LocalDateTimeUtil.getDateAsString(eyebrow.endDate, "MMM"),
+                    style = MaterialTheme.typography.h6
+                )
+                Text(
+                    modifier = Modifier.offset(y = (-2).dp),
+                    text = LocalDateTimeUtil.getDateAsString(eyebrow.endDate, "dd"),
+                    style = MaterialTheme.typography.subtitle1
+                )
+            }
+        }
+        val daysLeft = LocalDateTimeUtil.getNumberOfDaysTillEndDate(eyebrow)
+        val deadlineText = if (daysLeft > 1) {
+            "$daysLeft days left till deadline."
+        } else if (daysLeft == 1) {
+            "$daysLeft day left till deadline."
+        } else if (daysLeft == 0) {
+            "Deadline is today!"
+        } else if (daysLeft == -1) {
+            abs(daysLeft).toString() + " day late."
+        } else {
+            abs(daysLeft).toString() + " days late."
+        }
+        Text(
+            modifier = Modifier.padding(start = 8.dp),
+            text = "$deadlineText",
+            style = MaterialTheme.typography.h6
         )
-        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-        Text(text = LocalDateTimeUtil.getDateAsString(eyebrow.startDate))
-
-        // Progress bar to end date.
-        ProgressContainer(
-            eyebrow = eyebrow,
-            Modifier.weight(1f)
-        )
-
-        // UI for end date.
-        Icon(
-            imageVector = Icons.Filled.Flag,
-            contentDescription = "End Date"
-        )
-        Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-        Text(text = LocalDateTimeUtil.getDateAsString(eyebrow.endDate))
     }
 }

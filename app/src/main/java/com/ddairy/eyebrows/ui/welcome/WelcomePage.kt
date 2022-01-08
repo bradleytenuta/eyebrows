@@ -58,6 +58,7 @@ fun WelcomePage(
             text = welcomePage.description,
             textAlign = TextAlign.Center, fontSize = 14.sp
         )
+        Spacer(modifier = Modifier.height(40.dp))
 
         // When on the last page, show the button with animation.
         Column(

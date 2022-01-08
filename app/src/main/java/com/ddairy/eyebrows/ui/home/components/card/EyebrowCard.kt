@@ -53,7 +53,6 @@ private fun LightModePreview() {
     val eyebrow = Eyebrow(
         id = UUID.randomUUID(),
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        startDate = LocalDateTime.now().plusHours(12),
         participants = listOf(
             Participant("Bob"),
             Participant("Dan"),
@@ -70,13 +69,13 @@ private fun LightModePreview() {
     }
 }
 
-@Preview("Light Mode - No prize")
+@Preview("Light Mode - In the Past")
 @Composable
-private fun LightModeNoPrizePreview() {
+private fun LightModeInThePastPreview() {
     val eyebrow = Eyebrow(
         id = UUID.randomUUID(),
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        startDate = LocalDateTime.now().plusHours(12),
+        endDate = LocalDateTime.now().minusDays(2),
         participants = listOf(
             Participant("Bob"),
             Participant("Dan"),
@@ -91,6 +90,40 @@ private fun LightModeNoPrizePreview() {
         )
     )
     EyebrowsTheme {
+        EyebrowCard(
+            eyebrow = eyebrow,
+            removeEyebrow = { _: Context, _: Eyebrow -> },
+            updateEyebrow = { _: Context, _: Eyebrow -> }
+        )
+    }
+}
+
+@Preview("Light Mode - Yesterday")
+@Composable
+private fun LightModeYesterdayPreview() {
+    val eyebrow = Eyebrow(
+        id = UUID.randomUUID(),
+        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        endDate = LocalDateTime.now().minusDays(1)
+    )
+    EyebrowsTheme {
+        EyebrowCard(
+            eyebrow = eyebrow,
+            removeEyebrow = { _: Context, _: Eyebrow -> },
+            updateEyebrow = { _: Context, _: Eyebrow -> }
+        )
+    }
+}
+
+@Preview("Light Mode - Today")
+@Composable
+private fun LightModeTodayPreview() {
+    val eyebrow = Eyebrow(
+        id = UUID.randomUUID(),
+        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        endDate = LocalDateTime.now()
+    )
+    EyebrowsTheme(darkTheme = true) {
         EyebrowCard(
             eyebrow = eyebrow,
             removeEyebrow = { _: Context, _: Eyebrow -> },
