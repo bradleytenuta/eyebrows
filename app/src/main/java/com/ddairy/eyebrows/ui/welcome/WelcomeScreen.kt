@@ -10,7 +10,7 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
@@ -21,25 +21,6 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 
-// TODO: Write this and make pictures.
-val welcomePages = listOf(
-    WelcomePage(
-        "Easy Momo Transfer",
-        "Make a quick transaction with someone besides you by scanning their Easy Momo Code",
-        R.drawable.ic_launcher_foreground
-    ),
-    WelcomePage(
-        "Easy Select",
-        "Pick a contact directly from your contact list and Momo them in less than no time",
-        R.drawable.ic_launcher_foreground
-    ),
-    WelcomePage(
-        "Secure",
-        "We will never know your Momo PIN in anyway.The app does not share your data with any third party. No internet connection required",
-        R.drawable.ic_launcher_foreground
-    )
-)
-
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
@@ -47,13 +28,32 @@ fun WelcomeScreen(
     onGettingStartedClick:() -> Unit,
     onSkipClicked:() -> Unit
 ) {
+    // TODO: Write this and make pictures.
+    val welcomePages = listOf(
+        WelcomePage(
+            stringResource(R.string.welcome_page_1_title),
+            stringResource(R.string.welcome_page_1_text),
+            R.drawable.ic_launcher_foreground
+        ),
+        WelcomePage(
+            stringResource(R.string.welcome_page_2_title),
+            stringResource(R.string.welcome_page_2_text),
+            R.drawable.ic_launcher_foreground
+        ),
+        WelcomePage(
+            stringResource(R.string.welcome_page_3_title),
+            stringResource(R.string.welcome_page_3_text),
+            R.drawable.ic_launcher_foreground
+        )
+    )
+
     val pagerState = rememberPagerState()
-    Column(modifier = Modifier.background(Color.Transparent)) {
+    Column(modifier = Modifier.background(MaterialTheme.colors.background)) {
         TextButton(
             onClick = { onSkipClicked() },
             modifier = Modifier.padding(8.dp)
         ) {
-            EyebrowText(text = "Skip")
+            EyebrowText(text = stringResource(R.string.welcome_skip_button))
         }
 
         // Contains the page UI which appears as you swipe.

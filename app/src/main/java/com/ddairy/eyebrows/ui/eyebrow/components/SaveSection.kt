@@ -6,7 +6,9 @@ import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.ui.components.EyebrowText
 
 /**
@@ -24,6 +26,6 @@ fun SaveSection(onSave: () -> Unit) {
             .padding(16.dp)
             .fillMaxWidth(),
     ) {
-        EyebrowText("Save")
+        EyebrowText(stringResource(R.string.eyebrow_save_section))
     }
 }

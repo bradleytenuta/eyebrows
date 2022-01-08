@@ -1,3 +1,64 @@
 <resources>
     <string name="app_name">Eyebrows</string>
+
+    <!-- Eyebrow - Navbar -->
+    <string name="eyebrow_nav_bar_title">I bet Eyebrows...</string>
+    <string name="eyebrow_nav_bar_cancel">Cancel</string>
+
+    <!-- Eyebrows - Page -->
+    <string name="eyebrow_description">Eyebrow Screen</string>
+    <string name="eyebrow_content_description">New Eyebrow Screen</string>
+    <string name="eyebrow_description_error_message">A description must be provided.</string>
+    <string name="eyebrow_date_error_message">The end date can\'t be in the past.</string>
+    <string name="eyebrow_description_field_label">that...</string>
+    <string name="eyebrow_end_date_icon_description">End Date</string>
+    <string name="eyebrow_end_date_label">Select End Date:</string>
+    <string name="eyebrow_optional_properties_header">Optional</string>
+    <string name="eyebrow_participants_header">Participants</string>
+    <string name="eyebrow_add_participant">Add Participant</string>
+    <string name="eyebrow_participant_label">Name...</string>
+    <string name="eyebrow_delete_participant_icon_description">Delete</string>
+    <string name="eyebrow_save_section">Save</string>
+
+    <!-- Home - Action Button Section -->
+    <string name="home_action_complete_icon_description">Mark as complete</string>
+    <string name="home_action_more_options_icon_description">More options</string>
+    <string name="home_action_dropdown_edit">Edit</string>
+    <string name="home_action_dropdown_remove">Remove</string>
+    <string name="home_action_dropdown_mark_as_not_complete">Mark as not complete</string>
+
+    <!-- Home - Eyebrow Deadline -->
+    <string name="home_card_eyebrow_deadline_more_than_1_day">days left till deadline</string>
+    <string name="home_card_eyebrow_deadline_1_day">day left till deadline</string>
+    <string name="home_card_eyebrow_deadline_today">Deadline is today!</string>
+    <string name="home_card_eyebrow_deadline_1_day_late">day late.</string>
+    <string name="home_card_eyebrow_deadline_more_than_1_day_late">days late.</string>
+
+    <!-- Home - Eyebrow Participants Dialog -->
+    <string name="home_card_eyebrow_participants_dialog_title">All Participants</string>
+    <string name="home_card_eyebrow_participants_dialog_close">Close</string>
+
+    <!-- Home - Remove Eyebrow Dialog -->
+    <string name="home_card_remove_eyebrow_dialog_title">Delete Eyebrow</string>
+    <string name="home_card_remove_eyebrow_dialog_text">Are you sure?</string>
+    <string name="home_card_remove_eyebrow_dialog_delete">Delete</string>
+    <string name="home_card_remove_eyebrow_dialog_cancel">Cancel</string>
+
+    <!-- Home - Navbar -->
+    <string name="home_nav_bar_help_icon_description">View welcome page</string>
+    <string name="home_nav_bar_new_eyebrow">New Eyebrow</string>
+
+    <!-- Home - Page -->
+    <string name="home_description">Home Screen</string>
+    <string name="home_no_eyebrows_message">Your eyebrows need a trim, how about a friendly bet?</string>
+
+    <!-- Welcome - Page -->
+    <string name="welcome_start_button">Get Started</string>
+    <string name="welcome_skip_button">Skip</string>
+    <string name="welcome_page_1_title">Easy Momo Transfer</string>
+    <string name="welcome_page_1_text">Make a quick transaction with someone besides you by scanning their Easy Momo Code</string>
+    <string name="welcome_page_2_title">Easy Select</string>
+    <string name="welcome_page_2_text">Pick a contact directly from your contact list and Momo them in less than no time</string>
+    <string name="welcome_page_3_title">Secure</string>
+    <string name="welcome_page_3_text">We will never know your Momo PIN in anyway.The app does not share your data with any third party. No internet connection required</string>
 </resources>

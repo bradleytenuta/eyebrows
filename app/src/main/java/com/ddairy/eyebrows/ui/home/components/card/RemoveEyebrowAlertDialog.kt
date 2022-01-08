@@ -5,6 +5,8 @@ import androidx.compose.material.AlertDialog
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.EyebrowText
 
@@ -25,10 +27,10 @@ fun RemoveEyebrowAlertDialog(
                 toggleShow(false)
             },
             title = {
-                EyebrowText(text = "Delete Eyebrow")
+                EyebrowText(text = stringResource(R.string.home_card_remove_eyebrow_dialog_title))
             },
             text = {
-                EyebrowText("Are you sure?")
+                EyebrowText(text = stringResource(R.string.home_card_remove_eyebrow_dialog_text))
             },
             confirmButton = {
                 TextButton(
@@ -37,7 +39,7 @@ fun RemoveEyebrowAlertDialog(
                         removeEyebrow(context, eyebrow)
                     }
                 ) {
-                    EyebrowText("Delete")
+                    EyebrowText(text = stringResource(R.string.home_card_remove_eyebrow_dialog_delete))
                 }
             },
             dismissButton = {
@@ -46,7 +48,7 @@ fun RemoveEyebrowAlertDialog(
                         toggleShow(false)
                     }
                 ) {
-                    EyebrowText("Cancel")
+                    EyebrowText(text = stringResource(R.string.home_card_remove_eyebrow_dialog_cancel))
                 }
             }
         )

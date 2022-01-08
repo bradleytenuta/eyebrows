@@ -18,8 +18,6 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 // TODO: test.
 // TODO: Add text and images
 // TODO: Add icon and animated icon
-// TODO: Move text to strings file.
-// TODO: Make sure each text has a material theme style.
 // TODO: Prepare for production
 // TODO: Add adds
 /**

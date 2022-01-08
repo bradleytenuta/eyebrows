@@ -14,6 +14,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.home.components.card.RemoveEyebrowAlertDialog
@@ -41,7 +43,7 @@ fun ActionButtonSection(
             ) {
                 Icon(
                     Icons.Outlined.Done,
-                    contentDescription = "Mark as complete"
+                    contentDescription = stringResource(R.string.home_action_complete_icon_description)
                 )
             }
         }
@@ -58,7 +60,7 @@ fun ActionButtonSection(
         IconButton(onClick = { expanded = true }) {
             Icon(
                 Icons.Outlined.MoreVert,
-                contentDescription = "More options"
+                contentDescription = stringResource(R.string.home_action_more_options_icon_description)
             )
             DropdownMenu(
                 expanded = expanded,
@@ -70,7 +72,7 @@ fun ActionButtonSection(
                         onClickNewEyebrows(eyebrow)
                     }
                 ) {
-                    EyebrowText("Edit")
+                    EyebrowText(stringResource(R.string.home_action_dropdown_edit))
                 }
                 DropdownMenuItem(
                     onClick = {
@@ -78,7 +80,7 @@ fun ActionButtonSection(
                         showRemoveAlertDialog = true
                     }
                 ) {
-                    EyebrowText("Remove")
+                    EyebrowText(stringResource(R.string.home_action_dropdown_remove))
                 }
                 if (eyebrow.status == Eyebrow.Status.Complete) {
                     DropdownMenuItem(
@@ -88,7 +90,7 @@ fun ActionButtonSection(
                             updateEyebrow(context, eyebrow)
                         }
                     ) {
-                        EyebrowText("Mark as not complete")
+                        EyebrowText(stringResource(R.string.home_action_dropdown_mark_as_not_complete))
                     }
                 }
             }

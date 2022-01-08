@@ -44,6 +44,8 @@ import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDateValid
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDescriptionValid
@@ -59,7 +61,9 @@ fun EyebrowScreen(
     eyebrow: Eyebrow,
     addEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
 ) {
+    val context = LocalContext.current
     Scaffold(
+        modifier = Modifier.semantics { contentDescription = context.resources.getString(R.string.eyebrow_description) },
         topBar = {
             EyebrowNavBar(onClickReturnHome = onClickReturnHome)
         }
@@ -81,13 +85,13 @@ fun EyebrowScreen(
                 modifier = Modifier
                     .weight(1f)
                     .padding(innerPadding)
-                    .semantics { contentDescription = "New Eyebrow Screen" }
+                    .semantics { contentDescription = context.resources.getString(R.string.eyebrow_content_description) }
                     .verticalScroll(rememberScrollState())
             ) {
                 // Error message is only shown when there is an error.
                 if (descriptionIsErrorValue || dateIsErrorValue) {
-                    val descriptionErrorMessage = "A description must be provided."
-                    val dateErrorMessage = "The end date can't be in the past."
+                    val descriptionErrorMessage = stringResource(R.string.eyebrow_description_error_message)
+                    val dateErrorMessage = stringResource(R.string.eyebrow_date_error_message)
                     EyebrowText(
                         text = if (descriptionIsErrorValue && dateIsErrorValue) "$descriptionErrorMessage $dateErrorMessage" else if (descriptionIsErrorValue) descriptionErrorMessage else dateErrorMessage,
                         color = MaterialTheme.colors.error,
@@ -102,7 +106,7 @@ fun EyebrowScreen(
                 EyebrowTextField(
                     value = descriptionText,
                     onValueChange = descriptionSetText,
-                    label = { EyebrowText("that...") },
+                    label = { EyebrowText(stringResource(R.string.eyebrow_description_field_label)) },
                     keyboardActions = KeyboardActions(onDone = {
                         keyboardController?.hide()
                     }),
@@ -119,17 +123,17 @@ fun EyebrowScreen(
                     Icon(
                         modifier = Modifier.padding(end = 8.dp),
                         imageVector = Icons.Filled.Flag,
-                        contentDescription = "End Date"
+                        contentDescription = stringResource(R.string.eyebrow_end_date_icon_description)
                     )
 
                     EyebrowText(
-                        text = "Select End Date:",
+                        text = stringResource(R.string.eyebrow_end_date_label),
                         style = MaterialTheme.typography.subtitle2
                     )
 
                     // Date Picker for end date.
                     DatePicker(
-                        context = LocalContext.current,
+                        context = context,
                         date = endDateValue,
                         updateDate = { year: Int, month: Int, day: Int ->
                             endDateSet(
@@ -141,7 +145,7 @@ fun EyebrowScreen(
                 }
 
                 EyebrowText(
-                    text = "Optional",
+                    text = stringResource(R.string.eyebrow_optional_properties_header),
                     style = MaterialTheme.typography.subtitle1,
                     modifier = Modifier
                         .padding(
@@ -161,7 +165,7 @@ fun EyebrowScreen(
                         .height(48.dp)
                 ) {
                     EyebrowText(
-                        text = "Participants",
+                        text = stringResource(R.string.eyebrow_participants_header),
                         style = MaterialTheme.typography.subtitle2
                     )
                     if (participants.size < 10) {
@@ -171,9 +175,9 @@ fun EyebrowScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Filled.Add,
-                                contentDescription = "Add Participant"
+                                contentDescription = stringResource(R.string.eyebrow_add_participant)
                             )
-                            EyebrowText(text = "Add Participant")
+                            EyebrowText(text = stringResource(R.string.eyebrow_add_participant))
                         }
                     }
                 }
@@ -201,7 +205,7 @@ fun EyebrowScreen(
                                 onValueChange = {
                                     participants[index] = participants[index].copy(name = it)
                                 },
-                                label = { EyebrowText("Name...") },
+                                label = { EyebrowText(stringResource(R.string.eyebrow_participant_label)) },
                                 maxLines = 1,
                                 singleLine = true,
                                 keyboardActions = KeyboardActions(onDone = {
@@ -218,7 +222,7 @@ fun EyebrowScreen(
                             ) {
                                 Icon(
                                     imageVector = Icons.Outlined.Close,
-                                    contentDescription = "Delete"
+                                    contentDescription = stringResource(R.string.eyebrow_delete_participant_icon_description)
                                 )
                             }
                         }
@@ -227,7 +231,6 @@ fun EyebrowScreen(
             }
 
             // Logic for the save button section.
-            val context = LocalContext.current
             SaveSection(
                 onSave = {
                    if (isDescriptionValid(description = descriptionText) && isDateValid(endDate = endDateValue)) {

@@ -15,7 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.util.helper.LocalDateTimeUtil
@@ -69,15 +71,15 @@ fun CardContent(eyebrow: Eyebrow) {
         }
         val daysLeft = LocalDateTimeUtil.getNumberOfDaysTillEndDate(eyebrow)
         val deadlineText = if (daysLeft > 1) {
-            "$daysLeft days left till deadline."
+            "$daysLeft" + " " + stringResource(R.string.home_card_eyebrow_deadline_more_than_1_day)
         } else if (daysLeft == 1) {
-            "$daysLeft day left till deadline."
+            "$daysLeft" + " " + stringResource(R.string.home_card_eyebrow_deadline_1_day)
         } else if (daysLeft == 0) {
-            "Deadline is today!"
+            stringResource(R.string.home_card_eyebrow_deadline_today)
         } else if (daysLeft == -1) {
-            abs(daysLeft).toString() + " day late."
+            abs(daysLeft).toString() + " " + stringResource(R.string.home_card_eyebrow_deadline_1_day_late)
         } else {
-            abs(daysLeft).toString() + " days late."
+            abs(daysLeft).toString() + " " + stringResource(R.string.home_card_eyebrow_deadline_more_than_1_day_late)
         }
         EyebrowText(
             modifier = Modifier.padding(start = 8.dp),

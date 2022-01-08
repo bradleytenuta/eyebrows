@@ -9,19 +9,19 @@ import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.data.Participant
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
-import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -51,7 +51,7 @@ fun ParticipantDialogContent(
     Surface(shape = MaterialTheme.shapes.medium) {
         Column(modifier = Modifier.fillMaxWidth()) {
             EyebrowText(
-                text = "All Participants",
+                text = stringResource(R.string.home_card_eyebrow_participants_dialog_title),
                 style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .padding(8.dp)
@@ -80,7 +80,7 @@ fun ParticipantDialogContent(
                     .fillMaxWidth()
             ) {
                 Button(onClick = { toggleShow(false) }) {
-                    EyebrowText(text = "Close")
+                    EyebrowText(text = stringResource(R.string.home_card_eyebrow_participants_dialog_close))
                 }
             }
         }

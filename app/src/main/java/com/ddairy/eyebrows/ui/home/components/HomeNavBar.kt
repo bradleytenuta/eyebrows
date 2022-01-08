@@ -14,8 +14,10 @@ import androidx.compose.material.icons.outlined.School
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 
@@ -38,15 +40,15 @@ fun HomeNavBar(
             Icon(
                 imageVector = Icons.Outlined.School,
                 tint = MaterialTheme.colors.primary,
-                contentDescription = "View welcome page"
+                contentDescription = stringResource(R.string.home_nav_bar_help_icon_description)
             )
         }
         TextButton(onClick = onClickNewEyebrows) {
             Icon(
                 imageVector = Icons.Outlined.Add,
-                contentDescription = "New Eyebrow"
+                contentDescription = stringResource(R.string.home_nav_bar_new_eyebrow)
             )
-            EyebrowText(text = "New Eyebrow")
+            EyebrowText(text = stringResource(R.string.home_nav_bar_new_eyebrow))
         }
     }
 }

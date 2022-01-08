@@ -20,7 +20,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
@@ -46,9 +48,10 @@ fun HomeScreen(
     removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit
 ) {
+    val context = LocalContext.current
     Column(
         modifier = Modifier
-            .semantics { contentDescription = "Home Screen" }
+            .semantics { contentDescription = context.resources.getString(R.string.home_description) }
             .fillMaxSize()
             .background(MaterialTheme.colors.background)
             .verticalScroll(rememberScrollState())
@@ -95,7 +98,7 @@ fun HomeScreen(
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 EyebrowText(
-                    text = "Your eyebrows need a trim, how about a friendly bet?",
+                    text = stringResource(R.string.home_no_eyebrows_message),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h6,
                 )
