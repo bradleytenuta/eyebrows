@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.util.helper.LocalDateTimeUtil
 import kotlin.math.abs
 
@@ -32,7 +32,7 @@ fun CardContent(eyebrow: Eyebrow) {
         .padding(8.dp)
 
     // UI for Eyebrow description.
-    Text(
+    EyebrowText(
         modifier = modifier,
         text = eyebrow.description,
         style = MaterialTheme.typography.h5
@@ -53,13 +53,13 @@ fun CardContent(eyebrow: Eyebrow) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
+                EyebrowText(
                     modifier = Modifier.offset(y = 2.dp),
                     text = LocalDateTimeUtil.getDateAsString(eyebrow.endDate, "MMM"),
                     style = MaterialTheme.typography.h6,
                     color = Color.White
                 )
-                Text(
+                EyebrowText(
                     modifier = Modifier.offset(y = (-5).dp),
                     text = LocalDateTimeUtil.getDateAsString(eyebrow.endDate, "dd"),
                     style = MaterialTheme.typography.subtitle1,
@@ -79,7 +79,7 @@ fun CardContent(eyebrow: Eyebrow) {
         } else {
             abs(daysLeft).toString() + " days late."
         }
-        Text(
+        EyebrowText(
             modifier = Modifier.padding(start = 8.dp),
             text = "$deadlineText",
             style = MaterialTheme.typography.h6

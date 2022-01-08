@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.toMutableStateList
@@ -45,6 +44,7 @@ import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDateValid
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDescriptionValid
 
@@ -88,7 +88,7 @@ fun EyebrowScreen(
                 if (descriptionIsErrorValue || dateIsErrorValue) {
                     val descriptionErrorMessage = "A description must be provided."
                     val dateErrorMessage = "The end date can't be in the past."
-                    Text(
+                    EyebrowText(
                         text = if (descriptionIsErrorValue && dateIsErrorValue) "$descriptionErrorMessage $dateErrorMessage" else if (descriptionIsErrorValue) descriptionErrorMessage else dateErrorMessage,
                         color = MaterialTheme.colors.error,
                         style = MaterialTheme.typography.caption,
@@ -102,7 +102,7 @@ fun EyebrowScreen(
                 EyebrowTextField(
                     value = descriptionText,
                     onValueChange = descriptionSetText,
-                    label = { Text("that...") },
+                    label = { EyebrowText("that...") },
                     keyboardActions = KeyboardActions(onDone = {
                         keyboardController?.hide()
                     }),
@@ -122,7 +122,7 @@ fun EyebrowScreen(
                         contentDescription = "End Date"
                     )
 
-                    Text(
+                    EyebrowText(
                         text = "Select End Date:",
                         style = MaterialTheme.typography.subtitle2
                     )
@@ -140,7 +140,7 @@ fun EyebrowScreen(
                     )
                 }
 
-                Text(
+                EyebrowText(
                     text = "Optional",
                     style = MaterialTheme.typography.subtitle1,
                     modifier = Modifier
@@ -160,7 +160,7 @@ fun EyebrowScreen(
                         .fillMaxWidth()
                         .height(48.dp)
                 ) {
-                    Text(
+                    EyebrowText(
                         text = "Participants",
                         style = MaterialTheme.typography.subtitle2
                     )
@@ -173,7 +173,7 @@ fun EyebrowScreen(
                                 imageVector = Icons.Filled.Add,
                                 contentDescription = "Add Participant"
                             )
-                            Text(text = "Add Participant")
+                            EyebrowText(text = "Add Participant")
                         }
                     }
                 }
@@ -201,7 +201,7 @@ fun EyebrowScreen(
                                 onValueChange = {
                                     participants[index] = participants[index].copy(name = it)
                                 },
-                                label = { Text("Name...") },
+                                label = { EyebrowText("Name...") },
                                 maxLines = 1,
                                 singleLine = true,
                                 keyboardActions = KeyboardActions(onDone = {

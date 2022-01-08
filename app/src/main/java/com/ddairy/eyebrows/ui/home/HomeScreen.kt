@@ -16,7 +16,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.home.components.card.EyebrowCard
 import com.ddairy.eyebrows.ui.home.components.HomeNavBar
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
@@ -94,7 +94,7 @@ fun HomeScreen(
                     modifier = Modifier.size(200.dp)
                 )
                 Spacer(modifier = Modifier.height(20.dp))
-                Text(
+                EyebrowText(
                     text = "Your eyebrows need a trim, how about a friendly bet?",
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h6,

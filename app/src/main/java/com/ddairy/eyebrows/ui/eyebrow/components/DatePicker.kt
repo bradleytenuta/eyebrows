@@ -6,7 +6,6 @@ import android.widget.DatePicker
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.LocalDateTimeUtil
 import java.time.LocalDateTime
@@ -47,7 +47,7 @@ fun DatePicker(
             datePickerDialog.show()
         }
     ) {
-        Text(
+        EyebrowText(
             text = LocalDateTimeUtil.getDateAsString(date, "dd/MM/yyyy"),
             color = MaterialTheme.colors.secondary
         )

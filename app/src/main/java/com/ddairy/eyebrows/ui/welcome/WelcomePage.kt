@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.ddairy.eyebrows.ui.components.EyebrowText
 
 data class WelcomePage(
     val title: String,
@@ -49,14 +49,15 @@ fun WelcomePage(
             modifier = Modifier.size(200.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        Text(
+        EyebrowText(
             text = welcomePage.title,
-            fontSize = 28.sp, fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.h5
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(
+        EyebrowText(
             text = welcomePage.description,
-            textAlign = TextAlign.Center, fontSize = 14.sp
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(40.dp))
 
@@ -77,7 +78,7 @@ fun WelcomePage(
                     shape = RoundedCornerShape(20.dp),
                     onClick = onGettingStartedClick
                 ) {
-                    Text(text = "Get Started")
+                    EyebrowText(text = "Get Started")
                 }
             }
         }

@@ -5,7 +5,6 @@ import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Done
 import androidx.compose.material.icons.outlined.MoreVert
@@ -16,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.home.components.card.RemoveEyebrowAlertDialog
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
@@ -70,7 +70,7 @@ fun ActionButtonSection(
                         onClickNewEyebrows(eyebrow)
                     }
                 ) {
-                    Text("Edit")
+                    EyebrowText("Edit")
                 }
                 DropdownMenuItem(
                     onClick = {
@@ -78,7 +78,7 @@ fun ActionButtonSection(
                         showRemoveAlertDialog = true
                     }
                 ) {
-                    Text("Remove")
+                    EyebrowText("Remove")
                 }
                 if (eyebrow.status == Eyebrow.Status.Complete) {
                     DropdownMenuItem(
@@ -88,7 +88,7 @@ fun ActionButtonSection(
                             updateEyebrow(context, eyebrow)
                         }
                     ) {
-                        Text("Mark as not complete")
+                        EyebrowText("Mark as not complete")
                     }
                 }
             }

@@ -2,11 +2,11 @@ package com.ddairy.eyebrows.ui.home.components.card
 
 import android.content.Context
 import androidx.compose.material.AlertDialog
-import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.ui.components.EyebrowText
 
 /**
  * The UI for the eyebrow delete pop up.
@@ -25,10 +25,10 @@ fun RemoveEyebrowAlertDialog(
                 toggleShow(false)
             },
             title = {
-                Text(text = "Delete Eyebrow")
+                EyebrowText(text = "Delete Eyebrow")
             },
             text = {
-                Text("Are you sure?")
+                EyebrowText("Are you sure?")
             },
             confirmButton = {
                 TextButton(
@@ -37,7 +37,7 @@ fun RemoveEyebrowAlertDialog(
                         removeEyebrow(context, eyebrow)
                     }
                 ) {
-                    Text("Delete")
+                    EyebrowText("Delete")
                 }
             },
             dismissButton = {
@@ -46,7 +46,7 @@ fun RemoveEyebrowAlertDialog(
                         toggleShow(false)
                     }
                 ) {
-                    Text("Cancel")
+                    EyebrowText("Cancel")
                 }
             }
         )

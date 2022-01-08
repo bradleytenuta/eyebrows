@@ -7,7 +7,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
@@ -21,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.data.Participant
+import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.home.components.card.ParticipantDialog
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
@@ -73,7 +73,7 @@ fun ParticipantSection(eyebrow: Eyebrow) {
                     horizontalAlignment = Alignment.End,
                     modifier = Modifier.size(24.dp)
                 ) {
-                    Text(
+                    EyebrowText(
                         text = "...",
                         color = MaterialTheme.colors.secondary
                     )

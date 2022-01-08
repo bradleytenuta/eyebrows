@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.data.Participant
+import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
@@ -49,7 +50,7 @@ fun ParticipantDialogContent(
 ) {
     Surface(shape = MaterialTheme.shapes.medium) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            Text(
+            EyebrowText(
                 text = "All Participants",
                 style = MaterialTheme.typography.h5,
                 modifier = Modifier
@@ -60,7 +61,7 @@ fun ParticipantDialogContent(
             LazyColumn {
                 items(items = eyebrow.participants) { participant ->
                     Divider()
-                    Text(
+                    EyebrowText(
                         text = participant.name,
                         modifier = Modifier.padding(
                             vertical = 4.dp,
@@ -79,7 +80,7 @@ fun ParticipantDialogContent(
                     .fillMaxWidth()
             ) {
                 Button(onClick = { toggleShow(false) }) {
-                    Text(text = "Close")
+                    EyebrowText(text = "Close")
                 }
             }
         }
