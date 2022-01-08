@@ -16,11 +16,12 @@ class GeneralUtil {
         /**
          * Values of the different RGB ranges.
          */
-        private var RED_LOWER = SecondaryVariant.toArgb().red
-        private var RED_HIGHER = Secondary.toArgb().red
+        private var RED_LOWER = Secondary.toArgb().red
         private var GREEN_LOWER = SecondaryVariant.toArgb().green
-        private var GREEN_HIGHER = Secondary.toArgb().green
         private var BLUE_LOWER = SecondaryVariant.toArgb().blue
+
+        private var RED_HIGHER = SecondaryVariant.toArgb().red
+        private var GREEN_HIGHER = Secondary.toArgb().green
         private var BLUE_HIGHER = Secondary.toArgb().blue
 
         /**

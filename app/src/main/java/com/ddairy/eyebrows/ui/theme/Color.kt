@@ -10,22 +10,22 @@ val Primary = Color(
 )
 
 val PrimaryVariant = Color(
-    red = 40,
-    green = 125,
-    blue = 53,
+    red = 0,
+    green = 128,
+    blue = 116,
     alpha = 0xFF
 )
 
 val Secondary = Color(
-    red = 188,
-    green = 113,
-    blue = 29,
+    red = 0,
+    green = 110,
+    blue = 120,
     alpha = 0xFF
 )
 
 val SecondaryVariant = Color(
-    red = 146,
-    green = 87,
-    blue = 22,
+    red = 47,
+    green = 72,
+    blue = 88,
     alpha = 0xFF
 )

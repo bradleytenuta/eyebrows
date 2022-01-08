@@ -15,11 +15,11 @@ import com.ddairy.eyebrows.util.helper.FirebaseUtil
 import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.google.accompanist.pager.ExperimentalPagerApi
 
-// TODO: Should only have an end date. progress bar can be from now till end date.
 // TODO: test.
 // TODO: Add text and images
 // TODO: Add icon and animated icon
 // TODO: Move text to strings file.
+// TODO: Make sure each text has a material theme style.
 // TODO: Prepare for production
 // TODO: Add adds
 /**

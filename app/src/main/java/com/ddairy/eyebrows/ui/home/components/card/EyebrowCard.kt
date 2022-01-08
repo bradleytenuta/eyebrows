@@ -3,6 +3,7 @@ package com.ddairy.eyebrows.ui.home.components.card
 import android.content.Context
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -28,11 +29,13 @@ fun EyebrowCard(
     onClickNewEyebrows: (Eyebrow) -> Unit = {},
 ) {
     val elevation = if (eyebrow.status == Eyebrow.Status.Open) 10.dp else 6.dp
-
     Card(
         shape = MaterialTheme.shapes.large,
         elevation = elevation,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+            .padding(vertical = 8.dp),
     ) {
         Column {
             CardContent(eyebrow = eyebrow)
