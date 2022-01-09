@@ -13,7 +13,7 @@
         <item name="windowSplashScreenBackground">@color/Primary</item>
 
         <!-- To set the splash icon -->
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/eyebrows_icon_foreground</item>
 
         <!-- to set the theme that will be used once the Splash screen is no longer visible -->
         <item name="postSplashScreenTheme">@style/Theme.Eyebrows</item>

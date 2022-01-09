@@ -16,7 +16,6 @@ import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 // TODO: add Android tests.
-// TODO: Add icon and animated icon
 // TODO: Prepare for production
 // TODO: Add adds
 /**

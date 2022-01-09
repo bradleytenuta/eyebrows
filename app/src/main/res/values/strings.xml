@@ -59,7 +59,7 @@
     <!-- Welcome - Page -->
     <string name="welcome_start_button">Get Started</string>
     <string name="welcome_skip_button">Skip</string>
-    <string name="welcome_page_1_title">Create Friendly Bets</string>
+    <string name="welcome_page_1_title">Create &amp; Store Bets</string>
     <string name="welcome_page_1_text">Ever forget those random bets you make with friends? Store them here safely.</string>
     <string name="welcome_page_2_title">Track With Ease</string>
     <string name="welcome_page_2_text">Set deadlines for your bets to put the pressure on.</string>
