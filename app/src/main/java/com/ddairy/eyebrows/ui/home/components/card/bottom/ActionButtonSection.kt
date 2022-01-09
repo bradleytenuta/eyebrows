@@ -1,6 +1,7 @@
 package com.ddairy.eyebrows.ui.home.components.card.bottom
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.DropdownMenu
@@ -62,6 +63,13 @@ fun MarkCompleteButton(
         colors = if (isEyebrowOpen) ButtonDefaults.textButtonColors(contentColor = animatedColor.value) else ButtonDefaults.textButtonColors(contentColor = animatedColor.value),
         onClick = {
             eyebrow.status = if (isEyebrowOpen) Eyebrow.Status.Complete else Eyebrow.Status.Open
+
+            // Updates eyebrow and shows toast message.
+            Toast.makeText(
+                context,
+                context.resources.getString(R.string.home_action_complete_open_toast_message),
+                Toast.LENGTH_SHORT
+            ).show()
             updateEyebrow(context, eyebrow)
         }
     ) {

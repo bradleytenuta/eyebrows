@@ -1,9 +1,11 @@
 package com.ddairy.eyebrows.model
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.util.helper.FirebaseUtil
 import com.ddairy.eyebrows.util.storage.InternalStorage
@@ -29,8 +31,12 @@ class EyebrowModel : ViewModel() {
         val index = this.eyebrows.indexOf(eyebrow)
         if (index == -1) {
             eyebrows.add(eyebrow)
-            updateInternalStorage(context)
-            logEyebrowAnalytics(AnalyticsEventName.EYEBROW_CREATED, eyebrow)
+            postModelChange(
+                context = context,
+                eyebrow = eyebrow,
+                analyticsMessage = AnalyticsEventName.EYEBROW_CREATED,
+                toastMessage = context.resources.getString(R.string.eyebrow_toast_created)
+            )
         } else {
             updateEyebrow(context, eyebrow)
         }
@@ -41,8 +47,12 @@ class EyebrowModel : ViewModel() {
      */
     fun removeEyebrow(context: Context, eyebrow: Eyebrow) {
         this.eyebrows.remove(eyebrow)
-        updateInternalStorage(context)
-        logEyebrowAnalytics(AnalyticsEventName.EYEBROW_DELETED, eyebrow)
+        postModelChange(
+            context = context,
+            eyebrow = eyebrow,
+            analyticsMessage = AnalyticsEventName.EYEBROW_DELETED,
+            toastMessage = context.resources.getString(R.string.eyebrow_toast_deleted)
+        )
     }
 
     /**
@@ -53,11 +63,14 @@ class EyebrowModel : ViewModel() {
         if (index == -1) {
             return
         }
-
         this.eyebrows.removeIf { eyebrowItem -> eyebrowItem.id == eyebrow.id }
         this.eyebrows.add(index, eyebrow)
-        updateInternalStorage(context)
-        logEyebrowAnalytics(AnalyticsEventName.EYEBROW_UPDATED, eyebrow)
+        postModelChange(
+            context = context,
+            eyebrow = eyebrow,
+            analyticsMessage = AnalyticsEventName.EYEBROW_UPDATED,
+            toastMessage = context.resources.getString(R.string.eyebrow_toast_updated)
+        )
     }
 
     /**
@@ -68,6 +81,15 @@ class EyebrowModel : ViewModel() {
      */
     fun initialiseWithStorage(context: Context) {
         eyebrows = InternalStorage.readEyebrows(context).toMutableStateList()
+    }
+
+    /**
+     * This method runs all the required functions after the eyebrow model has changed in anyway.
+     */
+    private fun postModelChange(context: Context, eyebrow: Eyebrow, analyticsMessage: AnalyticsEventName, toastMessage: String) {
+        Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+        updateInternalStorage(context)
+        logEyebrowAnalytics(analyticsMessage, eyebrow)
     }
 
     /**

@@ -19,10 +19,14 @@
     <string name="eyebrow_participant_label">Name...</string>
     <string name="eyebrow_delete_participant_icon_description">Delete</string>
     <string name="eyebrow_save_section">Save</string>
+    <string name="eyebrow_toast_created">Eyebrow Created</string>
+    <string name="eyebrow_toast_updated">Eyebrow Updated</string>
+    <string name="eyebrow_toast_deleted">Eyebrow Deleted</string>
 
     <!-- Home - Action Button Section -->
     <string name="home_action_open_button">Open</string>
     <string name="home_action_complete_button">Done</string>
+    <string name="home_action_complete_open_toast_message">Eyebrow status updated</string>
     <string name="home_action_more_options_icon_description">More options</string>
     <string name="home_action_dropdown_edit">Edit</string>
     <string name="home_action_dropdown_remove">Remove</string>
