@@ -1,11 +1,12 @@
 package com.ddairy.eyebrows.util.helper
 
+import org.junit.Assert
 import org.junit.Test
 
 class GeneralUtilTest {
 
     @Test
     fun getRandomColor() {
-        GeneralUtil.getRandomColor()
+        Assert.assertNotNull(GeneralUtil.getRandomColor())
     }
 }

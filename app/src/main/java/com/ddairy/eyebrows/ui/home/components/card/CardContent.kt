@@ -21,6 +21,7 @@ import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.util.helper.LocalDateTimeUtil
+import java.time.LocalDateTime
 import kotlin.math.abs
 
 /**
@@ -69,7 +70,7 @@ fun CardContent(eyebrow: Eyebrow) {
                 )
             }
         }
-        val daysLeft = LocalDateTimeUtil.getNumberOfDaysTillEndDate(eyebrow)
+        val daysLeft = LocalDateTimeUtil.getNumberOfDaysTillEndDate(eyebrow, LocalDateTime.now())
         val deadlineText = if (daysLeft > 1) {
             "$daysLeft" + " " + stringResource(R.string.home_card_eyebrow_deadline_more_than_1_day)
         } else if (daysLeft == 1) {

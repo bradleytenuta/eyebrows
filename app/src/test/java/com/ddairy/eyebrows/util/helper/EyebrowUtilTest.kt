@@ -40,4 +40,28 @@ class EyebrowUtilTest {
         Assert.assertEquals(listAfter[3], listBefore[1])
         Assert.assertEquals(listAfter[4], listBefore[0])
     }
+
+    @Test
+    fun doesReturnValidDescription() {
+        Assert.assertTrue(EyebrowUtil.isDescriptionValid("test"))
+    }
+
+    @Test
+    fun shouldFailIfInvalidDescription() {
+        Assert.assertFalse(EyebrowUtil.isDescriptionValid(""))
+    }
+
+    @Test
+    fun doesReturnValidDate() {
+        val startDate = LocalDateTime.of(2020, 1, 1, 0, 0, 0)
+        val endDate = LocalDateTime.of(2020, 1, 2, 0, 0, 0)
+        Assert.assertTrue(EyebrowUtil.isDateValid(startDate, endDate))
+    }
+
+    @Test
+    fun shouldFailIfInvalidDate() {
+        val startDate = LocalDateTime.of(2020, 1, 2, 0, 0, 0)
+        val endDate = LocalDateTime.of(2020, 1, 1, 0, 0, 0)
+        Assert.assertFalse(EyebrowUtil.isDateValid(startDate, endDate))
+    }
 }

@@ -20,8 +20,8 @@ class LocalDateTimeUtil {
         /**
          * Gets the number of days left till the finish date of an eyebrow is reached.
          */
-        fun getNumberOfDaysTillEndDate(eyebrow: Eyebrow): Int {
-            val startDateLong = LocalDateTime.now().atZone(ZoneOffset.UTC).toEpochSecond()
+        fun getNumberOfDaysTillEndDate(eyebrow: Eyebrow, startDate: LocalDateTime): Int {
+            val startDateLong = startDate.atZone(ZoneOffset.UTC).toEpochSecond()
             val endDateLong = eyebrow.endDate.atZone(ZoneOffset.UTC).toEpochSecond()
             val diffDate = endDateLong - startDateLong
 

@@ -12,7 +12,7 @@ data class Participant(
 ) {
 
     @JsonIgnore
-    var iconColor: Color? = null
+    private var iconColor: Color? = null
 
     /**
      * Gets a random color for the participant, this is only used within the UI.

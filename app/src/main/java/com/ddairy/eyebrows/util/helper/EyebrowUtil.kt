@@ -27,7 +27,6 @@ class EyebrowUtil {
         fun organiseList(eyebrows: List<Eyebrow>): List<Eyebrow> {
             val allOpenItems = eyebrows.filter { it.status == Eyebrow.Status.Open }
             val allCompleteItems = eyebrows.filter { it.status == Eyebrow.Status.Complete }
-
             return allOpenItems.sortedWith(compareDate).plus(allCompleteItems.sortedWith(compareDate))
         }
 
@@ -35,22 +34,14 @@ class EyebrowUtil {
          * Verifies that the description value for an eyebrow object is valid.
          */
         fun isDescriptionValid(description: String): Boolean {
-            // Description cannot be empty.
-            if (description.trim().isEmpty()) {
-                return false
-            }
-            return true
+            return description.trim().isNotEmpty()
         }
 
         /**
          * Verifies that the start and end date values for an eyebrow object is valid.
          */
-        fun isDateValid(endDate: LocalDateTime): Boolean {
-            // End date cannot be before the start date
-            if (endDate.isBefore(LocalDateTime.now())) {
-                return false
-            }
-            return true
+        fun isDateValid(startDate: LocalDateTime, endDate: LocalDateTime): Boolean {
+            return endDate.isAfter(startDate)
         }
 
         /**

@@ -237,7 +237,7 @@ fun EyebrowScreen(
             // Logic for the save button section.
             SaveSection(
                 onSave = {
-                    if (isDescriptionValid(description = descriptionText) && isDateValid(endDate = endDateValue)) {
+                    if (isDescriptionValid(description = descriptionText) && isDateValid(startDate = LocalDateTime.now(), endDate = endDateValue)) {
                         eyebrow.description = descriptionText.trim()
                         eyebrow.endDate = endDateValue
 
@@ -255,7 +255,7 @@ fun EyebrowScreen(
                         onClickReturnHome()
                     } else {
                         descriptionIsErrorSet(!isDescriptionValid(description = descriptionText))
-                        dateIsErrorSet(!isDateValid(endDate = endDateValue))
+                        dateIsErrorSet(!isDateValid(startDate = LocalDateTime.now(), endDate = endDateValue))
                     }
                 }
             )
