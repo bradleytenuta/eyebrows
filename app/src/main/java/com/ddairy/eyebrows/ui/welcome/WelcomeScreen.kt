@@ -28,7 +28,7 @@ fun WelcomeScreen(
     onGettingStartedClick:() -> Unit,
     onSkipClicked:() -> Unit
 ) {
-    // TODO: Write this and make pictures.
+    // TODO: Make pictures.
     val welcomePages = listOf(
         WelcomePage(
             stringResource(R.string.welcome_page_1_title),
@@ -38,11 +38,6 @@ fun WelcomeScreen(
         WelcomePage(
             stringResource(R.string.welcome_page_2_title),
             stringResource(R.string.welcome_page_2_text),
-            R.drawable.ic_launcher_foreground
-        ),
-        WelcomePage(
-            stringResource(R.string.welcome_page_3_title),
-            stringResource(R.string.welcome_page_3_text),
             R.drawable.ic_launcher_foreground
         )
     )

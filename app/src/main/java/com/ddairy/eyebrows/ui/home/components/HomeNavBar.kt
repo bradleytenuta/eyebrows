@@ -10,7 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
-import androidx.compose.material.icons.outlined.School
+import androidx.compose.material.icons.outlined.HelpOutline
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,7 +38,7 @@ fun HomeNavBar(
     ) {
         IconButton(onClick = onClickViewWelcomePage) {
             Icon(
-                imageVector = Icons.Outlined.School,
+                imageVector = Icons.Outlined.HelpOutline,
                 tint = MaterialTheme.colors.primary,
                 contentDescription = stringResource(R.string.home_nav_bar_help_icon_description)
             )

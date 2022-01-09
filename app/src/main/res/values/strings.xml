@@ -59,10 +59,8 @@
     <!-- Welcome - Page -->
     <string name="welcome_start_button">Get Started</string>
     <string name="welcome_skip_button">Skip</string>
-    <string name="welcome_page_1_title">Easy Momo Transfer</string>
-    <string name="welcome_page_1_text">Make a quick transaction with someone besides you by scanning their Easy Momo Code</string>
-    <string name="welcome_page_2_title">Easy Select</string>
-    <string name="welcome_page_2_text">Pick a contact directly from your contact list and Momo them in less than no time</string>
-    <string name="welcome_page_3_title">Secure</string>
-    <string name="welcome_page_3_text">We will never know your Momo PIN in anyway.The app does not share your data with any third party. No internet connection required</string>
+    <string name="welcome_page_1_title">Create Friendly Bets</string>
+    <string name="welcome_page_1_text">Ever forget those random bets you make with friends? Store them here safely.</string>
+    <string name="welcome_page_2_title">Track With Ease</string>
+    <string name="welcome_page_2_text">Set deadlines for your bets to put the pressure on.</string>
 </resources>

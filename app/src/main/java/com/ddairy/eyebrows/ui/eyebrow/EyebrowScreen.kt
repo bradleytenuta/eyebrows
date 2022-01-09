@@ -50,7 +50,6 @@ import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDateValid
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDescriptionValid
 
-// TODO: Refactor this file.
 /**
  * The UI eyebrow screen. Used to create and edit eyebrows.
  */
