@@ -38,7 +38,7 @@ fun ParticipantSection(eyebrow: Eyebrow) {
     )
 
     Button(
-        onClick={ showParticipantDialog = true },
+        onClick = { showParticipantDialog = true },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color.Transparent,
             disabledBackgroundColor = Color.Transparent,

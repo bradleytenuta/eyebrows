@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.EyebrowText
-import com.ddairy.eyebrows.ui.home.components.card.EyebrowCard
 import com.ddairy.eyebrows.ui.home.components.HomeNavBar
+import com.ddairy.eyebrows.ui.home.components.card.EyebrowCard
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.EyebrowUtil
 import java.time.LocalDateTime
@@ -51,7 +51,9 @@ fun HomeScreen(
     val context = LocalContext.current
     Column(
         modifier = Modifier
-            .semantics { contentDescription = context.resources.getString(R.string.home_description) }
+            .semantics {
+                contentDescription = context.resources.getString(R.string.home_description)
+            }
             .fillMaxSize()
             .background(MaterialTheme.colors.background)
             .verticalScroll(rememberScrollState())
@@ -87,7 +89,8 @@ fun HomeScreen(
         } else {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(32.dp)
+                modifier = Modifier
+                    .padding(32.dp)
                     .fillMaxWidth()
                     .weight(1f)
             ) {

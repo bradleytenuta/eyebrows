@@ -20,7 +20,7 @@ fun RemoveEyebrowAlertDialog(
     eyebrow: Eyebrow,
     removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit
 ) {
-    if(show) {
+    if (show) {
         val context = LocalContext.current
         AlertDialog(
             onDismissRequest = {

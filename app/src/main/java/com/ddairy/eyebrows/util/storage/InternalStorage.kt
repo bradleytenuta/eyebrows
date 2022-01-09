@@ -41,7 +41,7 @@ class InternalStorage {
                 val fileOutputStream: FileOutputStream =
                     context.openFileOutput(fileName, Context.MODE_PRIVATE)
                 fileOutputStream.write(InstanceMapper.mapper.writeValueAsString(t).toByteArray())
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e(ErrorTag.FileWriteFailure.name, "Failed to write to file: $fileName")
             }
         }

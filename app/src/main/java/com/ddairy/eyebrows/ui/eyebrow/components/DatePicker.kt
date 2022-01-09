@@ -27,7 +27,7 @@ fun DatePicker(
     date: LocalDateTime,
     borderColor: Color = Color.Gray,
     updateDate: (year: Int, month: Int, day: Int) -> Unit
-){
+) {
     // Month value needs minus 1 and plus 1 as the value is used instead of int value.
     // e.g. december is 12 in value but should be 11 in picker due to starting at 0.
     val datePickerDialog = DatePickerDialog(

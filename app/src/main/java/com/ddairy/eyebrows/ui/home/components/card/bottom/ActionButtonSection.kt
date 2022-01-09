@@ -53,14 +53,16 @@ fun ActionButtonSection(
 fun MarkCompleteButton(
     eyebrow: Eyebrow,
     updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
-){
+) {
     val context = LocalContext.current
     val isEyebrowOpen = eyebrow.status == Eyebrow.Status.Open
     val animatedColor = animateColorAsState(
         if (isEyebrowOpen) MaterialTheme.colors.primary else MaterialTheme.colors.secondary
     )
     TextButton(
-        colors = if (isEyebrowOpen) ButtonDefaults.textButtonColors(contentColor = animatedColor.value) else ButtonDefaults.textButtonColors(contentColor = animatedColor.value),
+        colors = if (isEyebrowOpen) ButtonDefaults.textButtonColors(contentColor = animatedColor.value) else ButtonDefaults.textButtonColors(
+            contentColor = animatedColor.value
+        ),
         onClick = {
             eyebrow.status = if (isEyebrowOpen) Eyebrow.Status.Complete else Eyebrow.Status.Open
 
@@ -82,7 +84,7 @@ fun DropDownMenu(
     eyebrow: Eyebrow,
     removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     onClickNewEyebrows: (Eyebrow) -> Unit
-){
+) {
     var showRemoveAlertDialog by remember { mutableStateOf(false) }
     RemoveEyebrowAlertDialog(
         show = showRemoveAlertDialog,

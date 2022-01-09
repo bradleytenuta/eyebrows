@@ -25,8 +25,8 @@ import com.google.accompanist.pager.rememberPagerState
 @ExperimentalPagerApi
 @Composable
 fun WelcomeScreen(
-    onGettingStartedClick:() -> Unit,
-    onSkipClicked:() -> Unit
+    onGettingStartedClick: () -> Unit,
+    onSkipClicked: () -> Unit
 ) {
     // TODO: Make pictures.
     val welcomePages = listOf(

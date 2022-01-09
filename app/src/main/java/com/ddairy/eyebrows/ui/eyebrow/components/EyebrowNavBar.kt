@@ -21,10 +21,12 @@ fun EyebrowNavBar(
     onClickReturnHome: () -> Unit
 ) {
     NavBar(
-        title = { EyebrowText(
-            text = stringResource(R.string.eyebrow_nav_bar_title),
-            style = MaterialTheme.typography.h6
-        ) },
+        title = {
+            EyebrowText(
+                text = stringResource(R.string.eyebrow_nav_bar_title),
+                style = MaterialTheme.typography.h6
+            )
+        },
         actions = {
             TextButton(onClick = onClickReturnHome) {
                 Icon(

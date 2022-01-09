@@ -11,7 +11,7 @@ class EyebrowUtil {
         /**
          * A compare function that compares two dates to see which one occurs first.
          */
-        private val compareDate =  Comparator<Eyebrow> { eyebrowOne, eyebrowTwo ->
+        private val compareDate = Comparator<Eyebrow> { eyebrowOne, eyebrowTwo ->
             when {
                 (getEpoch(eyebrowOne.endDate) >= getEpoch(eyebrowTwo.endDate)) -> 1
                 else -> -1

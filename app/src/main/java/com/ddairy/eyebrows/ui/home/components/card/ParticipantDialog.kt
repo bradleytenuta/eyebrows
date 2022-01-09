@@ -33,7 +33,7 @@ fun ParticipantDialog(
     toggleShow: (Boolean) -> Unit,
     eyebrow: Eyebrow
 ) {
-    if(show) {
+    if (show) {
         Dialog(onDismissRequest = { toggleShow(false) }) {
             ParticipantDialogContent(
                 toggleShow = toggleShow,

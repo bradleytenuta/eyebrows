@@ -38,7 +38,7 @@ data class WelcomePage(
 @Composable
 fun WelcomePage(
     welcomePage: WelcomePage,
-    onGettingStartedClick:() -> Unit,
+    onGettingStartedClick: () -> Unit,
     isLastPage: Boolean = false
 ) {
     Column(

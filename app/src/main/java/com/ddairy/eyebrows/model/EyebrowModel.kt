@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class EyebrowModel : ViewModel() {
 
     var eyebrows = mutableStateListOf<Eyebrow>()
-    private set // By specifying private set, we're restricting writes to this state object to a private setter only visible inside the ViewModel.
+        private set // By specifying private set, we're restricting writes to this state object to a private setter only visible inside the ViewModel.
 
     /**
      * Adds an eyebrow to the list. If the eyebrow already exists then its updated instead.
@@ -86,7 +86,12 @@ class EyebrowModel : ViewModel() {
     /**
      * This method runs all the required functions after the eyebrow model has changed in anyway.
      */
-    private fun postModelChange(context: Context, eyebrow: Eyebrow, analyticsMessage: AnalyticsEventName, toastMessage: String) {
+    private fun postModelChange(
+        context: Context,
+        eyebrow: Eyebrow,
+        analyticsMessage: AnalyticsEventName,
+        toastMessage: String
+    ) {
         Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
         updateInternalStorage(context)
         logEyebrowAnalytics(analyticsMessage, eyebrow)
