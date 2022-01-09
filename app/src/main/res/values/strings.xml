@@ -21,11 +21,11 @@
     <string name="eyebrow_save_section">Save</string>
 
     <!-- Home - Action Button Section -->
-    <string name="home_action_complete_icon_description">Mark as complete</string>
+    <string name="home_action_open_button">Open</string>
+    <string name="home_action_complete_button">Done</string>
     <string name="home_action_more_options_icon_description">More options</string>
     <string name="home_action_dropdown_edit">Edit</string>
     <string name="home_action_dropdown_remove">Remove</string>
-    <string name="home_action_dropdown_mark_as_not_complete">Mark as not complete</string>
 
     <!-- Home - Eyebrow Deadline -->
     <string name="home_card_eyebrow_deadline_more_than_1_day">days left till deadline</string>
