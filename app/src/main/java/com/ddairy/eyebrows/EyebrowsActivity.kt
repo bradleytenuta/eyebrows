@@ -19,6 +19,7 @@ import kotlin.time.ExperimentalTime
 // TODO: add Android tests.
 // TODO: Prepare for production
 // TODO: Add adds
+// TODO: Look into notifications for when deadline is reached for eyebrow.
 /**
  * Class that runs the application.
  */

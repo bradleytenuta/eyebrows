@@ -3,9 +3,9 @@ package com.ddairy.eyebrows.ui.home
 import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -90,22 +90,23 @@ fun HomeScreen(
             )
         } else {
             Column(
-                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .padding(32.dp)
                     .fillMaxWidth()
                     .weight(1f)
             ) {
+                Spacer(modifier = Modifier.height(50.dp))
                 Image(
-                    painter = painterResource(R.drawable.eyebrow),
+                    painter = painterResource(R.drawable.home_screen_face),
                     contentDescription = null,
                     modifier = Modifier.size(200.dp)
                 )
+                Spacer(modifier = Modifier.height(20.dp))
                 EyebrowText(
                     text = stringResource(R.string.home_no_eyebrows_message),
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.h6,
+                    style = MaterialTheme.typography.h6
                 )
             }
         }
