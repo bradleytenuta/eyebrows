@@ -35,11 +35,13 @@ import com.ddairy.eyebrows.ui.home.components.HomeNavBar
 import com.ddairy.eyebrows.ui.home.components.card.EyebrowCard
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.EyebrowUtil
-import java.time.LocalDateTime
+import java.time.LocalDate
+import kotlin.time.ExperimentalTime
 
 /**
  * The UI home screen. Used to display and configure eyebrows.
  */
+@ExperimentalTime
 @Composable
 fun HomeScreen(
     onClickNewEyebrows: (Eyebrow) -> Unit,
@@ -110,6 +112,7 @@ fun HomeScreen(
     }
 }
 
+@ExperimentalTime
 @Composable
 fun EyebrowList(
     onClickNewEyebrows: (Eyebrow) -> Unit,
@@ -146,6 +149,7 @@ fun EyebrowList(
 }
 
 
+@ExperimentalTime
 @Preview("Home Screen")
 @Composable
 private fun HomePreview() {
@@ -156,16 +160,16 @@ private fun HomePreview() {
             eyebrows = listOf(
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    endDate = LocalDateTime.now(),
+                    endDate = LocalDate.now(),
                     status = Eyebrow.Status.Complete
                 ),
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    endDate = LocalDateTime.now().plusDays(3)
+                    endDate = LocalDate.now().plusDays(3)
                 ),
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    endDate = LocalDateTime.now().plusDays(1)
+                    endDate = LocalDate.now().plusDays(1)
                 )
             ),
             removeEyebrow = { _: Context, _: Eyebrow -> },
@@ -174,6 +178,7 @@ private fun HomePreview() {
     }
 }
 
+@ExperimentalTime
 @Preview("Home Screen - Dark Mode")
 @Composable
 private fun HomePreviewDarkMode() {
@@ -184,12 +189,12 @@ private fun HomePreviewDarkMode() {
             eyebrows = listOf(
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    endDate = LocalDateTime.now().plusDays(1),
+                    endDate = LocalDate.now().plusDays(1),
                     status = Eyebrow.Status.Complete
                 ),
                 Eyebrow(
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    endDate = LocalDateTime.now().minusDays(1),
+                    endDate = LocalDate.now().minusDays(1),
                 )
             ),
             removeEyebrow = { _: Context, _: Eyebrow -> },
@@ -198,6 +203,7 @@ private fun HomePreviewDarkMode() {
     }
 }
 
+@ExperimentalTime
 @Preview("Home Screen - No Eyebrows")
 @Composable
 private fun HomePreviewNoEyebrows() {

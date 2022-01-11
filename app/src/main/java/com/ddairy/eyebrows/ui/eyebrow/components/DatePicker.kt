@@ -11,12 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import com.ddairy.eyebrows.util.helper.LocalDateTimeUtil
-import java.time.LocalDateTime
+import com.ddairy.eyebrows.util.helper.LocalDateUtil
+import java.time.LocalDate
 
 /**
  * UI that allows the user to select a given date.
@@ -24,7 +26,7 @@ import java.time.LocalDateTime
 @Composable
 fun DatePicker(
     context: Context,
-    date: LocalDateTime,
+    date: LocalDate,
     borderColor: Color = Color.Gray,
     updateDate: (year: Int, month: Int, day: Int) -> Unit
 ) {
@@ -47,8 +49,23 @@ fun DatePicker(
             datePickerDialog.show()
         }
     ) {
+        LocalDate.now()
+        val text =
+            when {
+                date.isEqual(LocalDate.now()) -> stringResource(R.string.home_card_eyebrow_datepicker_today)
+                date.isEqual(
+                    LocalDate.now().minusDays(1)
+                ) -> stringResource(R.string.home_card_eyebrow_datepicker_yesterday)
+                date.isEqual(
+                    LocalDate.now().plusDays(1)
+                ) -> stringResource(R.string.home_card_eyebrow_datepicker_tomorrow)
+                else -> LocalDateUtil.getDateAsString(
+                    date,
+                    "dd/MM/yyyy"
+                )
+            }
         EyebrowText(
-            text = LocalDateTimeUtil.getDateAsString(date, "dd/MM/yyyy"),
+            text = text,
             color = MaterialTheme.colors.secondary
         )
     }
@@ -60,21 +77,69 @@ private fun LightModePreview() {
     EyebrowsTheme {
         DatePicker(
             context = LocalContext.current,
-            date = LocalDateTime.now(),
+            date = LocalDate.now(),
             updateDate = { _: Int, _: Int, _: Int -> }
         )
     }
 }
 
-@Preview("Light Mode Error")
+@Preview("Light Mode - Error")
 @Composable
 private fun LightModeErrorPreview() {
     EyebrowsTheme {
         DatePicker(
             context = LocalContext.current,
-            date = LocalDateTime.now(),
+            date = LocalDate.now(),
             updateDate = { _: Int, _: Int, _: Int -> },
             borderColor = MaterialTheme.colors.error
+        )
+    }
+}
+
+@Preview("Light Mode - 1 day ahead")
+@Composable
+private fun LightModeOneDayAheadPreview() {
+    EyebrowsTheme {
+        DatePicker(
+            context = LocalContext.current,
+            date = LocalDate.now().plusDays(1),
+            updateDate = { _: Int, _: Int, _: Int -> }
+        )
+    }
+}
+
+@Preview("Light Mode - 1 day behind")
+@Composable
+private fun LightModeOneDayBehindPreview() {
+    EyebrowsTheme {
+        DatePicker(
+            context = LocalContext.current,
+            date = LocalDate.now().minusDays(1),
+            updateDate = { _: Int, _: Int, _: Int -> }
+        )
+    }
+}
+
+@Preview("Light Mode - another date ahead")
+@Composable
+private fun LightModeAnotherDateAheadPreview() {
+    EyebrowsTheme {
+        DatePicker(
+            context = LocalContext.current,
+            date = LocalDate.now().plusDays(5),
+            updateDate = { _: Int, _: Int, _: Int -> }
+        )
+    }
+}
+
+@Preview("Light Mode - another date behind")
+@Composable
+private fun LightModeAnotherDateBehindPreview() {
+    EyebrowsTheme {
+        DatePicker(
+            context = LocalContext.current,
+            date = LocalDate.now().minusDays(5),
+            updateDate = { _: Int, _: Int, _: Int -> }
         )
     }
 }

@@ -20,13 +20,15 @@ import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.EyebrowText
-import com.ddairy.eyebrows.util.helper.LocalDateTimeUtil
-import java.time.LocalDateTime
+import com.ddairy.eyebrows.util.helper.LocalDateUtil
+import java.time.LocalDate
 import kotlin.math.abs
+import kotlin.time.ExperimentalTime
 
 /**
  * The UI for the main content of the eyebrow card.
  */
+@ExperimentalTime
 @Composable
 fun CardContent(eyebrow: Eyebrow) {
     // Custom Modifier for the UI elements above the main divider.
@@ -58,19 +60,19 @@ fun CardContent(eyebrow: Eyebrow) {
             ) {
                 EyebrowText(
                     modifier = Modifier.offset(y = 2.dp),
-                    text = LocalDateTimeUtil.getDateAsString(eyebrow.endDate, "MMM"),
+                    text = LocalDateUtil.getDateAsString(eyebrow.endDate, "MMM"),
                     style = MaterialTheme.typography.h6,
                     color = Color.White
                 )
                 EyebrowText(
                     modifier = Modifier.offset(y = (-5).dp),
-                    text = LocalDateTimeUtil.getDateAsString(eyebrow.endDate, "dd"),
+                    text = LocalDateUtil.getDateAsString(eyebrow.endDate, "dd"),
                     style = MaterialTheme.typography.subtitle1,
                     color = Color.White
                 )
             }
         }
-        val daysLeft = LocalDateTimeUtil.getNumberOfDaysTillEndDate(eyebrow, LocalDateTime.now())
+        val daysLeft = LocalDateUtil.getNumberOfDaysTillEndDate(eyebrow, LocalDate.now())
         val deadlineText = if (daysLeft > 1) {
             "$daysLeft" + " " + stringResource(R.string.home_card_eyebrow_deadline_more_than_1_day)
         } else if (daysLeft == 1) {

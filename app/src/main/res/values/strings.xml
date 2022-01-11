@@ -11,8 +11,8 @@
     <string name="eyebrow_description_error_message">A description must be provided.</string>
     <string name="eyebrow_date_error_message">The end date can\'t be in the past.</string>
     <string name="eyebrow_description_field_label">that...</string>
-    <string name="eyebrow_end_date_icon_description">End Date</string>
-    <string name="eyebrow_end_date_label">Select End Date:</string>
+    <string name="eyebrow_end_date_icon_description">Eyebrow Deadline</string>
+    <string name="eyebrow_end_date_label">Deadline:</string>
     <string name="eyebrow_optional_properties_header">Optional</string>
     <string name="eyebrow_participants_header">Participants</string>
     <string name="eyebrow_add_participant">Add Participant</string>
@@ -37,6 +37,9 @@
     <string name="home_card_eyebrow_deadline_today">Deadline is today!</string>
     <string name="home_card_eyebrow_deadline_1_day_late">day late.</string>
     <string name="home_card_eyebrow_deadline_more_than_1_day_late">days late.</string>
+    <string name="home_card_eyebrow_datepicker_today">TODAY</string>
+    <string name="home_card_eyebrow_datepicker_tomorrow">TOMORROW</string>
+    <string name="home_card_eyebrow_datepicker_yesterday">YESTERDAY</string>
 
     <!-- Home - Eyebrow Participants Dialog -->
     <string name="home_card_eyebrow_participants_dialog_title">All Participants</string>

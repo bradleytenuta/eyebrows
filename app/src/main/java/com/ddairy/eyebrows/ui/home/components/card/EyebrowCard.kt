@@ -15,12 +15,14 @@ import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.data.Participant
 import com.ddairy.eyebrows.ui.home.components.card.bottom.CardBottom
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.util.*
+import kotlin.time.ExperimentalTime
 
 /**
  * The main UI for the eyebrow card.
  */
+@ExperimentalTime
 @Composable
 fun EyebrowCard(
     eyebrow: Eyebrow,
@@ -50,6 +52,7 @@ fun EyebrowCard(
     }
 }
 
+@ExperimentalTime
 @Preview("Light Mode")
 @Composable
 private fun LightModePreview() {
@@ -72,13 +75,14 @@ private fun LightModePreview() {
     }
 }
 
+@ExperimentalTime
 @Preview("Light Mode - In the Past")
 @Composable
 private fun LightModeInThePastPreview() {
     val eyebrow = Eyebrow(
         id = UUID.randomUUID(),
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        endDate = LocalDateTime.now().minusDays(2),
+        endDate = LocalDate.now().minusDays(2),
         participants = listOf(
             Participant("Bob"),
             Participant("Dan"),
@@ -101,13 +105,14 @@ private fun LightModeInThePastPreview() {
     }
 }
 
+@ExperimentalTime
 @Preview("Light Mode - Yesterday")
 @Composable
 private fun LightModeYesterdayPreview() {
     val eyebrow = Eyebrow(
         id = UUID.randomUUID(),
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        endDate = LocalDateTime.now().minusDays(1),
+        endDate = LocalDate.now().minusDays(1),
         status = Eyebrow.Status.Complete
     )
     EyebrowsTheme {
@@ -119,13 +124,14 @@ private fun LightModeYesterdayPreview() {
     }
 }
 
+@ExperimentalTime
 @Preview("Light Mode - Today")
 @Composable
 private fun LightModeTodayPreview() {
     val eyebrow = Eyebrow(
         id = UUID.randomUUID(),
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        endDate = LocalDateTime.now()
+        endDate = LocalDate.now()
     )
     EyebrowsTheme(darkTheme = true) {
         EyebrowCard(

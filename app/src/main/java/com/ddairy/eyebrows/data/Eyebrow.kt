@@ -1,6 +1,6 @@
 package com.ddairy.eyebrows.data
 
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.util.UUID
 
 /**
@@ -9,7 +9,7 @@ import java.util.UUID
 data class Eyebrow(
     var description: String,
     var id: UUID = UUID.randomUUID(), // Since the user may generate identical tasks, give them each a unique ID
-    var endDate: LocalDateTime = LocalDateTime.now().plusDays(1),
+    var endDate: LocalDate = LocalDate.now(),
     var status: Status = Status.Open,
     var participants: List<Participant> = emptyList()
 ) {

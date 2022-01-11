@@ -1,22 +1,12 @@
 package com.ddairy.eyebrows.util.helper
 
 import com.ddairy.eyebrows.data.Eyebrow
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.ZoneOffset
 
 class EyebrowUtil {
 
     companion object {
-
-        /**
-         * A compare function that compares two dates to see which one occurs first.
-         */
-        private val compareDate = Comparator<Eyebrow> { eyebrowOne, eyebrowTwo ->
-            when {
-                (getEpoch(eyebrowOne.endDate) >= getEpoch(eyebrowTwo.endDate)) -> 1
-                else -> -1
-            }
-        }
 
         /**
          * Organises the list of eyebrow objects.
@@ -27,7 +17,7 @@ class EyebrowUtil {
         fun organiseList(eyebrows: List<Eyebrow>): List<Eyebrow> {
             val allOpenItems = eyebrows.filter { it.status == Eyebrow.Status.Open }
             val allCompleteItems = eyebrows.filter { it.status == Eyebrow.Status.Complete }
-            return allOpenItems.sortedWith(compareDate).plus(allCompleteItems.sortedWith(compareDate))
+            return allOpenItems.sortedWith(compareBy({ it.endDate }, { it.endDate })).plus(allCompleteItems.sortedWith(compareBy({ it.endDate }, { it.endDate })))
         }
 
         /**
@@ -40,15 +30,8 @@ class EyebrowUtil {
         /**
          * Verifies that the start and end date values for an eyebrow object is valid.
          */
-        fun isDateValid(startDate: LocalDateTime, endDate: LocalDateTime): Boolean {
-            return endDate.isAfter(startDate)
-        }
-
-        /**
-         * Gets the date in EPOCH time in seconds.
-         */
-        private fun getEpoch(date: LocalDateTime): Long {
-            return date.atZone(ZoneOffset.UTC).toEpochSecond()
+        fun isDateValid(startDate: LocalDate, endDate: LocalDate): Boolean {
+            return endDate.isAfter(startDate) || endDate.isEqual(startDate)
         }
     }
 }

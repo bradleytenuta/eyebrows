@@ -6,7 +6,7 @@ import com.ddairy.eyebrows.data.Preferences
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.Assert
 import org.junit.Test
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.util.*
 
 class InstanceMapperTest {
@@ -16,11 +16,11 @@ class InstanceMapperTest {
         val eyebrow = Eyebrow(
             id = UUID.fromString("1802e58c-09b8-40b6-a284-b74a3825abcb"),
             description = "description here",
-            endDate = LocalDateTime.of(2020, 1, 2, 12, 0),
+            endDate = LocalDate.of(2020, 1, 2),
             participants = listOf(Participant(name = "bob"))
         )
         val serialized = InstanceMapper.mapper.writeValueAsString(eyebrow)
-        val json = """{"description":"description here","id":"1802e58c-09b8-40b6-a284-b74a3825abcb","endDate":"2020-01-02T12:00:00","status":"Open","participants":[{"name":"bob"}]}"""
+        val json = """{"description":"description here","id":"1802e58c-09b8-40b6-a284-b74a3825abcb","endDate":"2020-01-02","status":"Open","participants":[{"name":"bob"}]}"""
         Assert.assertEquals(serialized, json)
     }
 
@@ -29,23 +29,23 @@ class InstanceMapperTest {
         val eyebrow = Eyebrow(
             id = UUID.fromString("1802e58c-09b8-40b6-a284-b74a3825abcb"),
             description = "description here",
-            endDate = LocalDateTime.of(2020, 1, 2, 12, 0),
+            endDate = LocalDate.of(2020, 1, 2),
             participants = listOf(Participant(name = "bob"))
         )
         val eyebrows = listOf(eyebrow, eyebrow)
 
         val serialized = InstanceMapper.mapper.writeValueAsString(eyebrows)
-        val json = """[{"description":"description here","id":"1802e58c-09b8-40b6-a284-b74a3825abcb","endDate":"2020-01-02T12:00:00","status":"Open","participants":[{"name":"bob"}]},{"description":"description here","id":"1802e58c-09b8-40b6-a284-b74a3825abcb","endDate":"2020-01-02T12:00:00","status":"Open","participants":[{"name":"bob"}]}]"""
+        val json = """[{"description":"description here","id":"1802e58c-09b8-40b6-a284-b74a3825abcb","endDate":"2020-01-02","status":"Open","participants":[{"name":"bob"}]},{"description":"description here","id":"1802e58c-09b8-40b6-a284-b74a3825abcb","endDate":"2020-01-02","status":"Open","participants":[{"name":"bob"}]}]"""
         Assert.assertEquals(serialized, json)
     }
 
     @Test
     fun canDeserializeEyebrows() {
-        val json = """{"id":"1802e58c-09b8-40b6-a284-b74a3825abcb","description":"description here","endDate":"2020-01-02T12:00:00","status":"Open","participants":[{"name":"bob"}]}"""
+        val json = """{"id":"1802e58c-09b8-40b6-a284-b74a3825abcb","description":"description here","endDate":"2020-01-02","status":"Open","participants":[{"name":"bob"}]}"""
         val eyebrow = Eyebrow(
             id = UUID.fromString("1802e58c-09b8-40b6-a284-b74a3825abcb"),
             description = "description here",
-            endDate = LocalDateTime.of(2020, 1, 2, 12, 0),
+            endDate = LocalDate.of(2020, 1, 2),
             participants = listOf(Participant(name = "bob"))
         )
         val eyebrow2: Eyebrow = InstanceMapper.mapper.readValue(json)
@@ -54,11 +54,11 @@ class InstanceMapperTest {
 
     @Test
     fun canDeserializeWithCompleteState() {
-        val json = """{"id":"1802e58c-09b8-40b6-a284-b74a3825abcb","description":"description here","endDate":"2020-01-02T12:00:00","status":"Complete","participants":[{"name":"bob"}]}"""
+        val json = """{"id":"1802e58c-09b8-40b6-a284-b74a3825abcb","description":"description here","endDate":"2020-01-02","status":"Complete","participants":[{"name":"bob"}]}"""
         val eyebrow = Eyebrow(
             id = UUID.fromString("1802e58c-09b8-40b6-a284-b74a3825abcb"),
             description = "description here",
-            endDate = LocalDateTime.of(2020, 1, 2, 12, 0),
+            endDate = LocalDate.of(2020, 1, 2),
             status = Eyebrow.Status.Complete,
             participants = listOf(Participant(name = "bob"))
         )
@@ -68,11 +68,11 @@ class InstanceMapperTest {
 
     @Test
     fun canDeserializeListOfEyebrows() {
-        val json = """[{"id":"1802e58c-09b8-40b6-a284-b74a3825abcb","description":"description here","endDate":"2020-01-02T12:00:00","status":"Open","participants":[{"name":"bob"}]},{"id":"1802e58c-09b8-40b6-a284-b74a3825abcb","description":"description here","endDate":"2020-01-02T12:00:00","status":"Open","participants":[{"name":"bob"}]}]"""
+        val json = """[{"id":"1802e58c-09b8-40b6-a284-b74a3825abcb","description":"description here","endDate":"2020-01-02","status":"Open","participants":[{"name":"bob"}]},{"id":"1802e58c-09b8-40b6-a284-b74a3825abcb","description":"description here","endDate":"2020-01-02","status":"Open","participants":[{"name":"bob"}]}]"""
         val eyebrow = Eyebrow(
             id = UUID.fromString("1802e58c-09b8-40b6-a284-b74a3825abcb"),
             description = "description here",
-            endDate = LocalDateTime.of(2020, 1, 2, 12, 0),
+            endDate = LocalDate.of(2020, 1, 2),
             participants = listOf(Participant(name = "bob"))
         )
         val eyebrows = listOf(eyebrow, eyebrow)

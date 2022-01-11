@@ -3,16 +3,16 @@ package com.ddairy.eyebrows.util.helper
 import com.ddairy.eyebrows.data.Eyebrow
 import org.junit.Assert
 import org.junit.Test
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 class EyebrowUtilTest {
 
     @Test
     fun doesOrganiseListInCorrectOrder() {
         val listBefore = listOf(
-            Eyebrow(description = "", endDate = LocalDateTime.now().plusDays(2)),
-            Eyebrow(description = "", endDate = LocalDateTime.now().plusDays(3)),
-            Eyebrow(description = "", endDate = LocalDateTime.now())
+            Eyebrow(description = "", endDate = LocalDate.now().plusDays(2)),
+            Eyebrow(description = "", endDate = LocalDate.now().plusDays(3)),
+            Eyebrow(description = "", endDate = LocalDate.now())
         )
 
         val listAfter = EyebrowUtil.organiseList(listBefore)
@@ -25,11 +25,11 @@ class EyebrowUtilTest {
     @Test
     fun doesOrganiseListInCorrectOrderWithDifferentStates() {
         val listBefore = listOf(
-            Eyebrow(description = "", endDate = LocalDateTime.now().plusDays(2), status = Eyebrow.Status.Complete),
-            Eyebrow(description = "", endDate = LocalDateTime.now(), status = Eyebrow.Status.Complete),
-            Eyebrow(description = "", endDate = LocalDateTime.now().plusDays(2)),
-            Eyebrow(description = "", endDate = LocalDateTime.now().plusDays(3)),
-            Eyebrow(description = "", endDate = LocalDateTime.now())
+            Eyebrow(description = "", endDate = LocalDate.now().plusDays(2), status = Eyebrow.Status.Complete),
+            Eyebrow(description = "", endDate = LocalDate.now(), status = Eyebrow.Status.Complete),
+            Eyebrow(description = "", endDate = LocalDate.now().plusDays(2)),
+            Eyebrow(description = "", endDate = LocalDate.now().plusDays(3)),
+            Eyebrow(description = "", endDate = LocalDate.now())
         )
 
         val listAfter = EyebrowUtil.organiseList(listBefore)
@@ -53,15 +53,22 @@ class EyebrowUtilTest {
 
     @Test
     fun doesReturnValidDate() {
-        val startDate = LocalDateTime.of(2020, 1, 1, 0, 0, 0)
-        val endDate = LocalDateTime.of(2020, 1, 2, 0, 0, 0)
+        val startDate = LocalDate.of(2020, 1, 1)
+        val endDate = LocalDate.of(2020, 1, 2)
+        Assert.assertTrue(EyebrowUtil.isDateValid(startDate, endDate))
+    }
+
+    @Test
+    fun doesReturnValidDateIfSameDay() {
+        val startDate = LocalDate.of(2020, 1, 1)
+        val endDate = LocalDate.of(2020, 1, 1)
         Assert.assertTrue(EyebrowUtil.isDateValid(startDate, endDate))
     }
 
     @Test
     fun shouldFailIfInvalidDate() {
-        val startDate = LocalDateTime.of(2020, 1, 2, 0, 0, 0)
-        val endDate = LocalDateTime.of(2020, 1, 1, 0, 0, 0)
+        val startDate = LocalDate.of(2020, 1, 2)
+        val endDate = LocalDate.of(2020, 1, 1)
         Assert.assertFalse(EyebrowUtil.isDateValid(startDate, endDate))
     }
 }

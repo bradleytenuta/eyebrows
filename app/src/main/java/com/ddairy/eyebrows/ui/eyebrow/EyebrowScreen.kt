@@ -48,7 +48,7 @@ import com.ddairy.eyebrows.ui.eyebrow.components.SaveSection
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDateValid
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDescriptionValid
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 /**
  * The UI eyebrow screen. Used to create and edit eyebrows.
@@ -141,7 +141,7 @@ fun EyebrowScreen(
                         date = endDateValue,
                         updateDate = { year: Int, month: Int, day: Int ->
                             endDateSet(
-                                LocalDateTime.of(year, month, day, 0, 0)
+                                LocalDate.of(year, month, day)
                             )
                         },
                         borderColor = if (dateIsErrorValue) MaterialTheme.colors.error else Color.Gray
@@ -237,7 +237,7 @@ fun EyebrowScreen(
             // Logic for the save button section.
             SaveSection(
                 onSave = {
-                    if (isDescriptionValid(description = descriptionText) && isDateValid(startDate = LocalDateTime.now(), endDate = endDateValue)) {
+                    if (isDescriptionValid(description = descriptionText) && isDateValid(startDate = LocalDate.now(), endDate = endDateValue)) {
                         eyebrow.description = descriptionText.trim()
                         eyebrow.endDate = endDateValue
 
@@ -255,7 +255,7 @@ fun EyebrowScreen(
                         onClickReturnHome()
                     } else {
                         descriptionIsErrorSet(!isDescriptionValid(description = descriptionText))
-                        dateIsErrorSet(!isDateValid(startDate = LocalDateTime.now(), endDate = endDateValue))
+                        dateIsErrorSet(!isDateValid(startDate = LocalDate.now(), endDate = endDateValue))
                     }
                 }
             )
@@ -283,7 +283,7 @@ private fun EyebrowPreview() {
 private fun EyebrowPreviewDarkMode() {
     val eyebrow = Eyebrow(
         description = "description here",
-        endDate = LocalDateTime.of(2020, 1, 2, 12, 0),
+        endDate = LocalDate.of(2020, 1, 2),
         participants = listOf(Participant(name = "Bob"), Participant(name = "Jim"))
     )
 

@@ -14,6 +14,7 @@ import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.FirebaseUtil
 import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.google.accompanist.pager.ExperimentalPagerApi
+import kotlin.time.ExperimentalTime
 
 // TODO: add Android tests.
 // TODO: Prepare for production
@@ -27,6 +28,7 @@ class EyebrowsActivity : ComponentActivity() {
 
     private var preferences: Preferences = Preferences()
 
+    @ExperimentalTime
     @ExperimentalPagerApi
     @ExperimentalComposeUiApi
     @ExperimentalAnimationApi

@@ -19,7 +19,9 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 @ExperimentalPagerApi
 @ExperimentalComposeUiApi
 @ExperimentalAnimationApi
