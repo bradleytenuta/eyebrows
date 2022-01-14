@@ -1,5 +1,6 @@
 package com.ddairy.eyebrows
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,6 +21,7 @@ import kotlin.time.ExperimentalTime
 // TODO: Prepare for production
 // TODO: Add adds
 // TODO: Look into notifications for when deadline is reached for eyebrow.
+// TODO: Improve app to work in Landscape mode. Then enable landscape mode.
 /**
  * Class that runs the application.
  */
@@ -35,6 +37,9 @@ class EyebrowsActivity : ComponentActivity() {
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Forces the application to only work in Portrait.
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         // Initialise Analytics.
         FirebaseUtil.initialiseAnalytics()
