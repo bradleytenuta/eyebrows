@@ -17,9 +17,6 @@ android {
 
     // Android apps need to be digitally signed with a certificate before installing.
     signingConfigs {
-        // TODO: Look into before release.
-
-
         // Digitally signed for debug phones.
         // We use a bundled debug keystore, to allow debug builds from CI to be upgradable.
         debug {
