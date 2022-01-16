@@ -4,8 +4,8 @@
 
 <h2 align="center">Eyebrows</h2>
 
-<h4 align="center">Image References</h4>
-<p align="center">Images are from a site called: <a href="https://pixabay.com">https://pixabay.com</a>. Images are free to use commercially from here.</p>
+<h4>Image References</h4>
+<p>Images are from a site called: <a href="https://pixabay.com">https://pixabay.com</a>. Images are free to use commercially from here.</p>
 <ul>
   <li>
     <a href="https://pixabay.com/vectors/box-cardboard-cardboard-box-package-1673579">Box</a>
