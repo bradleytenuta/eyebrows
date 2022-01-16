@@ -4,7 +4,7 @@
 
 <h2 align="center">Eyebrows</h2>
 
-<h4>Image References</h4>
+<h3>Image References</h3>
 <p>Images are from a site called: <a href="https://pixabay.com">https://pixabay.com</a>. Images are free to use commercially from here.</p>
 <ul>
   <li>
@@ -21,7 +21,7 @@
   </li>
 </ul>
 
-<h2>How To Release</h2>
+<h3>How To Release</h3>
 <ul>
   <li>
     <p>Open up the application within android studio.</p>
