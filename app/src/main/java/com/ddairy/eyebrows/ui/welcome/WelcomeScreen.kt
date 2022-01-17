@@ -32,11 +32,16 @@ fun WelcomeScreen(
         WelcomePage(
             stringResource(R.string.welcome_page_1_title),
             stringResource(R.string.welcome_page_1_text),
-            R.drawable.box
+            R.drawable.friends
         ),
         WelcomePage(
             stringResource(R.string.welcome_page_2_title),
             stringResource(R.string.welcome_page_2_text),
+            R.drawable.box
+        ),
+        WelcomePage(
+            stringResource(R.string.welcome_page_3_title),
+            stringResource(R.string.welcome_page_3_text),
             R.drawable.alarm
         )
     )

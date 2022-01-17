@@ -22,7 +22,6 @@ import kotlin.time.ExperimentalTime
 // TODO: Look into notifications for when deadline is reached for eyebrow.
 // TODO: Improve app to work in Landscape mode. Then enable landscape mode.
 // TODO: Add other language support.
-// TODO: Add another welcome page explaining the origin of eyebrows.
 /**
  * Class that runs the application.
  */

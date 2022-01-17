@@ -8,6 +8,9 @@
 <p>Images are from a site called: <a href="https://pixabay.com">https://pixabay.com</a>. Images are free to use commercially from here.</p>
 <ul>
   <li>
+    <a href="https://pixabay.com/vectors/girls-selfie-portrait-women-6756328">Friends</a>
+  </li>
+  <li>
     <a href="https://pixabay.com/vectors/box-cardboard-cardboard-box-package-1673579">Box</a>
   </li>
   <li>
