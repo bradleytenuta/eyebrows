@@ -15,16 +15,21 @@ buildscript {
 
         // Required for Google API's such as firebase.
         google_services = '4.3.10'
+        firebase_crashlytics_plugin = '2.8.1'
+        firebase_performace_plugin = '1.4.0'
     }
 
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.gms:google-services:$google_services"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$firebase_crashlytics_plugin"
+        classpath "com.google.firebase:perf-plugin:$firebase_performace_plugin"
     }
 }

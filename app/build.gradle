@@ -71,7 +71,9 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     // Declare the dependency for the Firebase SDK for Google Analytics.
     // When using the BoM, you don't specify versions in Firebase library dependencies.
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-perf-ktx'
     // Does not come with the bom above.
     // TODO: How to get started: https://firebase.google.com/docs/admob/android/quick-start - this can only be done once app is on the play store. I have already completed step 1a in the tutorial.
     // TODO: Uncomment: implementation 'com.google.android.gms:play-services-ads:20.5.0'
@@ -143,3 +145,5 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.firebase.firebase-perf'

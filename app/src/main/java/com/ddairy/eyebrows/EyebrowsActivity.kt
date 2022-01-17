@@ -23,7 +23,6 @@ import kotlin.time.ExperimentalTime
 // TODO: Improve app to work in Landscape mode. Then enable landscape mode.
 // TODO: Add other language support.
 // TODO: Add another welcome page explaining the origin of eyebrows.
-// TODO: Add support for other firebase features like performance and crashanalytics. No policy changes needed.
 /**
  * Class that runs the application.
  */
