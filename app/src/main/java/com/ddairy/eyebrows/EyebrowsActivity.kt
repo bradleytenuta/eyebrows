@@ -21,10 +21,10 @@ import kotlin.time.ExperimentalTime
 // TODO: Add adds
 // TODO: Look into notifications for when deadline is reached for eyebrow.
 // TODO: Improve app to work in Landscape mode. Then enable landscape mode.
-// TODO: 'Add I bet eyebrows that...' to the eyebrow card, above the title.
 // TODO: Add other language support.
 // TODO: Add a menu icon with a menu item that takes you to the privacy policy.
 // TODO: Add another welcome page explaining the origin of eyebrows.
+// TODO: Add support for other firebase features like performance and crashanalytics. No policy changes needed.
 /**
  * Class that runs the application.
  */

@@ -51,6 +51,9 @@
     <string name="home_card_remove_eyebrow_dialog_delete">Delete</string>
     <string name="home_card_remove_eyebrow_dialog_cancel">Cancel</string>
 
+    <!-- Home - Card -->
+    <string name="home_card_sub_title">I bet Eyebrows that...</string>
+
     <!-- Home - Navbar -->
     <string name="home_nav_bar_help_icon_description">View welcome page</string>
     <string name="home_nav_bar_new_eyebrow">New Eyebrow</string>

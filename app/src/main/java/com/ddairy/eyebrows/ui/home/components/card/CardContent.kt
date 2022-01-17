@@ -31,21 +31,40 @@ import kotlin.time.ExperimentalTime
 @ExperimentalTime
 @Composable
 fun CardContent(eyebrow: Eyebrow) {
-    // Custom Modifier for the UI elements above the main divider.
-    val modifier = Modifier
-        .fillMaxWidth()
-        .padding(8.dp)
+    // Subheading
+    EyebrowText(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                top = 8.dp,
+                start = 8.dp,
+                end = 8.dp,
+                bottom = 0.dp
+            ),
+        text = stringResource(R.string.home_card_sub_title),
+        style = MaterialTheme.typography.subtitle2,
+        color = MaterialTheme.colors.secondary
+    )
 
     // UI for Eyebrow description.
     EyebrowText(
-        modifier = modifier,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                top = 0.dp,
+                start = 8.dp,
+                end = 8.dp,
+                bottom = 8.dp
+            ),
         text = eyebrow.description,
         style = MaterialTheme.typography.h5
     )
 
     // UI for Eyebrow start and end date.
     Row(
-        modifier = modifier,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
