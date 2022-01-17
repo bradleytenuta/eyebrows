@@ -1,8 +1,7 @@
 package com.ddairy.eyebrows.util.helper
 
 import com.ddairy.eyebrows.data.Eyebrow
-import java.time.LocalDate
-import java.time.ZoneOffset
+import org.joda.time.LocalDate
 
 class EyebrowUtil {
 

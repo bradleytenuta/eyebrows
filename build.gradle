@@ -12,6 +12,7 @@ buildscript {
         jackson_version = '2.13.1'
         accompanist_version = '0.22.0-rc'
         espresso_version = '3.4.0'
+        joda_time_version = '2.10.13'
 
         // Required for Google API's such as firebase.
         google_services = '4.3.10'
@@ -22,7 +23,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        jcenter()
+        jcenter() // Needed for firebase performance plugin
     }
 
     dependencies {

@@ -18,7 +18,7 @@ import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.LocalDateUtil
-import java.time.LocalDate
+import org.joda.time.LocalDate
 
 /**
  * UI that allows the user to select a given date.
@@ -38,7 +38,7 @@ fun DatePicker(
             updateDate(year, month + 1, dayOfMonth)
         },
         date.year,
-        date.monthValue - 1,
+        date.monthOfYear - 1,
         date.dayOfMonth
     )
 

@@ -3,7 +3,7 @@ package com.ddairy.eyebrows.util.helper
 import com.ddairy.eyebrows.data.Eyebrow
 import org.junit.Assert
 import org.junit.Test
-import java.time.LocalDate
+import org.joda.time.LocalDate
 
 class EyebrowUtilTest {
 
@@ -53,22 +53,22 @@ class EyebrowUtilTest {
 
     @Test
     fun doesReturnValidDate() {
-        val startDate = LocalDate.of(2020, 1, 1)
-        val endDate = LocalDate.of(2020, 1, 2)
+        val startDate = LocalDate(2020, 1, 1)
+        val endDate = LocalDate(2020, 1, 2)
         Assert.assertTrue(EyebrowUtil.isDateValid(startDate, endDate))
     }
 
     @Test
     fun doesReturnValidDateIfSameDay() {
-        val startDate = LocalDate.of(2020, 1, 1)
-        val endDate = LocalDate.of(2020, 1, 1)
+        val startDate = LocalDate(2020, 1, 1)
+        val endDate = LocalDate(2020, 1, 1)
         Assert.assertTrue(EyebrowUtil.isDateValid(startDate, endDate))
     }
 
     @Test
     fun shouldFailIfInvalidDate() {
-        val startDate = LocalDate.of(2020, 1, 2)
-        val endDate = LocalDate.of(2020, 1, 1)
+        val startDate = LocalDate(2020, 1, 2)
+        val endDate = LocalDate(2020, 1, 1)
         Assert.assertFalse(EyebrowUtil.isDateValid(startDate, endDate))
     }
 }

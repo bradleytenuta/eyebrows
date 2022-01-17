@@ -16,7 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.HelpOutline
 import androidx.compose.material.icons.outlined.Link
-import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -83,7 +83,7 @@ fun DropDownMenu() {
 
     IconButton(onClick = { expanded = true }) {
         Icon(
-            imageVector = Icons.Outlined.MoreVert,
+            imageVector = Icons.Outlined.MoreHoriz,
             tint = MaterialTheme.colors.primary,
             contentDescription = stringResource(R.string.home_nav_bar_more)
         )

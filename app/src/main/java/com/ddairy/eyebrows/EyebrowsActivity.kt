@@ -17,7 +17,7 @@ import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlin.time.ExperimentalTime
 
-// TODO: add Android tests. Days remaining might have a bug when deadline is large.
+// TODO: add Android tests.
 // TODO: Add adds
 // TODO: Look into notifications for when deadline is reached for eyebrow.
 // TODO: Improve app to work in Landscape mode. Then enable landscape mode.

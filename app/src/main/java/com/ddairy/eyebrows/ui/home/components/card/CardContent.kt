@@ -21,7 +21,7 @@ import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.util.helper.LocalDateUtil
-import java.time.LocalDate
+import org.joda.time.LocalDate
 import kotlin.math.abs
 import kotlin.time.ExperimentalTime
 

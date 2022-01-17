@@ -6,7 +6,7 @@ import com.ddairy.eyebrows.data.Preferences
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.Assert
 import org.junit.Test
-import java.time.LocalDate
+import org.joda.time.LocalDate
 import java.util.*
 
 class InstanceMapperTest {
@@ -16,7 +16,7 @@ class InstanceMapperTest {
         val eyebrow = Eyebrow(
             id = UUID.fromString("1802e58c-09b8-40b6-a284-b74a3825abcb"),
             description = "description here",
-            endDate = LocalDate.of(2020, 1, 2),
+            endDate = LocalDate(2020, 1, 2),
             participants = listOf(Participant(name = "bob"))
         )
         val serialized = InstanceMapper.mapper.writeValueAsString(eyebrow)
@@ -29,7 +29,7 @@ class InstanceMapperTest {
         val eyebrow = Eyebrow(
             id = UUID.fromString("1802e58c-09b8-40b6-a284-b74a3825abcb"),
             description = "description here",
-            endDate = LocalDate.of(2020, 1, 2),
+            endDate = LocalDate(2020, 1, 2),
             participants = listOf(Participant(name = "bob"))
         )
         val eyebrows = listOf(eyebrow, eyebrow)
@@ -45,7 +45,7 @@ class InstanceMapperTest {
         val eyebrow = Eyebrow(
             id = UUID.fromString("1802e58c-09b8-40b6-a284-b74a3825abcb"),
             description = "description here",
-            endDate = LocalDate.of(2020, 1, 2),
+            endDate = LocalDate(2020, 1, 2),
             participants = listOf(Participant(name = "bob"))
         )
         val eyebrow2: Eyebrow = InstanceMapper.mapper.readValue(json)
@@ -58,7 +58,7 @@ class InstanceMapperTest {
         val eyebrow = Eyebrow(
             id = UUID.fromString("1802e58c-09b8-40b6-a284-b74a3825abcb"),
             description = "description here",
-            endDate = LocalDate.of(2020, 1, 2),
+            endDate = LocalDate(2020, 1, 2),
             status = Eyebrow.Status.Complete,
             participants = listOf(Participant(name = "bob"))
         )
@@ -72,7 +72,7 @@ class InstanceMapperTest {
         val eyebrow = Eyebrow(
             id = UUID.fromString("1802e58c-09b8-40b6-a284-b74a3825abcb"),
             description = "description here",
-            endDate = LocalDate.of(2020, 1, 2),
+            endDate = LocalDate(2020, 1, 2),
             participants = listOf(Participant(name = "bob"))
         )
         val eyebrows = listOf(eyebrow, eyebrow)

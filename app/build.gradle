@@ -78,9 +78,13 @@ dependencies {
     // TODO: How to get started: https://firebase.google.com/docs/admob/android/quick-start - this can only be done once app is on the play store. I have already completed step 1a in the tutorial.
     // TODO: Uncomment: implementation 'com.google.android.gms:play-services-ads:20.5.0'
 
+    // Joda-Time is used to track date and time in this app. Provides useful functions.
+    implementation "joda-time:joda-time:$joda_time_version"
+
     // Jackson, used to deserialize objects to strings.
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-joda:$jackson_version"
 
     // Required to use the material theme in the theme.xml file.
     implementation "com.google.android.material:material:1.6.0-alpha01"

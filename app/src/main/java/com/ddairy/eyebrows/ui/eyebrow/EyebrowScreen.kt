@@ -48,7 +48,7 @@ import com.ddairy.eyebrows.ui.eyebrow.components.SaveSection
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDateValid
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDescriptionValid
-import java.time.LocalDate
+import org.joda.time.LocalDate
 
 /**
  * The UI eyebrow screen. Used to create and edit eyebrows.
@@ -141,7 +141,7 @@ fun EyebrowScreen(
                         date = endDateValue,
                         updateDate = { year: Int, month: Int, day: Int ->
                             endDateSet(
-                                LocalDate.of(year, month, day)
+                                LocalDate(year, month, day)
                             )
                         },
                         borderColor = if (dateIsErrorValue) MaterialTheme.colors.error else Color.Gray
@@ -283,7 +283,7 @@ private fun EyebrowPreview() {
 private fun EyebrowPreviewDarkMode() {
     val eyebrow = Eyebrow(
         description = "description here",
-        endDate = LocalDate.of(2020, 1, 2),
+        endDate = LocalDate(2020, 1, 2),
         participants = listOf(Participant(name = "Bob"), Participant(name = "Jim"))
     )
 

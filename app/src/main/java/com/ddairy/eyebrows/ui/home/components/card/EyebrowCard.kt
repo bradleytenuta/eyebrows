@@ -15,7 +15,7 @@ import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.data.Participant
 import com.ddairy.eyebrows.ui.home.components.card.bottom.CardBottom
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import java.time.LocalDate
+import org.joda.time.LocalDate
 import java.util.*
 import kotlin.time.ExperimentalTime
 
