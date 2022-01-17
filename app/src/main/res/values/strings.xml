@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Eyebrows</string>
+    <string name="privacy_policy_url">https://ddairy978990818.wordpress.com/</string>
 
     <!-- Eyebrow - Navbar -->
     <string name="eyebrow_nav_bar_title">I bet Eyebrows...</string>
@@ -57,6 +58,8 @@
     <!-- Home - Navbar -->
     <string name="home_nav_bar_help_icon_description">View welcome page</string>
     <string name="home_nav_bar_new_eyebrow">New Eyebrow</string>
+    <string name="home_nav_bar_more">More Options</string>
+    <string name="home_nav_bar_dropdown_privacy_policy">Policy</string>
 
     <!-- Home - Page -->
     <string name="home_description">Home Screen</string>
