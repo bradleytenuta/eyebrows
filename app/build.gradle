@@ -9,8 +9,12 @@ android {
         applicationId "com.ddairy.eyebrows"
         minSdkVersion 29
         targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        // A positive integer used as an internal version number. This number is used only to
+        // determine whether one version is more recent than another, with higher numbers indicating
+        // more recent versions. This is not the version number shown to users; that number is set
+        // by the versionName setting, below.
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

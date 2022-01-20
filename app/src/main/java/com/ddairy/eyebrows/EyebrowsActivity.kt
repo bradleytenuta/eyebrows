@@ -12,6 +12,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.ddairy.eyebrows.data.Preferences
 import com.ddairy.eyebrows.model.EyebrowModel
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
+import com.ddairy.eyebrows.util.helper.AppUtil
 import com.ddairy.eyebrows.util.helper.FirebaseUtil
 import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -49,6 +50,12 @@ class EyebrowsActivity : ComponentActivity() {
 
         // Updates the preference object with internal storage.
         preferences = InternalStorage.readPreferences(this)
+
+        // Updates app util and stores the version name.
+        val versionName = this.packageManager.getPackageInfo(this.packageName, 0).versionName
+        if (versionName != null) {
+            AppUtil.versionName = versionName
+        }
 
         installSplashScreen()
         setContent {

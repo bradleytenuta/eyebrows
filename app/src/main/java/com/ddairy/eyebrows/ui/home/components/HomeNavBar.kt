@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Divider
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
@@ -26,12 +27,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import androidx.core.content.ContextCompat.startActivity
+import com.ddairy.eyebrows.util.helper.AppUtil
 
 /**
  * The navbar used for the home screen.
@@ -92,6 +96,7 @@ fun DropDownMenu() {
             onDismissRequest = { expanded = false }
         ) {
             DropdownMenuItem(
+                modifier = Modifier.padding(bottom = 8.dp),
                 onClick = {
                     expanded = false
                     val uri: Uri = Uri.parse(context.resources.getString(R.string.privacy_policy_url))
@@ -107,6 +112,23 @@ fun DropDownMenu() {
                     imageVector = Icons.Outlined.Link,
                     tint = MaterialTheme.colors.primary,
                     contentDescription = stringResource(R.string.home_nav_bar_dropdown_privacy_policy)
+                )
+            }
+
+            // Version text, displayed at the bottom of the dropdown.
+            Divider()
+            DropdownMenuItem(
+                onClick = {},
+                enabled = false
+
+            ) {
+                val versionName = AppUtil.versionName
+                EyebrowText(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Version: $versionName",
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.subtitle2,
+                    fontWeight = FontWeight.Light
                 )
             }
         }
