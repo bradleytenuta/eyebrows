@@ -37,7 +37,7 @@ import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import androidx.core.content.ContextCompat.startActivity
-import com.ddairy.eyebrows.util.helper.AppUtil
+import com.ddairy.eyebrows.util.helper.GeneralUtil
 
 /**
  * The navbar used for the home screen.
@@ -131,7 +131,7 @@ fun DropDownMenu() {
                 enabled = false
 
             ) {
-                val versionName = AppUtil.versionName
+                val versionName = GeneralUtil.versionName
                 EyebrowText(
                     modifier = Modifier.fillMaxWidth(),
                     text = "Version: $versionName",

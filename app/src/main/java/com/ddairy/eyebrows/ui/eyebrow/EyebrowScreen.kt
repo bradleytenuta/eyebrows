@@ -1,6 +1,10 @@
 package com.ddairy.eyebrows.ui.eyebrow
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Context.ALARM_SERVICE
+import android.content.Intent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,7 +41,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.data.Participant
 import com.ddairy.eyebrows.ui.components.EyebrowText
@@ -49,6 +52,12 @@ import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDateValid
 import com.ddairy.eyebrows.util.helper.EyebrowUtil.Companion.isDescriptionValid
 import org.joda.time.LocalDate
+import com.ddairy.eyebrows.R
+import com.ddairy.eyebrows.util.notification.EyebrowBroadcastReceiver
+
+import android.os.Bundle
+import com.ddairy.eyebrows.util.notification.NotificationConstants
+import java.util.*
 
 /**
  * The UI eyebrow screen. Used to create and edit eyebrows.
@@ -252,6 +261,7 @@ fun EyebrowScreen(
 
                         // If inputs are valid then create object and return.
                         addEyebrow(context, eyebrow)
+                        addEyebrowNotification(context, eyebrow)
                         onClickReturnHome()
                     } else {
                         descriptionIsErrorSet(!isDescriptionValid(description = descriptionText))
@@ -274,6 +284,31 @@ private fun isEyebrowValid(
     status: Eyebrow.Status
 ): Boolean {
     return isDescriptionValid(description = descriptionText) && (isDateValid(startDate = LocalDate.now(), endDate = endDateValue) || status == Eyebrow.Status.Complete)
+}
+
+/**
+ * Adds a notification to go off when the deadline for this eyebrow is reached.
+ */
+private fun addEyebrowNotification(context: Context, eyebrow: Eyebrow) {
+    val intent = Intent(context, EyebrowBroadcastReceiver::class.java)
+
+    // Adds values about the eyebrow to the intent.
+    // TODO: values don't update maybe notification channel needs deleting?
+    val bundle = Bundle()
+    bundle.putString(NotificationConstants.eyebrowDescriptionKey, eyebrow.description);
+    bundle.putString(NotificationConstants.eyebrowIdKey, eyebrow.id.toString());
+    intent.putExtras(bundle)
+
+    val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+    val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager
+
+    // Sets the exact time the notification should be sent.
+    val calendar: Calendar = Calendar.getInstance()
+    calendar.set(Calendar.YEAR, eyebrow.endDate.year) // Year value stays the same.
+    calendar.set(Calendar.MONTH, eyebrow.endDate.monthOfYear - 1) // First month is 0 (Jan)
+    calendar.set(Calendar.DAY_OF_MONTH, eyebrow.endDate.dayOfMonth) // First day of month is 1. // TODO: plus 1 to this day so notification comes after deadline reach not at beginning of deadline day.
+
+    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
 }
 
 @ExperimentalComposeUiApi

@@ -12,14 +12,14 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.ddairy.eyebrows.data.Preferences
 import com.ddairy.eyebrows.model.EyebrowModel
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import com.ddairy.eyebrows.util.helper.AppUtil
 import com.ddairy.eyebrows.util.helper.FirebaseUtil
+import com.ddairy.eyebrows.util.helper.GeneralUtil
+import com.ddairy.eyebrows.util.notification.NotificationUtil
 import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlin.time.ExperimentalTime
 
 // TODO: Add adds
-// TODO: Look into notifications for when deadline is reached for eyebrow.
 // TODO: Improve app to work in Landscape mode. Then enable landscape mode.
 // TODO: Add other language support.
 // TODO: Add a way to include both google services json files and switch between based on if prod or other.
@@ -39,6 +39,9 @@ class EyebrowsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Creates a notification channel and stores it.
+        NotificationUtil.initialise(this)
+
         // Forces the application to only work in Portrait.
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
@@ -54,7 +57,7 @@ class EyebrowsActivity : ComponentActivity() {
         // Updates app util and stores the version name.
         val versionName = this.packageManager.getPackageInfo(this.packageName, 0).versionName
         if (versionName != null) {
-            AppUtil.versionName = versionName
+            GeneralUtil.versionName = versionName
         }
 
         installSplashScreen()

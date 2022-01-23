@@ -14,6 +14,13 @@ class GeneralUtil {
     companion object {
 
         /**
+         * The default version name of the app. This value should be updated to the
+         * new version name when the app starts.
+         */
+        private const val defaultVersionName = "1.0"
+        var versionName: String = defaultVersionName
+
+        /**
          * Values of the different RGB ranges.
          */
         private var RED_LOWER = Secondary.toArgb().red
