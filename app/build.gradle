@@ -31,7 +31,6 @@ android {
         }
     }
     buildTypes {
-        // TODO: Look into before release.
         debug {
             signingConfig signingConfigs.debug
         }

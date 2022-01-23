@@ -18,11 +18,11 @@ import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlin.time.ExperimentalTime
 
-// TODO: add Android tests.
 // TODO: Add adds
 // TODO: Look into notifications for when deadline is reached for eyebrow.
 // TODO: Improve app to work in Landscape mode. Then enable landscape mode.
 // TODO: Add other language support.
+// TODO: Add a way to include both google services json files and switch between based on if prod or other.
 /**
  * Class that runs the application.
  */

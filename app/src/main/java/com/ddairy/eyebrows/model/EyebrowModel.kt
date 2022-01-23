@@ -111,9 +111,14 @@ class EyebrowModel : ViewModel() {
      * Logs the event of the eyebrow event in google analytics.
      */
     private fun logEyebrowAnalytics(analyticsEventName: AnalyticsEventName, eyebrow: Eyebrow) {
-        FirebaseUtil.firebaseAnalytics.logEvent(analyticsEventName.eventName) {
-            if (analyticsEventName == AnalyticsEventName.EYEBROW_CREATED || analyticsEventName == AnalyticsEventName.EYEBROW_UPDATED) {
-                param(AnalyticsParamName.NUMBER_OF_PARTICIPANTS.paramName, eyebrow.participants.size.toString())
+        if (FirebaseUtil.firebaseAnalytics != null) {
+            FirebaseUtil.firebaseAnalytics!!.logEvent(analyticsEventName.eventName) {
+                if (analyticsEventName == AnalyticsEventName.EYEBROW_CREATED || analyticsEventName == AnalyticsEventName.EYEBROW_UPDATED) {
+                    param(
+                        AnalyticsParamName.NUMBER_OF_PARTICIPANTS.paramName,
+                        eyebrow.participants.size.toString()
+                    )
+                }
             }
         }
     }

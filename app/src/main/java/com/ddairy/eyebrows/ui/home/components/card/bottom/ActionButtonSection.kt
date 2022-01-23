@@ -17,8 +17,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.EyebrowText
@@ -85,6 +88,7 @@ fun DropDownMenu(
     removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     onClickNewEyebrows: (Eyebrow) -> Unit
 ) {
+    val context = LocalContext.current
     var showRemoveAlertDialog by remember { mutableStateOf(false) }
     RemoveEyebrowAlertDialog(
         show = showRemoveAlertDialog,
@@ -93,7 +97,10 @@ fun DropDownMenu(
         removeEyebrow = removeEyebrow
     )
     var expanded by remember { mutableStateOf(false) }
-    IconButton(onClick = { expanded = true }) {
+    IconButton(
+        onClick = { expanded = true },
+        modifier = Modifier.semantics { contentDescription = context.resources.getString(R.string.home_action_more_options_icon_description) }
+    ) {
         Icon(
             Icons.Outlined.MoreVert,
             contentDescription = stringResource(R.string.home_action_more_options_icon_description)

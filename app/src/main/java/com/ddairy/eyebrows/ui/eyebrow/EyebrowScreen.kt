@@ -237,7 +237,7 @@ fun EyebrowScreen(
             // Logic for the save button section.
             SaveSection(
                 onSave = {
-                    if (isDescriptionValid(description = descriptionText) && isDateValid(startDate = LocalDate.now(), endDate = endDateValue)) {
+                    if (isEyebrowValid(descriptionText, endDateValue, eyebrow.status)) {
                         eyebrow.description = descriptionText.trim()
                         eyebrow.endDate = endDateValue
 
@@ -262,6 +262,18 @@ fun EyebrowScreen(
 
         }
     }
+}
+
+/**
+ * Returns true if the description is valid and
+ * the date is valid or the eyebrow is complete.
+ */
+private fun isEyebrowValid(
+    descriptionText: String,
+    endDateValue: LocalDate,
+    status: Eyebrow.Status
+): Boolean {
+    return isDescriptionValid(description = descriptionText) && (isDateValid(startDate = LocalDate.now(), endDate = endDateValue) || status == Eyebrow.Status.Complete)
 }
 
 @ExperimentalComposeUiApi

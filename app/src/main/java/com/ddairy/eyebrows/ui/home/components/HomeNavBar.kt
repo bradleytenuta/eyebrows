@@ -27,6 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,6 +47,7 @@ fun HomeNavBar(
     onClickNewEyebrows: () -> Unit,
     onClickViewWelcomePage: () -> Unit
 ) {
+    val context = LocalContext.current
     Row(modifier = Modifier.fillMaxWidth()) {
         Row(
             horizontalArrangement = Arrangement.Start,
@@ -62,14 +65,20 @@ fun HomeNavBar(
                 .weight(2f)
                 .padding(8.dp)
         ) {
-            IconButton(onClick = onClickViewWelcomePage) {
+            IconButton(
+                onClick = onClickViewWelcomePage,
+                modifier = Modifier.semantics { contentDescription = context.resources.getString(R.string.home_nav_bar_help_icon_description) }
+            ) {
                 Icon(
                     imageVector = Icons.Outlined.HelpOutline,
                     tint = MaterialTheme.colors.primary,
                     contentDescription = stringResource(R.string.home_nav_bar_help_icon_description)
                 )
             }
-            TextButton(onClick = onClickNewEyebrows) {
+            TextButton(
+                onClick = onClickNewEyebrows,
+                modifier = Modifier.semantics { contentDescription = context.resources.getString(R.string.home_nav_bar_new_eyebrow) }
+            ) {
                 Icon(
                     imageVector = Icons.Outlined.Add,
                     contentDescription = stringResource(R.string.home_nav_bar_new_eyebrow)
