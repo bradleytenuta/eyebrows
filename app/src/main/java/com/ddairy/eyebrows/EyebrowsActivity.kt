@@ -1,6 +1,5 @@
 package com.ddairy.eyebrows
 
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,7 +19,6 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlin.time.ExperimentalTime
 
 // TODO: Add adds
-// TODO: Improve app to work in Landscape mode. Then enable landscape mode.
 // TODO: Add other language support.
 // TODO: Add a way to include both google services json files and switch between based on if prod or other.
 /**
@@ -41,9 +39,6 @@ class EyebrowsActivity : ComponentActivity() {
 
         // Creates a notification channel and stores it.
         NotificationUtil.initialise(this)
-
-        // Forces the application to only work in Portrait.
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         // Initialise Analytics.
         FirebaseUtil.initialiseAnalytics()

@@ -1,10 +1,12 @@
 package com.ddairy.eyebrows.ui.home
 
 import android.content.Context
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,12 +22,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
@@ -37,6 +41,8 @@ import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.EyebrowUtil
 import org.joda.time.LocalDate
 import kotlin.time.ExperimentalTime
+
+private const val offsetValue = -140
 
 /**
  * The UI home screen. Used to display and configure eyebrows.
@@ -79,7 +85,6 @@ fun HomeScreen(
                 onClickViewWelcomePage = onClickViewWelcomePage
             )
         }
-
         // Displays eyebrows list or a 'no eyebrows' message.
         if (eyebrows.isNotEmpty()) {
             EyebrowList(
@@ -89,40 +94,21 @@ fun HomeScreen(
                 updateEyebrow = updateEyebrow
             )
         } else {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .padding(32.dp)
-                    .fillMaxWidth()
-                    .weight(1f)
-            ) {
-                Spacer(modifier = Modifier.height(50.dp))
-                Image(
-                    painter = painterResource(R.drawable.home_screen_face),
-                    contentDescription = null,
-                    modifier = Modifier.size(200.dp)
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                EyebrowText(
-                    text = stringResource(R.string.home_no_eyebrows_message),
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.h6
-                )
-            }
+            NoEyebrowsFiller()
         }
     }
 }
 
 @ExperimentalTime
 @Composable
-fun EyebrowList(
+private fun EyebrowList(
     onClickNewEyebrows: (Eyebrow) -> Unit,
     eyebrows: List<Eyebrow>,
     removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit
 ) {
     Column(
-        modifier = Modifier.offset(y = (-140).dp)
+        modifier = Modifier.offset(y = offsetValue.dp)
     ) {
         val organisedList = EyebrowUtil.organiseList(eyebrows)
         organisedList.forEachIndexed { index, eyebrow ->
@@ -149,6 +135,46 @@ fun EyebrowList(
     }
 }
 
+@Composable
+private fun NoEyebrowsFiller(
+    modifier: Modifier = Modifier
+) {
+    // Adjusts layout based on orientation.
+    val configuration = LocalConfiguration.current
+    val columnPaddingValues = when (configuration.orientation) {
+        Configuration.ORIENTATION_LANDSCAPE -> { PaddingValues(horizontal = 32.dp, vertical = 0.dp) } else -> { PaddingValues(32.dp) }
+    }
+    val spacerOnePaddingValues = when (configuration.orientation) {
+        Configuration.ORIENTATION_LANDSCAPE -> { 10.dp } else -> { 50.dp }
+    }
+    val imageSize = when (configuration.orientation) {
+        Configuration.ORIENTATION_LANDSCAPE -> { 150.dp } else -> { 200.dp }
+    }
+    val spacerTwoPaddingValues = when (configuration.orientation) {
+        Configuration.ORIENTATION_LANDSCAPE -> { 10.dp } else -> { 20.dp }
+    }
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .padding(columnPaddingValues)
+            .fillMaxWidth()
+            .offset(y = offsetValue.dp)
+    ) {
+        Spacer(modifier = Modifier.height(spacerOnePaddingValues))
+        Image(
+            painter = painterResource(R.drawable.home_screen_face),
+            contentDescription = null,
+            modifier = Modifier.size(imageSize)
+        )
+        Spacer(modifier = Modifier.height(spacerTwoPaddingValues))
+        EyebrowText(
+            text = stringResource(R.string.home_no_eyebrows_message),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.h6
+        )
+    }
+}
 
 @ExperimentalTime
 @Preview("Home Screen")
@@ -206,6 +232,7 @@ private fun HomePreviewDarkMode() {
 
 @ExperimentalTime
 @Preview("Home Screen - No Eyebrows")
+@Preview(device = Devices.AUTOMOTIVE_1024p, widthDp = 720, heightDp = 360, name = "Home Screen - No Eyebrows")
 @Composable
 private fun HomePreviewNoEyebrows() {
     EyebrowsTheme {
