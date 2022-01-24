@@ -13,16 +13,8 @@ class EyebrowBroadcastReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, p1: Intent) {
         // Gets the eyebrow properties from the intent
-        val description: String? = p1.getStringExtra(NotificationConstants.eyebrowDescriptionKey)
-        val id: String? = p1.getStringExtra(NotificationConstants.eyebrowIdKey)
-
-        // TODO: check values are not null and also check eyebrow still exists.
-        // TODO: if eyebrow was deleted, the notification will still play at its deadline.
-        // TODO: find way to delete from alarm manager instead as updated the deadline will also lead to issues.
-        // TODO: Remove from alarm manager when eyebrow is deleted.
-        if (description == null || id == null) {
-            return
-        }
+        val description: String = p1.getStringExtra(NotificationConstants.eyebrowDescriptionKey)
+            ?: return
 
         // Create an explicit intent for the main activity.
         val intent = Intent(context, EyebrowsActivity::class.java).apply {
@@ -43,7 +35,7 @@ class EyebrowBroadcastReceiver : BroadcastReceiver() {
             // The tag and id can be used to update or remove a notification later.
             // Calling the notify method will update the existing notification with the same tag and id if found.
             // Shows the notification.
-            notify(id, 1, builder.build())
+            notify(1, builder.build())
         }
     }
 }

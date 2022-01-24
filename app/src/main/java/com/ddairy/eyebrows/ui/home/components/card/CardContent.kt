@@ -91,6 +91,7 @@ fun CardContent(eyebrow: Eyebrow) {
                 )
             }
         }
+        // TODO: cant be late if complete!
         val daysLeft = LocalDateUtil.getNumberOfDaysTillEndDate(eyebrow, LocalDate.now())
         val deadlineText = if (daysLeft > 1) {
             "$daysLeft" + " " + stringResource(R.string.home_card_eyebrow_deadline_more_than_1_day)
