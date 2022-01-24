@@ -20,7 +20,6 @@ import kotlin.time.ExperimentalTime
 
 // TODO: Add adds
 // TODO: Add other language support.
-// TODO: Add a way to include both google services json files and switch between based on if prod or other.
 /**
  * Class that runs the application.
  */
