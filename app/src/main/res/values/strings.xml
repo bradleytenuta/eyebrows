@@ -25,14 +25,15 @@
     <string name="eyebrow_toast_deleted">Eyebrow Deleted</string>
 
     <!-- Home - Action Button Section -->
-    <string name="home_action_open_button">Open</string>
-    <string name="home_action_complete_button">Done</string>
+    <string name="home_action_mark_done_button">Mark Done</string>
+    <string name="home_action_complete_button">Re-open</string>
     <string name="home_action_complete_open_toast_message">Eyebrow status updated</string>
     <string name="home_action_more_options_icon_description">More options</string>
     <string name="home_action_dropdown_edit">Edit</string>
     <string name="home_action_dropdown_remove">Remove</string>
 
     <!-- Home - Eyebrow Deadline -->
+    <string name="home_card_eyebrow_deadline_completed">Done!</string>
     <string name="home_card_eyebrow_deadline_more_than_1_day">days left till deadline</string>
     <string name="home_card_eyebrow_deadline_1_day">day left till deadline</string>
     <string name="home_card_eyebrow_deadline_today">Deadline is today!</string>

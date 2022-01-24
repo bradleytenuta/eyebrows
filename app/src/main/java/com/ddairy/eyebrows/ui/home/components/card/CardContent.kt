@@ -1,5 +1,6 @@
 package com.ddairy.eyebrows.ui.home.components.card
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
@@ -45,7 +47,6 @@ fun CardContent(eyebrow: Eyebrow) {
         style = MaterialTheme.typography.subtitle2,
         color = MaterialTheme.colors.secondary
     )
-
     // UI for Eyebrow description.
     EyebrowText(
         modifier = Modifier
@@ -59,7 +60,6 @@ fun CardContent(eyebrow: Eyebrow) {
         text = eyebrow.description,
         style = MaterialTheme.typography.h5
     )
-
     // UI for Eyebrow start and end date.
     Row(
         modifier = Modifier
@@ -91,23 +91,36 @@ fun CardContent(eyebrow: Eyebrow) {
                 )
             }
         }
-        // TODO: cant be late if complete!
-        val daysLeft = LocalDateUtil.getNumberOfDaysTillEndDate(eyebrow, LocalDate.now())
-        val deadlineText = if (daysLeft > 1) {
-            "$daysLeft" + " " + stringResource(R.string.home_card_eyebrow_deadline_more_than_1_day)
-        } else if (daysLeft == 1) {
-            "$daysLeft" + " " + stringResource(R.string.home_card_eyebrow_deadline_1_day)
-        } else if (daysLeft == 0) {
-            stringResource(R.string.home_card_eyebrow_deadline_today)
-        } else if (daysLeft == -1) {
-            abs(daysLeft).toString() + " " + stringResource(R.string.home_card_eyebrow_deadline_1_day_late)
-        } else {
-            abs(daysLeft).toString() + " " + stringResource(R.string.home_card_eyebrow_deadline_more_than_1_day_late)
-        }
+        val deadlineText = createDeadlineText(LocalContext.current, eyebrow)
         EyebrowText(
             modifier = Modifier.padding(start = 8.dp),
             text = "$deadlineText",
             style = MaterialTheme.typography.h6
         )
+    }
+}
+
+@ExperimentalTime
+private fun createDeadlineText(context: Context, eyebrow: Eyebrow): String {
+    val daysLeft = LocalDateUtil.getNumberOfDaysTillEndDate(eyebrow, LocalDate.now())
+    if (Eyebrow.Status.Complete == eyebrow.status) {
+        return context.resources.getString(R.string.home_card_eyebrow_deadline_completed)
+    }
+    return when {
+        daysLeft > 1 -> {
+            "$daysLeft" + " " + context.resources.getString(R.string.home_card_eyebrow_deadline_more_than_1_day)
+        }
+        daysLeft == 1 -> {
+            "$daysLeft" + " " + context.resources.getString(R.string.home_card_eyebrow_deadline_1_day)
+        }
+        daysLeft == 0 -> {
+            context.resources.getString(R.string.home_card_eyebrow_deadline_today)
+        }
+        daysLeft == -1 -> {
+            abs(daysLeft).toString() + " " + context.resources.getString(R.string.home_card_eyebrow_deadline_1_day_late)
+        }
+        else -> {
+            abs(daysLeft).toString() + " " + context.resources.getString(R.string.home_card_eyebrow_deadline_more_than_1_day_late)
+        }
     }
 }

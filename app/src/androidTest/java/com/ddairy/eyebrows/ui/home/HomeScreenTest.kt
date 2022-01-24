@@ -91,9 +91,9 @@ class HomeScreenTest {
     @Test
     fun canMarkEyebrowAsDone() {
         initialise()
-        composeTestRule.onNodeWithText(context.resources.getString(R.string.home_action_open_button))
+        composeTestRule.onNodeWithText(context.resources.getString(R.string.home_action_mark_done_button))
             .assertIsDisplayed()
-        composeTestRule.onNodeWithText(context.resources.getString(R.string.home_action_open_button))
+        composeTestRule.onNodeWithText(context.resources.getString(R.string.home_action_mark_done_button))
             .performClick()
         composeTestRule.onNodeWithText(context.resources.getString(R.string.home_action_complete_button))
             .assertIsDisplayed()

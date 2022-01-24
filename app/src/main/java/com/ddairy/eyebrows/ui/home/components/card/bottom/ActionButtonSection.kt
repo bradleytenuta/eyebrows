@@ -78,7 +78,7 @@ fun MarkCompleteButton(
             updateEyebrow(context, eyebrow)
         }
     ) {
-        EyebrowText(text = if (isEyebrowOpen) stringResource(R.string.home_action_open_button) else stringResource(R.string.home_action_complete_button))
+        EyebrowText(text = if (isEyebrowOpen) stringResource(R.string.home_action_mark_done_button) else stringResource(R.string.home_action_complete_button))
     }
 }
 
