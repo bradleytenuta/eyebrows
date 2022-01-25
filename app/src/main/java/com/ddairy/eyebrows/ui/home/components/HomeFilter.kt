@@ -24,9 +24,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import com.ddairy.eyebrows.ui.theme.EyebrowRed
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.util.tag.HomeTab
 
@@ -49,8 +51,8 @@ fun HomeFilter(
             HomeTabIndicator(tabPositions, homeTab)
         }
     ) {
-        FilterButton(onClick = { onTabSelected(HomeTab.Open) }, buttonText = HomeTab.Open.name, NumberOfEyebrows = NumberOfEyebrowsOpen)
-        FilterButton(onClick = { onTabSelected(HomeTab.Completed) }, buttonText = HomeTab.Completed.name, NumberOfEyebrows = NumberOfEyebrowsCompleted)
+        FilterButton(onClick = { onTabSelected(HomeTab.Open) }, buttonText = stringResource(R.string.home_tab_open), NumberOfEyebrows = NumberOfEyebrowsOpen)
+        FilterButton(onClick = { onTabSelected(HomeTab.Completed) }, buttonText = stringResource(R.string.home_tab_complete), NumberOfEyebrows = NumberOfEyebrowsCompleted)
     }
 }
 

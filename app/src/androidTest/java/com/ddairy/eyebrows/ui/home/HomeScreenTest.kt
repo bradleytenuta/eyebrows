@@ -95,6 +95,8 @@ class HomeScreenTest {
             .assertIsDisplayed()
         composeTestRule.onNodeWithText(context.resources.getString(R.string.home_action_mark_done_button))
             .performClick()
+        composeTestRule.onNodeWithText(context.resources.getString(R.string.home_tab_complete))
+            .performClick()
         composeTestRule.onNodeWithText(context.resources.getString(R.string.home_action_complete_button))
             .assertIsDisplayed()
     }

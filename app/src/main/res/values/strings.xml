@@ -66,6 +66,10 @@
     <string name="home_description">Home Screen</string>
     <string name="home_no_eyebrows_message">Your eyebrows need a trim, how about a friendly bet?</string>
 
+    <!-- Home - Tabs -->
+    <string name="home_tab_open">Open</string>
+    <string name="home_tab_complete">Completed</string>
+
     <!-- Welcome - Page -->
     <string name="welcome_start_button">Get Started</string>
     <string name="welcome_skip_button">Skip</string>
