@@ -6,7 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import com.ddairy.eyebrows.R
@@ -18,6 +21,7 @@ import com.ddairy.eyebrows.util.notification.NotificationConstants
 import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.ddairy.eyebrows.util.tag.AnalyticsEventName
 import com.ddairy.eyebrows.util.tag.AnalyticsParamName
+import com.ddairy.eyebrows.util.tag.HomeTab
 import com.google.firebase.analytics.ktx.logEvent
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -30,7 +34,10 @@ import java.util.*
 class EyebrowModel : ViewModel() {
 
     var eyebrows = mutableStateListOf<Eyebrow>()
-        private set // By specifying private set, we're restricting writes to this state object to a private setter only visible inside the ViewModel.
+        private set
+
+    var selectedHomeTab by mutableStateOf(HomeTab.Open)
+        private set
 
     /**
      * Adds an eyebrow to the list. If the eyebrow already exists then its updated instead.
@@ -93,6 +100,13 @@ class EyebrowModel : ViewModel() {
      */
     fun initialiseWithStorage(context: Context) {
         eyebrows = InternalStorage.readEyebrows(context).toMutableStateList()
+    }
+
+    /**
+     * Updates the currently selected tab.
+     */
+    fun updateSelectedHomeTab(homeTab: HomeTab) {
+        selectedHomeTab = homeTab
     }
 
     /**

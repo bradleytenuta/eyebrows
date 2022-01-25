@@ -35,10 +35,12 @@ import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.ui.components.EyebrowText
+import com.ddairy.eyebrows.ui.home.components.HomeFilter
 import com.ddairy.eyebrows.ui.home.components.HomeNavBar
 import com.ddairy.eyebrows.ui.home.components.card.EyebrowCard
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.EyebrowUtil
+import com.ddairy.eyebrows.util.tag.HomeTab
 import org.joda.time.LocalDate
 import kotlin.time.ExperimentalTime
 
@@ -54,7 +56,9 @@ fun HomeScreen(
     onClickViewWelcomePage: () -> Unit,
     eyebrows: List<Eyebrow>,
     removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
-    updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit
+    updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
+    selectedHomeTab: HomeTab,
+    updateSelectedHomeTab: (homeTab: HomeTab) -> Unit
 ) {
     val context = LocalContext.current
     Column(
@@ -87,6 +91,17 @@ fun HomeScreen(
         }
         // Displays eyebrows list or a 'no eyebrows' message.
         if (eyebrows.isNotEmpty()) {
+            // TODO: Get list of eyebrows open and closed and use here.
+            HomeFilter(
+                offsetValue = offsetValue.dp,
+                homeTab = selectedHomeTab,
+                NumberOfEyebrowsOpen = 2,
+                NumberOfEyebrowsCompleted = 100,
+                onTabSelected = {
+                    updateSelectedHomeTab(it)
+                })
+
+            // TODO: show two different lists or the no eyebrows filler. Add some animation.
             EyebrowList(
                 onClickNewEyebrows = onClickNewEyebrows,
                 eyebrows = eyebrows,
@@ -200,7 +215,9 @@ private fun HomePreview() {
                 )
             ),
             removeEyebrow = { _: Context, _: Eyebrow -> },
-            updateEyebrow = { _: Context, _: Eyebrow -> }
+            updateEyebrow = { _: Context, _: Eyebrow -> },
+            selectedHomeTab = HomeTab.Open,
+            updateSelectedHomeTab = {}
         )
     }
 }
@@ -225,7 +242,9 @@ private fun HomePreviewDarkMode() {
                 )
             ),
             removeEyebrow = { _: Context, _: Eyebrow -> },
-            updateEyebrow = { _: Context, _: Eyebrow -> }
+            updateEyebrow = { _: Context, _: Eyebrow -> },
+            selectedHomeTab = HomeTab.Open,
+            updateSelectedHomeTab = {}
         )
     }
 }
@@ -241,7 +260,9 @@ private fun HomePreviewNoEyebrows() {
             onClickViewWelcomePage = {},
             eyebrows = emptyList(),
             removeEyebrow = { _: Context, _: Eyebrow -> },
-            updateEyebrow = { _: Context, _: Eyebrow -> }
+            updateEyebrow = { _: Context, _: Eyebrow -> },
+            selectedHomeTab = HomeTab.Open,
+            updateSelectedHomeTab = {}
         )
     }
 }

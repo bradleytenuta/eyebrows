@@ -64,7 +64,9 @@ fun EyebrowsNavigation(
                 },
                 eyebrows = eyebrowModel.eyebrows,
                 removeEyebrow = eyebrowModel::removeEyebrow,
-                updateEyebrow = eyebrowModel::updateEyebrow
+                updateEyebrow = eyebrowModel::updateEyebrow,
+                selectedHomeTab = eyebrowModel.selectedHomeTab,
+                updateSelectedHomeTab = eyebrowModel::updateSelectedHomeTab
             )
         }
         composable(
