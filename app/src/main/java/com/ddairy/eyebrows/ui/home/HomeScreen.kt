@@ -91,23 +91,40 @@ fun HomeScreen(
         }
         // Displays eyebrows list or a 'no eyebrows' message.
         if (eyebrows.isNotEmpty()) {
-            // TODO: Get list of eyebrows open and closed and use here.
+            // TODO: Add animation for switching
+            val openEyebrows = eyebrows.filter { it.status == Eyebrow.Status.Open }
+            val completeEyebrows = eyebrows.filter { it.status == Eyebrow.Status.Complete }
             HomeFilter(
                 offsetValue = offsetValue.dp,
                 homeTab = selectedHomeTab,
-                NumberOfEyebrowsOpen = 2,
-                NumberOfEyebrowsCompleted = 100,
+                NumberOfEyebrowsOpen = openEyebrows.size,
+                NumberOfEyebrowsCompleted = completeEyebrows.size,
                 onTabSelected = {
                     updateSelectedHomeTab(it)
                 })
-
-            // TODO: show two different lists or the no eyebrows filler. Add some animation.
-            EyebrowList(
-                onClickNewEyebrows = onClickNewEyebrows,
-                eyebrows = eyebrows,
-                removeEyebrow = removeEyebrow,
-                updateEyebrow = updateEyebrow
-            )
+            if (HomeTab.Open == selectedHomeTab) {
+                if (openEyebrows.isNotEmpty()) {
+                    EyebrowList(
+                        onClickNewEyebrows = onClickNewEyebrows,
+                        eyebrows = openEyebrows,
+                        removeEyebrow = removeEyebrow,
+                        updateEyebrow = updateEyebrow
+                    )
+                } else {
+                    NoEyebrowsFiller()
+                }
+            } else if (HomeTab.Completed == selectedHomeTab) {
+                if (completeEyebrows.isNotEmpty()) {
+                    EyebrowList(
+                        onClickNewEyebrows = onClickNewEyebrows,
+                        eyebrows = completeEyebrows,
+                        removeEyebrow = removeEyebrow,
+                        updateEyebrow = updateEyebrow
+                    )
+                } else {
+                    NoEyebrowsFiller()
+                }
+            }
         } else {
             NoEyebrowsFiller()
         }
@@ -125,27 +142,13 @@ private fun EyebrowList(
     Column(
         modifier = Modifier.offset(y = offsetValue.dp)
     ) {
-        val organisedList = EyebrowUtil.organiseList(eyebrows)
-        organisedList.forEachIndexed { index, eyebrow ->
+        eyebrows.forEach { eyebrow ->
             EyebrowCard(
                 eyebrow = eyebrow,
                 removeEyebrow = removeEyebrow,
                 updateEyebrow = updateEyebrow,
                 onClickNewEyebrows = onClickNewEyebrows
             )
-
-            // Creates a divider between the open and completed eyebrows.
-            val newIndex = index + 1
-            if (
-                newIndex < organisedList.size &&
-                eyebrow.status == Eyebrow.Status.Open &&
-                organisedList[newIndex].status == Eyebrow.Status.Complete
-            ) {
-                Divider(
-                    modifier = Modifier.padding(vertical = 20.dp),
-                    thickness = 2.dp
-                )
-            }
         }
     }
 }

@@ -30,10 +30,8 @@ fun EyebrowCard(
     updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     onClickNewEyebrows: (Eyebrow) -> Unit = {},
 ) {
-    val elevation = if (eyebrow.status == Eyebrow.Status.Open) 10.dp else 6.dp
     Card(
         shape = MaterialTheme.shapes.large,
-        elevation = elevation,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
