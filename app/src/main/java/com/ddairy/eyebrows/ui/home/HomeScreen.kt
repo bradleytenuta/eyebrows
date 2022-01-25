@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,7 +38,6 @@ import com.ddairy.eyebrows.ui.home.components.HomeFilter
 import com.ddairy.eyebrows.ui.home.components.HomeNavBar
 import com.ddairy.eyebrows.ui.home.components.card.EyebrowCard
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import com.ddairy.eyebrows.util.helper.EyebrowUtil
 import com.ddairy.eyebrows.util.tag.HomeTab
 import org.joda.time.LocalDate
 import kotlin.time.ExperimentalTime
@@ -89,42 +87,56 @@ fun HomeScreen(
                 onClickViewWelcomePage = onClickViewWelcomePage
             )
         }
-        // Displays eyebrows list or a 'no eyebrows' message.
-        if (eyebrows.isNotEmpty()) {
-            // TODO: Add animation for switching
-            val openEyebrows = eyebrows.filter { it.status == Eyebrow.Status.Open }
-            val completeEyebrows = eyebrows.filter { it.status == Eyebrow.Status.Complete }
-            HomeFilter(
-                offsetValue = offsetValue.dp,
-                homeTab = selectedHomeTab,
-                NumberOfEyebrowsOpen = openEyebrows.size,
-                NumberOfEyebrowsCompleted = completeEyebrows.size,
-                onTabSelected = {
-                    updateSelectedHomeTab(it)
-                })
-            if (HomeTab.Open == selectedHomeTab) {
-                if (openEyebrows.isNotEmpty()) {
-                    EyebrowList(
-                        onClickNewEyebrows = onClickNewEyebrows,
-                        eyebrows = openEyebrows,
-                        removeEyebrow = removeEyebrow,
-                        updateEyebrow = updateEyebrow
-                    )
-                } else {
-                    NoEyebrowsFiller()
-                }
-            } else if (HomeTab.Completed == selectedHomeTab) {
-                if (completeEyebrows.isNotEmpty()) {
-                    EyebrowList(
-                        onClickNewEyebrows = onClickNewEyebrows,
-                        eyebrows = completeEyebrows,
-                        removeEyebrow = removeEyebrow,
-                        updateEyebrow = updateEyebrow
-                    )
-                } else {
-                    NoEyebrowsFiller()
-                }
-            }
+        EyebrowListContainer(
+            onClickNewEyebrows = onClickNewEyebrows,
+            eyebrows = eyebrows,
+            removeEyebrow = removeEyebrow,
+            updateEyebrow = updateEyebrow,
+            selectedHomeTab = selectedHomeTab,
+            updateSelectedHomeTab = updateSelectedHomeTab
+        )
+    }
+}
+
+@ExperimentalTime
+@Composable
+private fun EyebrowListContainer(
+    onClickNewEyebrows: (Eyebrow) -> Unit,
+    eyebrows: List<Eyebrow>,
+    removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
+    updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
+    selectedHomeTab: HomeTab,
+    updateSelectedHomeTab: (homeTab: HomeTab) -> Unit
+) {
+    val openEyebrows = eyebrows.filter { it.status == Eyebrow.Status.Open }
+    val completeEyebrows = eyebrows.filter { it.status == Eyebrow.Status.Complete }
+    HomeFilter(
+        offsetValue = offsetValue.dp,
+        homeTab = selectedHomeTab,
+        NumberOfEyebrowsOpen = openEyebrows.size,
+        NumberOfEyebrowsCompleted = completeEyebrows.size,
+        onTabSelected = {
+            updateSelectedHomeTab(it)
+        })
+    if (HomeTab.Open == selectedHomeTab) {
+        if (openEyebrows.isNotEmpty()) {
+            EyebrowList(
+                onClickNewEyebrows = onClickNewEyebrows,
+                eyebrows = openEyebrows,
+                removeEyebrow = removeEyebrow,
+                updateEyebrow = updateEyebrow
+            )
+        } else {
+            NoEyebrowsFiller()
+        }
+    } else if (HomeTab.Completed == selectedHomeTab) {
+        if (completeEyebrows.isNotEmpty()) {
+            EyebrowList(
+                onClickNewEyebrows = onClickNewEyebrows,
+                eyebrows = completeEyebrows,
+                removeEyebrow = removeEyebrow,
+                updateEyebrow = updateEyebrow
+            )
         } else {
             NoEyebrowsFiller()
         }

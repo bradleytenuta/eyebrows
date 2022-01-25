@@ -20,6 +20,7 @@ import kotlin.time.ExperimentalTime
 
 // TODO: Add adds
 // TODO: Add other language support.
+// TODO: Look into using horizontal pager for the tabs once we can disable scroll.
 /**
  * Class that runs the application.
  */
