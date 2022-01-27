@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.ui.admob.AdvertView
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.home.components.HomeFilter
 import com.ddairy.eyebrows.ui.home.components.HomeNavBar
@@ -154,13 +155,17 @@ private fun EyebrowList(
     Column(
         modifier = Modifier.offset(y = offsetValue.dp)
     ) {
-        eyebrows.forEach { eyebrow ->
+        eyebrows.forEachIndexed { index, eyebrow ->
             EyebrowCard(
                 eyebrow = eyebrow,
                 removeEyebrow = removeEyebrow,
                 updateEyebrow = updateEyebrow,
                 onClickNewEyebrows = onClickNewEyebrows
             )
+            // Displays an advert after first eyebrow, then after every 2 eyebrows.
+            if (index == 0 || index > 1) {
+                AdvertView()
+            }
         }
     }
 }

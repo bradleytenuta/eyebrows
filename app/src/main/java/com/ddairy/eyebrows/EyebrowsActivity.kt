@@ -16,11 +16,11 @@ import com.ddairy.eyebrows.util.helper.GeneralUtil
 import com.ddairy.eyebrows.util.notification.NotificationUtil
 import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.android.gms.ads.MobileAds
 import kotlin.time.ExperimentalTime
 
-// TODO: Add adds
 // TODO: Add other language support.
-// TODO: Look into using horizontal pager for the tabs once we can disable scroll.
+// TODO: Look into using horizontal pager for the tabs once we can disable scroll, or some animation to switch tabs and when deleting/moving an eyebrow.
 /**
  * Class that runs the application.
  */
@@ -36,6 +36,8 @@ class EyebrowsActivity : ComponentActivity() {
     @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        MobileAds.initialize(this) {}
 
         // Creates a notification channel and stores it.
         NotificationUtil.initialise(this)

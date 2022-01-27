@@ -77,8 +77,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     // Does not come with the bom above.
-    // TODO: How to get started: https://firebase.google.com/docs/admob/android/quick-start - this can only be done once app is on the play store. I have already completed step 1a in the tutorial.
-    // TODO: Uncomment: implementation 'com.google.android.gms:play-services-ads:20.5.0'
+    implementation 'com.google.android.gms:play-services-ads:20.5.0'
 
     // Joda-Time is used to track date and time in this app. Provides useful functions.
     implementation "joda-time:joda-time:$joda_time_version"
