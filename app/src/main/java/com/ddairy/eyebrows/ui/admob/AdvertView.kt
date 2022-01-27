@@ -10,10 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.google.android.gms.ads.AdRequest
@@ -37,7 +39,7 @@ fun AdvertView(modifier: Modifier = Modifier) {
                     .fillMaxWidth()
                     .padding(horizontal = 2.dp, vertical = 6.dp),
                 textAlign = TextAlign.Center,
-                text = "Advert Here",
+                text = stringResource(R.string.ads_text),
             )
         } else {
             AndroidView(
@@ -45,7 +47,7 @@ fun AdvertView(modifier: Modifier = Modifier) {
                 factory = { context ->
                     AdView(context).apply {
                         adSize = AdSize.BANNER
-                        adUnitId = "ca-app-pub-3940256099942544/6300978111"
+                        adUnitId = context.resources.getString(R.string.admob_banner_id)
                         loadAd(AdRequest.Builder().build())
                     }
                 }

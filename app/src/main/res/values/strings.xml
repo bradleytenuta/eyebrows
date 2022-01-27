@@ -84,4 +84,8 @@
     <string name="notifications_title">Eyebrow Deadline Reached</string>
     <string name="notifications_channel_name">Eyebrow Notifications</string>
     <string name="notifications_channel_description">The default notification category for the Eyebrow App.</string>
+
+    <!-- Eyebrow Ads -->
+    <string name="ads_text">Advert Here</string>
+    <string name="admob_banner_id">ca-app-pub-6802867376550817/4930881604</string>
 </resources>
