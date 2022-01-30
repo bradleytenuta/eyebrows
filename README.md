@@ -24,6 +24,10 @@
   </li>
 </ul>
 
+<h3>Special Thanks</h3>
+<p>Thanks to: Jayr_Jayr, Memed_Nurrohmad, 29matu, mohamed_hassan and OpenClipart-Vectors for creating the vector images I used within this app.</p>
+<p>Thanks to my good friend Michal who translated the app into Polish for me.</p>
+
 <h3>How To Release</h3>
 <ul>
   <li>
