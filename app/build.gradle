@@ -115,6 +115,9 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager:$accompanist_version"
     implementation "com.google.accompanist:accompanist-pager-indicators:$accompanist_version"
 
+    // Used to provide country flags
+    implementation "com.github.murgupluoglu:flagkit-android:1.0.2"
+
     // ----------------- androidTestImplementation -----------------
     /* adds dependency for androidTest source set
      * For android UI test. It needs virtual or real device (Espresso).

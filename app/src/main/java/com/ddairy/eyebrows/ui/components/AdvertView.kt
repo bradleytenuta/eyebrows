@@ -1,4 +1,4 @@
-package com.ddairy.eyebrows.ui.admob
+package com.ddairy.eyebrows.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.ddairy.eyebrows.R
-import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize

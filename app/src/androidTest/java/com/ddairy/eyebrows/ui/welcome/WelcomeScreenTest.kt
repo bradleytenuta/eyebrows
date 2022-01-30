@@ -108,8 +108,7 @@ class WelcomeScreenTest {
             EyebrowsTheme {
                 Scaffold {
                     EyebrowsNavigation(
-                        eyebrowModel = EyebrowModel(),
-                        preferences = preferences
+                        eyebrowModel = EyebrowModel()
                     )
                 }
             }

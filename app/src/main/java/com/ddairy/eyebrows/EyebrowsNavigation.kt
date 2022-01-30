@@ -8,12 +8,10 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import com.ddairy.eyebrows.data.Eyebrow
-import com.ddairy.eyebrows.data.Preferences
 import com.ddairy.eyebrows.model.EyebrowModel
 import com.ddairy.eyebrows.ui.eyebrow.EyebrowScreen
 import com.ddairy.eyebrows.ui.home.HomeScreen
 import com.ddairy.eyebrows.ui.welcome.WelcomeScreen
-import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.ddairy.eyebrows.util.tag.ScreenName
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -28,10 +26,9 @@ import kotlin.time.ExperimentalTime
 @Composable
 fun EyebrowsNavigation(
     eyebrowModel: EyebrowModel,
-    preferences: Preferences,
     navController: NavHostController = rememberAnimatedNavController(),
 ) {
-    val startDestination = if (preferences.showWelcomeScreen) ScreenName.Welcome.route else ScreenName.Home.route
+    val startDestination = if (eyebrowModel.preferences.showWelcomeScreen) ScreenName.Welcome.route else ScreenName.Home.route
     AnimatedNavHost(
         navController = navController,
         startDestination = startDestination
@@ -40,8 +37,9 @@ fun EyebrowsNavigation(
             val context = LocalContext.current
             val toHomeScreen = {
                 // Sets preferences and writes to storage.
+                var preferences = eyebrowModel.preferences
                 preferences.showWelcomeScreen = false
-                InternalStorage.writePreferences(context, preferences)
+                eyebrowModel.updatePreferences(context, preferences)
 
                 // Removes this composable from the back stack, so when the page changes, the user cannot go back.
                 navController.popBackStack()
@@ -66,7 +64,9 @@ fun EyebrowsNavigation(
                 removeEyebrow = eyebrowModel::removeEyebrow,
                 updateEyebrow = eyebrowModel::updateEyebrow,
                 selectedHomeTab = eyebrowModel.selectedHomeTab,
-                updateSelectedHomeTab = eyebrowModel::updateSelectedHomeTab
+                updateSelectedHomeTab = eyebrowModel::updateSelectedHomeTab,
+                preferences = eyebrowModel.preferences,
+                onClickUpdatePreferences = eyebrowModel::updatePreferences
             )
         }
         composable(

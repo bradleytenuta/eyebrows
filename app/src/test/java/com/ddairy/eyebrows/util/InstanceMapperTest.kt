@@ -87,7 +87,7 @@ class InstanceMapperTest {
             showWelcomeScreen = true
         )
         val serialized = InstanceMapper.mapper.writeValueAsString(preferences)
-        val json = """{"showWelcomeScreen":true}"""
+        val json = """{"showWelcomeScreen":true,"localeCode":"en"}"""
         Assert.assertEquals(serialized, json)
     }
 

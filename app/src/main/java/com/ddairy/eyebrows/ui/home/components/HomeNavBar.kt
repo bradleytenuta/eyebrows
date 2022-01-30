@@ -1,11 +1,14 @@
 package com.ddairy.eyebrows.ui.home.components
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Divider
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
@@ -26,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -37,7 +41,11 @@ import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import androidx.core.content.ContextCompat.startActivity
+import com.ddairy.eyebrows.data.Preferences
 import com.ddairy.eyebrows.util.helper.GeneralUtil
+import com.ddairy.eyebrows.util.tag.FlagTag
+import com.ddairy.eyebrows.util.tag.LocaleCode
+import com.murgupluoglu.flagkit.FlagKit
 
 /**
  * The navbar used for the home screen.
@@ -45,7 +53,9 @@ import com.ddairy.eyebrows.util.helper.GeneralUtil
 @Composable
 fun HomeNavBar(
     onClickNewEyebrows: () -> Unit,
-    onClickViewWelcomePage: () -> Unit
+    onClickViewWelcomePage: () -> Unit,
+    preferences: Preferences,
+    onClickUpdatePreferences: (context: Context, preferences: Preferences) -> Unit
 ) {
     val context = LocalContext.current
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -56,7 +66,10 @@ fun HomeNavBar(
                 .weight(1f)
                 .padding(8.dp)
         ) {
-            DropDownMenu()
+            DropDownMenu(
+                preferences = preferences,
+                onClickUpdatePreferences = onClickUpdatePreferences
+            )
         }
         Row(
             horizontalArrangement = Arrangement.End,
@@ -90,7 +103,10 @@ fun HomeNavBar(
 }
 
 @Composable
-fun DropDownMenu() {
+fun DropDownMenu(
+    preferences: Preferences,
+    onClickUpdatePreferences: (context: Context, preferences: Preferences) -> Unit
+) {
     val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
 
@@ -123,13 +139,38 @@ fun DropDownMenu() {
                     contentDescription = stringResource(R.string.home_nav_bar_dropdown_privacy_policy)
                 )
             }
+            DropdownMenuItem(
+                modifier = Modifier.padding(bottom = 8.dp),
+                onClick = {
+                    if (preferences.localeCode == LocaleCode.English.localeCode) {
+                        preferences.localeCode = LocaleCode.Polish.localeCode
+                    } else if (preferences.localeCode == LocaleCode.Polish.localeCode) {
+                        preferences.localeCode = LocaleCode.English.localeCode
+                    }
+                    onClickUpdatePreferences(context, preferences)
+                }
+            ) {
+                EyebrowText(
+                    text = stringResource(R.string.home_nav_bar_language_button),
+                    modifier = Modifier.weight(1f)
+                )
+                val resourceId = if (preferences.localeCode == LocaleCode.English.localeCode) {
+                    FlagKit.getResId(context, FlagTag.Polish.flagName)
+                } else {
+                    FlagKit.getResId(context, FlagTag.English.flagName)
+                }
+                Image(
+                    painter = painterResource(resourceId),
+                    contentDescription = stringResource(R.string.home_nav_bar_language_button),
+                    modifier = Modifier.size(24.dp)
+                )
+            }
 
             // Version text, displayed at the bottom of the dropdown.
             Divider()
             DropdownMenuItem(
                 onClick = {},
                 enabled = false
-
             ) {
                 val versionName = GeneralUtil.versionName
                 EyebrowText(
@@ -150,7 +191,9 @@ private fun LightModePreview() {
     EyebrowsTheme {
         HomeNavBar(
             onClickNewEyebrows = {},
-            onClickViewWelcomePage = {}
+            onClickViewWelcomePage = {},
+            preferences = Preferences(),
+            onClickUpdatePreferences = { _: Context, _: Preferences -> }
         )
     }
 }

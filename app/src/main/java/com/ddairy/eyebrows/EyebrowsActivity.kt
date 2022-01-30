@@ -8,18 +8,15 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.Scaffold
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.ddairy.eyebrows.data.Preferences
 import com.ddairy.eyebrows.model.EyebrowModel
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
 import com.ddairy.eyebrows.util.helper.FirebaseUtil
 import com.ddairy.eyebrows.util.helper.GeneralUtil
 import com.ddairy.eyebrows.util.notification.NotificationUtil
-import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.android.gms.ads.MobileAds
 import kotlin.time.ExperimentalTime
 
-// TODO: Add other language support.
 // TODO: Look into using horizontal pager for the tabs once we can disable scroll, or some animation to switch tabs and when deleting/moving an eyebrow.
 /**
  * Class that runs the application.
@@ -27,8 +24,6 @@ import kotlin.time.ExperimentalTime
 class EyebrowsActivity : ComponentActivity() {
 
     private val modelEyebrow by viewModels<EyebrowModel>()
-
-    private var preferences: Preferences = Preferences()
 
     @ExperimentalTime
     @ExperimentalPagerApi
@@ -45,11 +40,9 @@ class EyebrowsActivity : ComponentActivity() {
         // Initialise Analytics.
         FirebaseUtil.initialiseAnalytics()
 
-        // Updates the list of eyebrows with internal storage.
-        modelEyebrow.initialiseWithStorage(this)
-
-        // Updates the preference object with internal storage.
-        preferences = InternalStorage.readPreferences(this)
+        // Updates the list of eyebrows and preferences with internal storage.
+        modelEyebrow.initialiseEyebrowsWithStorage(this)
+        modelEyebrow.initialisePreferencesWithStorage(this)
 
         // Updates app util and stores the version name.
         val versionName = this.packageManager.getPackageInfo(this.packageName, 0).versionName
@@ -61,10 +54,7 @@ class EyebrowsActivity : ComponentActivity() {
         setContent {
             EyebrowsTheme {
                 Scaffold {
-                    EyebrowsNavigation(
-                        eyebrowModel = modelEyebrow,
-                        preferences = preferences
-                    )
+                    EyebrowsNavigation(eyebrowModel = modelEyebrow)
                 }
             }
         }

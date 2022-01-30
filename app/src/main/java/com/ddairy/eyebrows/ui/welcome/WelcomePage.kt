@@ -77,7 +77,8 @@ fun WelcomePage(
         EyebrowText(
             text = welcomePage.title,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.typography.h5,
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(spacerTwoValues))
         EyebrowText(

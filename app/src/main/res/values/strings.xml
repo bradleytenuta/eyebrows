@@ -1,6 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Eyebrows</string>
-    <string name="privacy_policy_url">https://ddairy978990818.wordpress.com/</string>
+    <string name="app_name" translatable="false">Eyebrows</string>
+    <string name="privacy_policy_url" translatable="false">https://ddairy978990818.wordpress.com/</string>
+    <string name="admob_banner_id" translatable="false">ca-app-pub-6802867376550817/4930881604</string>
+    <string name="notifications_channel_name" translatable="false">Eyebrow Notifications</string>
+    <string name="notifications_channel_description" translatable="false">The default notification category for the Eyebrow App.</string>
 
     <!-- Eyebrow - Navbar -->
     <string name="eyebrow_nav_bar_title">I Bet Eyebrows...</string>
@@ -61,6 +65,7 @@
     <string name="home_nav_bar_new_eyebrow">New Eyebrow</string>
     <string name="home_nav_bar_more">More Options</string>
     <string name="home_nav_bar_dropdown_privacy_policy">Privacy Policy</string>
+    <string name="home_nav_bar_language_button">Polish</string>
 
     <!-- Home - Page -->
     <string name="home_description">Home Screen</string>
@@ -82,10 +87,7 @@
 
     <!-- Eyebrow Notifications -->
     <string name="notifications_title">Eyebrow Deadline Reached</string>
-    <string name="notifications_channel_name">Eyebrow Notifications</string>
-    <string name="notifications_channel_description">The default notification category for the Eyebrow App.</string>
 
     <!-- Eyebrow Ads -->
     <string name="ads_text">Advert Here</string>
-    <string name="admob_banner_id">ca-app-pub-6802867376550817/4930881604</string>
 </resources>

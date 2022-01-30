@@ -14,8 +14,10 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
+import com.ddairy.eyebrows.data.Preferences
 import com.ddairy.eyebrows.util.helper.EyebrowUtil
 import com.ddairy.eyebrows.util.helper.FirebaseUtil
+import com.ddairy.eyebrows.util.helper.LocaleHelper
 import com.ddairy.eyebrows.util.notification.EyebrowBroadcastReceiver
 import com.ddairy.eyebrows.util.notification.NotificationConstants
 import com.ddairy.eyebrows.util.storage.InternalStorage
@@ -37,6 +39,9 @@ class EyebrowModel : ViewModel() {
         private set
 
     var selectedHomeTab by mutableStateOf(HomeTab.Open)
+        private set
+
+    var preferences by mutableStateOf(Preferences())
         private set
 
     /**
@@ -98,8 +103,16 @@ class EyebrowModel : ViewModel() {
      * Calling this method instead of adding the eyebrows one by one will prevent extra analytics
      * events being created and ruining the validity of the data.
      */
-    fun initialiseWithStorage(context: Context) {
+    fun initialiseEyebrowsWithStorage(context: Context) {
         eyebrows = InternalStorage.readEyebrows(context).toMutableStateList()
+    }
+
+    /**
+     * Loads in the preferences object.
+     */
+    fun initialisePreferencesWithStorage(context: Context) {
+        preferences = InternalStorage.readPreferences(context)
+        LocaleHelper.setLocale(context, preferences.localeCode)
     }
 
     /**
@@ -107,6 +120,15 @@ class EyebrowModel : ViewModel() {
      */
     fun updateSelectedHomeTab(homeTab: HomeTab) {
         selectedHomeTab = homeTab
+    }
+
+    /**
+     * Updates the preferences object.
+     */
+    fun updatePreferences(context: Context, preferences: Preferences) {
+        this.preferences = preferences
+        InternalStorage.writePreferences(context, preferences)
+        LocaleHelper.setLocale(context, preferences.localeCode)
     }
 
     /**

@@ -33,7 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ddairy.eyebrows.R
 import com.ddairy.eyebrows.data.Eyebrow
-import com.ddairy.eyebrows.ui.admob.AdvertView
+import com.ddairy.eyebrows.data.Preferences
+import com.ddairy.eyebrows.ui.components.AdvertView
 import com.ddairy.eyebrows.ui.components.EyebrowText
 import com.ddairy.eyebrows.ui.home.components.HomeFilter
 import com.ddairy.eyebrows.ui.home.components.HomeNavBar
@@ -57,7 +58,9 @@ fun HomeScreen(
     removeEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     selectedHomeTab: HomeTab,
-    updateSelectedHomeTab: (homeTab: HomeTab) -> Unit
+    updateSelectedHomeTab: (homeTab: HomeTab) -> Unit,
+    preferences: Preferences,
+    onClickUpdatePreferences: (context: Context, preferences: Preferences) -> Unit
 ) {
     val context = LocalContext.current
     Column(
@@ -85,7 +88,9 @@ fun HomeScreen(
         ) {
             HomeNavBar(
                 onClickNewEyebrows = { onClickNewEyebrows(Eyebrow(description = "")) },
-                onClickViewWelcomePage = onClickViewWelcomePage
+                onClickViewWelcomePage = onClickViewWelcomePage,
+                preferences = preferences,
+                onClickUpdatePreferences = onClickUpdatePreferences
             )
         }
         EyebrowListContainer(
@@ -237,7 +242,9 @@ private fun HomePreview() {
             removeEyebrow = { _: Context, _: Eyebrow -> },
             updateEyebrow = { _: Context, _: Eyebrow -> },
             selectedHomeTab = HomeTab.Open,
-            updateSelectedHomeTab = {}
+            updateSelectedHomeTab = {},
+            preferences = Preferences(),
+            onClickUpdatePreferences = { _: Context, _: Preferences -> }
         )
     }
 }
@@ -264,7 +271,9 @@ private fun HomePreviewDarkMode() {
             removeEyebrow = { _: Context, _: Eyebrow -> },
             updateEyebrow = { _: Context, _: Eyebrow -> },
             selectedHomeTab = HomeTab.Open,
-            updateSelectedHomeTab = {}
+            updateSelectedHomeTab = {},
+            preferences = Preferences(),
+            onClickUpdatePreferences = { _: Context, _: Preferences -> }
         )
     }
 }
@@ -282,7 +291,9 @@ private fun HomePreviewNoEyebrows() {
             removeEyebrow = { _: Context, _: Eyebrow -> },
             updateEyebrow = { _: Context, _: Eyebrow -> },
             selectedHomeTab = HomeTab.Open,
-            updateSelectedHomeTab = {}
+            updateSelectedHomeTab = {},
+            preferences = Preferences(),
+            onClickUpdatePreferences = { _: Context, _: Preferences -> }
         )
     }
 }

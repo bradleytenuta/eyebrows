@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Eyebrow - Navbar -->
+    <string name="eyebrow_nav_bar_title">Założę się o brwi...</string>
+    <string name="eyebrow_nav_bar_cancel">Anuluj</string>
+
+    <!-- Eyebrows - Page -->
+    <string name="eyebrow_description">Ekran Brwi</string>
+    <string name="eyebrow_content_description">Nowy Ekran Brwi</string>
+    <string name="eyebrow_description_error_message">Należy podać opis.</string>
+    <string name="eyebrow_date_error_message">Data zakończenia nie może być datą przeszłą.</string>
+    <string name="eyebrow_description_field_label">Że...</string>
+    <string name="eyebrow_end_date_icon_description">Ostateczny termin brwi</string>
+    <string name="eyebrow_end_date_label">Termin Ostateczny:</string>
+    <string name="eyebrow_optional_properties_header">Opcjonalny</string>
+    <string name="eyebrow_participants_header">Uczestnicy</string>
+    <string name="eyebrow_add_participant">Dodaj Uczestnika</string>
+    <string name="eyebrow_participant_label">Nazwa...</string>
+    <string name="eyebrow_delete_participant_icon_description">Skasuj</string>
+    <string name="eyebrow_save_section">Zapisz</string>
+    <string name="eyebrow_toast_created">Utworzono Brwi</string>
+    <string name="eyebrow_toast_updated">Zaktualizowano Brwi</string>
+    <string name="eyebrow_toast_deleted">Usunięto Brwi</string>
+
+    <!-- Home - Action Button Section -->
+    <string name="home_action_mark_done_button">Zaznacz Gotowe</string>
+    <string name="home_action_complete_button">Otwórz ponownie</string>
+    <string name="home_action_complete_open_toast_message">Zaktualizowano statusu brwi</string>
+    <string name="home_action_more_options_icon_description">Więcej opcji</string>
+    <string name="home_action_dropdown_edit">Edytuj</string>
+    <string name="home_action_dropdown_remove">Usuń</string>
+
+    <!-- Home - Eyebrow Deadline -->
+    <string name="home_card_eyebrow_deadline_completed">Zrobione!</string>
+    <string name="home_card_eyebrow_deadline_more_than_1_day">dni do terminu</string>
+    <string name="home_card_eyebrow_deadline_1_day">dzien do terminu</string>
+    <string name="home_card_eyebrow_deadline_today">Termin jest dzisiaj!</string>
+    <string name="home_card_eyebrow_deadline_1_day_late">dzień za późno.</string>
+    <string name="home_card_eyebrow_deadline_more_than_1_day_late">dni za późno.</string>
+    <string name="home_card_eyebrow_datepicker_today">DZIŚ</string>
+    <string name="home_card_eyebrow_datepicker_tomorrow">JUTRO</string>
+    <string name="home_card_eyebrow_datepicker_yesterday">WCZORAJ</string>
+
+    <!-- Home - Eyebrow Participants Dialog -->
+    <string name="home_card_eyebrow_participants_dialog_title">Wszyscy Uczestnicy</string>
+    <string name="home_card_eyebrow_participants_dialog_close">Zamknij</string>
+
+    <!-- Home - Remove Eyebrow Dialog -->
+    <string name="home_card_remove_eyebrow_dialog_title">Usuń Brwi</string>
+    <string name="home_card_remove_eyebrow_dialog_text">Czy na pewno?</string>
+    <string name="home_card_remove_eyebrow_dialog_delete">Skasuj</string>
+    <string name="home_card_remove_eyebrow_dialog_cancel">Anuluj</string>
+
+    <!-- Home - Card -->
+    <string name="home_card_sub_title">Założę brwi, że...</string>
+
+    <!-- Home - Navbar -->
+    <string name="home_nav_bar_help_icon_description">Wyświetl stronę powitalną</string>
+    <string name="home_nav_bar_new_eyebrow">Nowe brwi</string>
+    <string name="home_nav_bar_more">Więcej Opcji</string>
+    <string name="home_nav_bar_dropdown_privacy_policy">Polityka Prywatności</string>
+    <string name="home_nav_bar_language_button">Angielski</string>
+
+    <!-- Home - Page -->
+    <string name="home_description">Pulpit</string>
+    <string name="home_no_eyebrows_message">Twoje brwi potrzebują przycięcia, co powiesz na przyjacielski zakład?</string>
+
+    <!-- Home - Tabs -->
+    <string name="home_tab_open">Otwórz</string>
+    <string name="home_tab_complete">Ukończono</string>
+
+    <!-- Welcome - Page -->
+    <string name="welcome_start_button">Rozpocznij</string>
+    <string name="welcome_skip_button">Pomiń</string>
+    <string name="welcome_page_1_title">Zakłady przyjacielskie z przyjaciółmi</string>
+    <string name="welcome_page_1_text">Na uniwersytecie moi przyjaciele obstawiali zakłady, aby zmusić się do robienia głupich rzeczy. Zamiast obstawiać pieniądze, gdy przegrali lub się poddali, musieli ogolić brwi!</string>
+    <string name="welcome_page_2_title">Twórz i przechowuj zakłady</string>
+    <string name="welcome_page_2_text">Bezpieczne miejsce do przechowywania zakładów o brwi. Ale nie martwcie się, sami ustalacie zasady! Nie musicie stawiać swojich brwi, jeśli nie chcecie.</string>
+    <string name="welcome_page_3_title">Śledź z łatwością</string>
+    <string name="welcome_page_3_text">Ustaw terminy zakładów o brwi, aby wywrzeć presję na znajomych.</string>
+
+    <!-- Eyebrow Notifications -->
+    <string name="notifications_title">Osiągnięto ostateczny termin o brwi</string>
+
+    <!-- Eyebrow Ads -->
+    <string name="ads_text">Reklama tutaj</string>
+</resources>
