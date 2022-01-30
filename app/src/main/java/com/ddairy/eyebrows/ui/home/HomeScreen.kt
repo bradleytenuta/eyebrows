@@ -60,7 +60,8 @@ fun HomeScreen(
     selectedHomeTab: HomeTab,
     updateSelectedHomeTab: (homeTab: HomeTab) -> Unit,
     preferences: Preferences,
-    onClickUpdatePreferences: (context: Context, preferences: Preferences) -> Unit
+    onClickUpdatePreferences: (context: Context, preferences: Preferences) -> Unit,
+    refreshHomePage: () -> Unit
 ) {
     val context = LocalContext.current
     Column(
@@ -90,7 +91,8 @@ fun HomeScreen(
                 onClickNewEyebrows = { onClickNewEyebrows(Eyebrow(description = "")) },
                 onClickViewWelcomePage = onClickViewWelcomePage,
                 preferences = preferences,
-                onClickUpdatePreferences = onClickUpdatePreferences
+                onClickUpdatePreferences = onClickUpdatePreferences,
+                refreshHomePage = refreshHomePage
             )
         }
         EyebrowListContainer(
@@ -244,7 +246,8 @@ private fun HomePreview() {
             selectedHomeTab = HomeTab.Open,
             updateSelectedHomeTab = {},
             preferences = Preferences(),
-            onClickUpdatePreferences = { _: Context, _: Preferences -> }
+            onClickUpdatePreferences = { _: Context, _: Preferences -> },
+            refreshHomePage = {}
         )
     }
 }
@@ -273,7 +276,8 @@ private fun HomePreviewDarkMode() {
             selectedHomeTab = HomeTab.Open,
             updateSelectedHomeTab = {},
             preferences = Preferences(),
-            onClickUpdatePreferences = { _: Context, _: Preferences -> }
+            onClickUpdatePreferences = { _: Context, _: Preferences -> },
+            refreshHomePage = {}
         )
     }
 }
@@ -293,7 +297,8 @@ private fun HomePreviewNoEyebrows() {
             selectedHomeTab = HomeTab.Open,
             updateSelectedHomeTab = {},
             preferences = Preferences(),
-            onClickUpdatePreferences = { _: Context, _: Preferences -> }
+            onClickUpdatePreferences = { _: Context, _: Preferences -> },
+            refreshHomePage = {}
         )
     }
 }

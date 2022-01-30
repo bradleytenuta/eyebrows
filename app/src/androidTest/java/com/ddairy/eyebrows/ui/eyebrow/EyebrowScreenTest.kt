@@ -25,7 +25,6 @@ class EyebrowScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val preferences = Preferences(showWelcomeScreen = false)
     private val context = InstrumentationRegistry.getInstrumentation().targetContext;
 
     @ExperimentalAnimationApi
@@ -121,12 +120,14 @@ class EyebrowScreenTest {
     @ExperimentalComposeUiApi
     @ExperimentalPagerApi
     @ExperimentalTime
-    private fun initialise() {
+    private fun initialise(showWelcomeScreen: Boolean = false) {
+        val eyebrowModel = EyebrowModel()
+        eyebrowModel.preferences.showWelcomeScreen = showWelcomeScreen
         composeTestRule.setContent {
             EyebrowsTheme {
                 Scaffold {
                     EyebrowsNavigation(
-                        eyebrowModel = EyebrowModel()
+                        eyebrowModel = eyebrowModel
                     )
                 }
             }

@@ -19,7 +19,6 @@ class LocaleHelper {
             val configuration = resources.configuration
             configuration.locale = locale
             resources.updateConfiguration(configuration, resources.displayMetrics)
-            // TODO: Find a way to make this rebuild compose, it works but only after changing page.
         }
     }
 }

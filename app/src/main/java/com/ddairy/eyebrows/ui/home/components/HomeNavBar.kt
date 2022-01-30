@@ -55,7 +55,8 @@ fun HomeNavBar(
     onClickNewEyebrows: () -> Unit,
     onClickViewWelcomePage: () -> Unit,
     preferences: Preferences,
-    onClickUpdatePreferences: (context: Context, preferences: Preferences) -> Unit
+    onClickUpdatePreferences: (context: Context, preferences: Preferences) -> Unit,
+    refreshHomePage: () -> Unit
 ) {
     val context = LocalContext.current
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -68,7 +69,8 @@ fun HomeNavBar(
         ) {
             DropDownMenu(
                 preferences = preferences,
-                onClickUpdatePreferences = onClickUpdatePreferences
+                onClickUpdatePreferences = onClickUpdatePreferences,
+                refreshHomePage = refreshHomePage
             )
         }
         Row(
@@ -105,7 +107,8 @@ fun HomeNavBar(
 @Composable
 fun DropDownMenu(
     preferences: Preferences,
-    onClickUpdatePreferences: (context: Context, preferences: Preferences) -> Unit
+    onClickUpdatePreferences: (context: Context, preferences: Preferences) -> Unit,
+    refreshHomePage: () -> Unit
 ) {
     val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
@@ -142,12 +145,18 @@ fun DropDownMenu(
             DropdownMenuItem(
                 modifier = Modifier.padding(bottom = 8.dp),
                 onClick = {
+                    expanded = false
+                    var newPreferences = Preferences(
+                        showWelcomeScreen = preferences.showWelcomeScreen,
+                        localeCode = preferences.localeCode
+                    )
                     if (preferences.localeCode == LocaleCode.English.localeCode) {
-                        preferences.localeCode = LocaleCode.Polish.localeCode
+                        newPreferences.localeCode = LocaleCode.Polish.localeCode
                     } else if (preferences.localeCode == LocaleCode.Polish.localeCode) {
-                        preferences.localeCode = LocaleCode.English.localeCode
+                        newPreferences.localeCode = LocaleCode.English.localeCode
                     }
-                    onClickUpdatePreferences(context, preferences)
+                    onClickUpdatePreferences(context, newPreferences)
+                    refreshHomePage()
                 }
             ) {
                 EyebrowText(
@@ -193,7 +202,8 @@ private fun LightModePreview() {
             onClickNewEyebrows = {},
             onClickViewWelcomePage = {},
             preferences = Preferences(),
-            onClickUpdatePreferences = { _: Context, _: Preferences -> }
+            onClickUpdatePreferences = { _: Context, _: Preferences -> },
+            refreshHomePage = {}
         )
     }
 }

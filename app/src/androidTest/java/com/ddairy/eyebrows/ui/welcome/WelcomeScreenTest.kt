@@ -22,7 +22,6 @@ class WelcomeScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val preferences = Preferences(showWelcomeScreen = true)
     private val context = InstrumentationRegistry.getInstrumentation().targetContext;
 
     @ExperimentalAnimationApi
@@ -31,8 +30,7 @@ class WelcomeScreenTest {
     @ExperimentalTime
     @Test
     fun isWelcomePageDisplayed() {
-        preferences.showWelcomeScreen = true
-        initialise()
+        initialise(showWelcomeScreen = true)
         composeTestRule.onNodeWithText(context.resources.getString(R.string.welcome_skip_button))
             .assertIsDisplayed()
     }
@@ -43,7 +41,6 @@ class WelcomeScreenTest {
     @ExperimentalTime
     @Test
     fun skipWelcomePage() {
-        preferences.showWelcomeScreen = false
         initialise()
         composeTestRule.onNodeWithText(context.resources.getString(R.string.welcome_skip_button))
             .assertDoesNotExist()
@@ -55,7 +52,7 @@ class WelcomeScreenTest {
     @ExperimentalTime
     @Test
     fun canSkipWelcomeScreen() {
-        initialise()
+        initialise(showWelcomeScreen = true)
         composeTestRule.onNodeWithText(context.resources.getString(R.string.welcome_skip_button))
             .performClick()
         composeTestRule.onNodeWithText(context.resources.getString(R.string.home_nav_bar_new_eyebrow))
@@ -68,7 +65,7 @@ class WelcomeScreenTest {
     @ExperimentalTime
     @Test
     fun doesNotGoBackToWelcomeScreen() {
-        initialise()
+        initialise(showWelcomeScreen = true)
         composeTestRule.onNodeWithText(context.resources.getString(R.string.welcome_skip_button))
             .performClick()
         composeTestRule.onNodeWithText(context.resources.getString(R.string.home_nav_bar_new_eyebrow))
@@ -84,7 +81,7 @@ class WelcomeScreenTest {
     @ExperimentalTime
     @Test
     fun doesShowAllScreens() {
-        initialise()
+        initialise(showWelcomeScreen = true)
         composeTestRule.onNodeWithText(context.resources.getString(R.string.welcome_page_1_title))
             .assertIsDisplayed()
         composeTestRule.onRoot().performGesture { swipeLeft() }
@@ -103,12 +100,15 @@ class WelcomeScreenTest {
     @ExperimentalComposeUiApi
     @ExperimentalPagerApi
     @ExperimentalTime
-    private fun initialise() {
+    private fun initialise(showWelcomeScreen: Boolean = false) {
+        val eyebrowModel = EyebrowModel()
+        eyebrowModel.preferences.showWelcomeScreen = showWelcomeScreen
+
         composeTestRule.setContent {
             EyebrowsTheme {
                 Scaffold {
                     EyebrowsNavigation(
-                        eyebrowModel = EyebrowModel()
+                        eyebrowModel = eyebrowModel
                     )
                 }
             }
