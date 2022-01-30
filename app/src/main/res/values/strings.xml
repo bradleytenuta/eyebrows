@@ -1,8 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Eyebrows</string>
+    <string name="app_name" translatable="false">Eyebrows</string>
+    <string name="privacy_policy_url" translatable="false">https://ddairy978990818.wordpress.com/</string>
+    <string name="admob_banner_id" translatable="false">ca-app-pub-6802867376550817/4930881604</string>
+    <string name="notifications_channel_name" translatable="false">Eyebrow Notifications</string>
+    <string name="notifications_channel_description" translatable="false">The default notification category for the Eyebrow App.</string>
 
     <!-- Eyebrow - Navbar -->
-    <string name="eyebrow_nav_bar_title">I bet Eyebrows...</string>
+    <string name="eyebrow_nav_bar_title">I Bet Eyebrows...</string>
     <string name="eyebrow_nav_bar_cancel">Cancel</string>
 
     <!-- Eyebrows - Page -->
@@ -24,14 +29,15 @@
     <string name="eyebrow_toast_deleted">Eyebrow Deleted</string>
 
     <!-- Home - Action Button Section -->
-    <string name="home_action_open_button">Open</string>
-    <string name="home_action_complete_button">Done</string>
+    <string name="home_action_mark_done_button">Mark Done</string>
+    <string name="home_action_complete_button">Re-open</string>
     <string name="home_action_complete_open_toast_message">Eyebrow status updated</string>
     <string name="home_action_more_options_icon_description">More options</string>
     <string name="home_action_dropdown_edit">Edit</string>
     <string name="home_action_dropdown_remove">Remove</string>
 
     <!-- Home - Eyebrow Deadline -->
+    <string name="home_card_eyebrow_deadline_completed">Done!</string>
     <string name="home_card_eyebrow_deadline_more_than_1_day">days left till deadline</string>
     <string name="home_card_eyebrow_deadline_1_day">day left till deadline</string>
     <string name="home_card_eyebrow_deadline_today">Deadline is today!</string>
@@ -51,19 +57,37 @@
     <string name="home_card_remove_eyebrow_dialog_delete">Delete</string>
     <string name="home_card_remove_eyebrow_dialog_cancel">Cancel</string>
 
+    <!-- Home - Card -->
+    <string name="home_card_sub_title">I bet Eyebrows that...</string>
+
     <!-- Home - Navbar -->
     <string name="home_nav_bar_help_icon_description">View welcome page</string>
     <string name="home_nav_bar_new_eyebrow">New Eyebrow</string>
+    <string name="home_nav_bar_more">More Options</string>
+    <string name="home_nav_bar_dropdown_privacy_policy">Privacy Policy</string>
+    <string name="home_nav_bar_language_button">Polish</string>
 
     <!-- Home - Page -->
     <string name="home_description">Home Screen</string>
     <string name="home_no_eyebrows_message">Your eyebrows need a trim, how about a friendly bet?</string>
 
+    <!-- Home - Tabs -->
+    <string name="home_tab_open">Open</string>
+    <string name="home_tab_complete">Completed</string>
+
     <!-- Welcome - Page -->
     <string name="welcome_start_button">Get Started</string>
     <string name="welcome_skip_button">Skip</string>
-    <string name="welcome_page_1_title">Create &amp; Store Bets</string>
-    <string name="welcome_page_1_text">Ever forget those random bets you make with friends? Store them here safely.</string>
-    <string name="welcome_page_2_title">Track With Ease</string>
-    <string name="welcome_page_2_text">Set deadlines for your bets to put the pressure on.</string>
+    <string name="welcome_page_1_title">Friendly bets with friends</string>
+    <string name="welcome_page_1_text">At University my friends would bet each other to do a range of silly things. Instead of offering money if they lost or forfeited, they would have to shave their eyebrows!</string>
+    <string name="welcome_page_2_title">Create &amp; Store Bets</string>
+    <string name="welcome_page_2_text">A safe place to store your eyebrow bets. Don\'t worry though, you create the rules, you don\'t have to bet your eyebrows if you don\'t want to.</string>
+    <string name="welcome_page_3_title">Track With Ease</string>
+    <string name="welcome_page_3_text">Set deadlines for your eyebrow bets to put the pressure on your friends.</string>
+
+    <!-- Eyebrow Notifications -->
+    <string name="notifications_title">Eyebrow Deadline Reached</string>
+
+    <!-- Eyebrow Ads -->
+    <string name="ads_text">Advert Here</string>
 </resources>

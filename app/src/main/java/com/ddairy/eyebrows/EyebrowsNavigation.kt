@@ -13,7 +13,6 @@ import com.ddairy.eyebrows.model.EyebrowModel
 import com.ddairy.eyebrows.ui.eyebrow.EyebrowScreen
 import com.ddairy.eyebrows.ui.home.HomeScreen
 import com.ddairy.eyebrows.ui.welcome.WelcomeScreen
-import com.ddairy.eyebrows.util.storage.InternalStorage
 import com.ddairy.eyebrows.util.tag.ScreenName
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -28,10 +27,9 @@ import kotlin.time.ExperimentalTime
 @Composable
 fun EyebrowsNavigation(
     eyebrowModel: EyebrowModel,
-    preferences: Preferences,
     navController: NavHostController = rememberAnimatedNavController(),
 ) {
-    val startDestination = if (preferences.showWelcomeScreen) ScreenName.Welcome.route else ScreenName.Home.route
+    val startDestination = if (eyebrowModel.preferences.showWelcomeScreen) ScreenName.Welcome.route else ScreenName.Home.route
     AnimatedNavHost(
         navController = navController,
         startDestination = startDestination
@@ -40,8 +38,12 @@ fun EyebrowsNavigation(
             val context = LocalContext.current
             val toHomeScreen = {
                 // Sets preferences and writes to storage.
-                preferences.showWelcomeScreen = false
-                InternalStorage.writePreferences(context, preferences)
+                var newPreferences = Preferences(
+                    showWelcomeScreen = eyebrowModel.preferences.showWelcomeScreen,
+                    localeCode = eyebrowModel.preferences.localeCode
+                )
+                newPreferences.showWelcomeScreen = false
+                eyebrowModel.updatePreferences(context, newPreferences)
 
                 // Removes this composable from the back stack, so when the page changes, the user cannot go back.
                 navController.popBackStack()
@@ -64,7 +66,14 @@ fun EyebrowsNavigation(
                 },
                 eyebrows = eyebrowModel.eyebrows,
                 removeEyebrow = eyebrowModel::removeEyebrow,
-                updateEyebrow = eyebrowModel::updateEyebrow
+                updateEyebrow = eyebrowModel::updateEyebrow,
+                selectedHomeTab = eyebrowModel.selectedHomeTab,
+                updateSelectedHomeTab = eyebrowModel::updateSelectedHomeTab,
+                preferences = eyebrowModel.preferences,
+                onClickUpdatePreferences = eyebrowModel::updatePreferences,
+                refreshHomePage = {
+                    navController.navigate(ScreenName.Home.route)
+                },
             )
         }
         composable(

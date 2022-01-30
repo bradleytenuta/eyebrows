@@ -1,8 +1,8 @@
 package com.ddairy.eyebrows.util.helper
 
 import com.ddairy.eyebrows.data.Eyebrow
-import java.time.Duration
-import java.time.LocalDate
+import org.joda.time.Days
+import org.joda.time.LocalDate
 import java.time.format.DateTimeFormatter
 import kotlin.time.ExperimentalTime
 
@@ -14,7 +14,9 @@ class LocalDateUtil {
          * Formats the date into a string format.
          */
         fun getDateAsString(localDate: LocalDate, pattern: String): String {
-            return localDate.format(DateTimeFormatter.ofPattern(pattern))
+            val date: java.time.LocalDate =
+                java.time.LocalDate.of(localDate.year, localDate.monthOfYear, localDate.dayOfMonth)
+            return date.format(DateTimeFormatter.ofPattern(pattern))
         }
 
         /**
@@ -22,7 +24,7 @@ class LocalDateUtil {
          */
         @ExperimentalTime
         fun getNumberOfDaysTillEndDate(eyebrow: Eyebrow, startDate: LocalDate): Int {
-            return eyebrow.endDate.compareTo(startDate)
+            return Days.daysBetween(startDate, eyebrow.endDate).days;
         }
     }
 }

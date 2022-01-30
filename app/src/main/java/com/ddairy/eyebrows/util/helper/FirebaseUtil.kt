@@ -8,7 +8,7 @@ class FirebaseUtil {
 
     companion object {
 
-        lateinit var firebaseAnalytics: FirebaseAnalytics
+        var firebaseAnalytics: FirebaseAnalytics? = null
 
         /**
          * Obtain the FirebaseAnalytics instance.

@@ -29,3 +29,10 @@ val SecondaryVariant = Color(
     blue = 88,
     alpha = 0xFF
 )
+
+val EyebrowRed = Color(
+    red = 164,
+    green = 0,
+    blue = 0,
+    alpha = 0xFF
+)

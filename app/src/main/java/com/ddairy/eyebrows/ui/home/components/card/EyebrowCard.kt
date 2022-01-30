@@ -15,7 +15,7 @@ import com.ddairy.eyebrows.data.Eyebrow
 import com.ddairy.eyebrows.data.Participant
 import com.ddairy.eyebrows.ui.home.components.card.bottom.CardBottom
 import com.ddairy.eyebrows.ui.theme.EyebrowsTheme
-import java.time.LocalDate
+import org.joda.time.LocalDate
 import java.util.*
 import kotlin.time.ExperimentalTime
 
@@ -30,10 +30,8 @@ fun EyebrowCard(
     updateEyebrow: (context: Context, eyebrow: Eyebrow) -> Unit,
     onClickNewEyebrows: (Eyebrow) -> Unit = {},
 ) {
-    val elevation = if (eyebrow.status == Eyebrow.Status.Open) 10.dp else 6.dp
     Card(
         shape = MaterialTheme.shapes.large,
-        elevation = elevation,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)

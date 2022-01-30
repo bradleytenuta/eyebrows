@@ -12,9 +12,11 @@ buildscript {
         jackson_version = '2.13.1'
         accompanist_version = '0.22.0-rc'
         espresso_version = '3.4.0'
+        joda_time_version = '2.10.13'
 
         // Required for Google API's such as firebase.
         google_services = '4.3.10'
+        firebase_crashlytics_plugin = '2.8.1'
     }
 
     repositories {
@@ -26,5 +28,6 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.gms:google-services:$google_services"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$firebase_crashlytics_plugin"
     }
 }
